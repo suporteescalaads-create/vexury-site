@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Star, Quote, ArrowLeft, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,35 +9,35 @@ const testimonials = [
         role: "Business Owner",
         company: "Thompson & Co.",
         content: "Working with Vexury was simple and professional. The website is clean, fast, and clearly presents our services to our target audience.",
-        image: "https://raw.githubusercontent.com/will-siq/vexury-assets/refs/heads/main/michaelthompson.png"
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/michaelthompson.webp"
     },
     {
         name: "Sarah Mitchell",
         role: "Founder",
         company: "Bloom Startups",
         content: "They delivered exactly what we needed — a professional website that works and represents our business well. Incredible ROI.",
-        image: "https://raw.githubusercontent.com/will-siq/vexury-assets/refs/heads/main/sarahmitchell.png"
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/sarahmitchell.webp"
     },
     {
         name: "Daniel Carter",
         role: "Operations Manager",
         company: "LogiTech",
         content: "Our old website didn’t reflect our company anymore. This new one feels modern, reliable, and easy to use. The team loves it.",
-        image: "https://raw.githubusercontent.com/will-siq/vexury-assets/refs/heads/main/daniel0989.png"
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/daniel0989.webp"
     },
     {
         name: "Emily Rodriguez",
         role: "Small Business Owner",
         company: "Rodriguez Boutique",
         content: "The communication was clear and the delivery was on time. The final result is exactly what we were looking for to scale up.",
-        image: "https://raw.githubusercontent.com/will-siq/vexury-assets/refs/heads/main/emilyrodriguez.png"
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/emilyrodriguez.webp"
     },
     {
         name: "James Walker",
         role: "Service Provider",
         company: "Walker Services",
         content: "The website makes it easier for clients to understand what we do and contact us. Everything feels well organized and professional.",
-        image: "https://raw.githubusercontent.com/will-siq/vexury-assets/refs/heads/main/jameswalker.png"
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/jameswalker.webp"
     }
 ];
 

@@ -10,14 +10,13 @@ export const Hero: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   
-  // Scroll Physics
+  // Scroll Physics - Reduced to almost nothing for a "glued" feel
   const { scrollY } = useScroll();
   
-  // Revised Scroll Physics for "Folding" & "Receding" Effect
-  const rotateX = useTransform(scrollY, [0, 1000], [0, 20]); 
-  const scale = useTransform(scrollY, [0, 1000], [1, 0.9]);
-  const opacity = useTransform(scrollY, [0, 800], [1, 0.6]);
-  const blur = useTransform(scrollY, [0, 800], ["0px", "5px"]);
+  // Minimal movement for a premium feel without "flying away"
+  const scale = useTransform(scrollY, [0, 500], [1, 0.98]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0.9]);
+  const blur = useTransform(scrollY, [0, 500], ["0px", "2px"]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -220,11 +219,10 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative pt-32 pb-0 overflow-hidden perspective-[2000px] md:min-h-screen flex flex-col justify-end bg-[#03000a]">
+    <section ref={containerRef} className="relative pt-32 pb-0 overflow-hidden md:min-h-screen flex flex-col justify-end bg-[#03000a]">
       
       {/* --- Dynamic Background --- */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-          
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#1a0b2e] via-[#03000a] to-[#000000]" />
           
           <motion.div
@@ -273,23 +271,14 @@ export const Hero: React.FC = () => {
             }}
           />
 
-          <canvas 
-            ref={meteorCanvasRef}
-            className="absolute inset-0 z-0 pointer-events-none opacity-60"
-          />
-
-          <canvas 
-            ref={canvasRef}
-            className="absolute inset-0 z-10 pointer-events-none"
-          />
-
+          <canvas ref={meteorCanvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-60" />
+          <canvas ref={canvasRef} className="absolute inset-0 z-10 pointer-events-none" />
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
-
       </div>
 
-      <div className="container mx-auto px-0 md:px-6 text-center relative z-20">
+      <div className="container mx-auto px-0 md:px-6 text-center relative z-20 flex flex-col items-center">
         
-        <div className="px-4 md:px-0">
+        <div className="px-4 md:px-0 max-w-5xl">
             <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -303,12 +292,12 @@ export const Hero: React.FC = () => {
             <span className="tracking-widest uppercase text-xs font-semibold">AVAILABLE FOR NEW PROJECTS</span>
             </motion.div>
 
-            <div className="mb-8 relative z-20 max-w-5xl mx-auto">
+            <div className="mb-8 relative z-20">
                 <div className="overflow-hidden p-2">
                     <motion.h1 
-                    initial={{ y: "110%", rotateZ: 1 }}
-                    animate={{ y: 0, rotateZ: 0 }}
-                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                    initial={{ y: "110%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     className="text-5xl md:text-8xl font-bold tracking-tight leading-[1.1] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
                     >
                     Your business deserves a website that <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-accent animate-pulse-slow">truly represents its value</span>.
@@ -325,7 +314,7 @@ export const Hero: React.FC = () => {
             Whether you’re launching your first website or upgrading an outdated one, your online presence should never be the reason a client chooses your competitor.
             </motion.p>
 
-            <div className="relative inline-block">
+            <div className="relative inline-block mb-12">
                 <motion.div 
                     animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.7, 0.4] }}
                     transition={{ duration: 4, repeat: Infinity }}
@@ -336,7 +325,7 @@ export const Hero: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1 }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12 md:mb-12 relative z-20"
+                className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-20"
                 >
                 <motion.button 
                     whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(168, 85, 247, 0.6)" }}
@@ -350,22 +339,24 @@ export const Hero: React.FC = () => {
             </div>
         </div>
 
+        {/* HERO IMAGE - GLUED TO BOTTOM */}
         <motion.div 
-          style={{ rotateX, scale, opacity, filter: blur }}
-          className="relative max-w-7xl mx-auto z-20 perspective-1000"
+          style={{ scale, opacity, filter: blur }}
+          className="relative w-full max-w-7xl mx-auto z-20 flex justify-center items-end"
         >
             <motion.div
-                initial={{ y: 200, rotateX: 20, opacity: 0 }}
-                animate={{ y: 0, rotateX: 0, opacity: 1 }}
-                transition={{ duration: 2.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative flex justify-center items-center"
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="relative w-full flex justify-center items-end"
             >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-accent/20 rounded-full blur-[80px] -z-10 animate-pulse-slow" />
+                {/* Glow behind image base */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[70%] h-[40%] bg-accent/20 rounded-full blur-[100px] -z-10 animate-pulse-slow" />
                 
                 <img 
-                    src="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/refs/heads/main/image-hero.webp" 
+                    src="https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/image-hero.webp" 
                     alt="Interface" 
-                    className="w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(168,85,247,0.2)] hover:scale-105 transition-transform duration-[2s]"
+                    className="w-full h-auto object-contain block mb-[-2px] drop-shadow-[0_-20px_50px_rgba(168,85,247,0.15)]"
                 />
             </motion.div>
         </motion.div>

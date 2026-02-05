@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Instagram } from 'lucide-react';
+import { Instagram, Phone, Mail, MessageSquare } from 'lucide-react';
 import { Logo } from './Logo';
 
 export const Contact: React.FC = () => {
@@ -9,7 +10,6 @@ export const Contact: React.FC = () => {
     const isHomePage = !window.location.hash.startsWith('#/');
 
     // If we are NOT on home page, allow default navigation to occur.
-    // This will change the URL hash to #section, which App.tsx detects to switch to Home and scroll.
     if (!isHomePage) {
         return;
     }
@@ -20,7 +20,7 @@ export const Contact: React.FC = () => {
     const element = document.getElementById(targetId);
     
     if (element) {
-      const headerOffset = 100; // Adjust for fixed header height
+      const headerOffset = 100; 
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -35,26 +35,65 @@ export const Contact: React.FC = () => {
     <footer id="contact" className="bg-[#03000a] pt-10 pb-10 relative">
       {/* Soft Neon Divider */}
       <div className="absolute top-0 left-0 w-full h-px">
-          {/* Main Line */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
-          {/* Glow Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/80 to-transparent blur-[4px] opacity-70" />
       </div>
 
       <div className="container mx-auto px-6">
         
-        {/* CTA Banner - Glass */}
-        <div className="bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-2xl rounded-3xl p-16 text-center border border-white/10 mb-10 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+        {/* CTA Banner - Compact Glass Version */}
+        <div className="bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-12 text-center border border-white/10 mb-16 relative overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
              <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-accent/10 blur-[100px] pointer-events-none" />
+             <div className="absolute bottom-0 left-0 w-[250px] h-[250px] bg-blue-500/10 blur-[80px] pointer-events-none" />
              
-             <div className="relative z-10 max-w-3xl mx-auto">
-                 <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Ready to elevate your workflow?</h2>
-                 <p className="text-gray-400 mb-10 text-lg">Join businesses that trust Vexury to build a strong, reliable digital presence — without complexity.</p>
-                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <input type="email" placeholder="Enter your email" className="px-8 py-4 rounded-full bg-black/30 border border-white/10 text-white focus:outline-none focus:border-accent/50 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)] w-full sm:w-auto transition-all" />
-                    <button className="bg-white text-black px-10 py-4 rounded-full font-bold hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-                        Start Your Project
-                    </button>
+             <div className="relative z-10 max-w-4xl mx-auto">
+                 <h2 className="text-4xl md:text-5xl font-bold mb-3 text-white tracking-tight">Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-300">talk</span>.</h2>
+                 <p className="text-gray-400 mb-8 text-sm md:text-base max-w-lg mx-auto font-light leading-relaxed">
+                   Connect directly with our team to start building a digital presence that truly reflects the value of your business.
+                 </p>
+                 
+                 {/* Direct Contact Options - Ultra Compact */}
+                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 md:gap-3 max-w-2xl mx-auto">
+                        <a 
+                          href="tel:+13054676317" 
+                          className="flex flex-col items-center gap-2 px-3 py-5 rounded-[1.5rem] bg-white/[0.03] border border-white/10 hover:border-accent/50 hover:bg-white/[0.07] hover:shadow-[0_10px_25px_rgba(0,0,0,0.4)] transition-all duration-500 group"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-inner">
+                                <Phone size={18} />
+                            </div>
+                            <div className="text-center">
+                                <span className="block text-[8px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-0.5">Talk to us</span>
+                                <span className="text-white text-xs font-medium tracking-tight">+1 (305) 467-6317</span>
+                            </div>
+                        </a>
+
+                        <a 
+                          href="mailto:hello@vexury.com" 
+                          className="flex flex-col items-center gap-2 px-3 py-5 rounded-[1.5rem] bg-white/[0.03] border border-white/10 hover:border-blue-400/50 hover:bg-white/[0.07] hover:shadow-[0_10px_25px_rgba(0,0,0,0.4)] transition-all duration-500 group"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-500 shadow-inner">
+                                <Mail size={18} />
+                            </div>
+                            <div className="text-center">
+                                <span className="block text-[8px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-0.5">Send Email</span>
+                                <span className="text-white text-xs font-medium tracking-tight">hello@vexury.com</span>
+                            </div>
+                        </a>
+
+                        <a 
+                          href="https://wa.me/13054676317" 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col items-center gap-2 px-3 py-5 rounded-[1.5rem] bg-white/[0.03] border border-white/10 hover:border-green-500/50 hover:bg-white/[0.07] hover:shadow-[0_10px_25px_rgba(0,0,0,0.4)] transition-all duration-500 group"
+                        >
+                            <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition-all duration-500 shadow-inner">
+                                <MessageSquare size={18} />
+                            </div>
+                            <div className="text-center">
+                                <span className="block text-[8px] uppercase tracking-[0.2em] text-gray-500 font-bold mb-0.5">WhatsApp</span>
+                                <span className="text-white text-xs font-medium tracking-tight">Start Chat</span>
+                            </div>
+                        </a>
                  </div>
              </div>
         </div>
@@ -62,7 +101,6 @@ export const Contact: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-16">
             <div className="col-span-2 md:col-span-1">
                  <a href="#" className="inline-block mb-6" onClick={(e) => {
-                     // If on home, scroll top. If not, let default happen (go to #)
                      if (!window.location.hash.startsWith('#/')) {
                          e.preventDefault();
                          window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -94,7 +132,15 @@ export const Contact: React.FC = () => {
             </div>
 
              <div>
-                <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Social</h4>
+                <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Connect</h4>
+                <ul className="space-y-4 text-gray-500 text-sm mb-6">
+                    <li>
+                        <a href="tel:+13054676317" className="hover:text-white transition-colors font-medium">+1 (305) 467-6317</a>
+                    </li>
+                    <li>
+                        <a href="mailto:hello@vexury.com" className="hover:text-white transition-colors font-medium">hello@vexury.com</a>
+                    </li>
+                </ul>
                 <div className="flex gap-4">
                     <a href="https://www.instagram.com/vexuryco/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-accent hover:border-accent transition-all duration-300">
                         <Instagram size={18} />

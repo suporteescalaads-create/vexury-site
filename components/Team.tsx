@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Users, Linkedin } from 'lucide-react';
@@ -7,7 +8,7 @@ const members = [
         name: "W. R. Siqueira",
         role: "Founder & Lead Developer",
         desc: "Responsible for strategy, design execution, development, and technical decisions.",
-        image: "https://i.ibb.co/jkXZ4801/23twre.png",
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/23twre%20(1).webp",
         initials: "WS",
         icon: <Code2 size={20} />,
         accentColor: "from-accent to-purple-600"
@@ -16,7 +17,7 @@ const members = [
         name: "J. V. Schneider",
         role: "Co-Founder & Client Relations",
         desc: "Responsible for client communication, alignment, and project coordination.",
-        image: "https://i.ibb.co/Fqfy506S/23twre3.png",
+        image: "https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/23twre3%20(1).webp",
         initials: "JS",
         icon: <Users size={20} />,
         accentColor: "from-blue-500 to-cyan-500"
