@@ -99,9 +99,9 @@ export const Contact: React.FC = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-16">
             <div className="col-span-2 md:col-span-1">
-                 <a href="https://vexury.com/#" className="inline-block mb-6" onClick={(e) => {
+                 <a href="https://vexury.com/#/" className="inline-block mb-6" onClick={(e) => {
                      e.preventDefault();
-                     window.location.hash = '#';
+                     window.location.hash = '#/';
                      window.scrollTo({ top: 0, behavior: 'smooth' });
                  }}>
                     <Logo className="w-10 h-10" textClassName="text-lg" />
