@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, useInView, useSpring, useMotionValue } from 'framer-motion';
 
@@ -108,7 +109,7 @@ export const Stats: React.FC = () => {
             
             {/* Stat Item 1 */}
             <StatCard delay={0}>
-                <div className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                     <Counter value={120} suffix="+" />
                 </div>
                 <div className="h-1 w-12 bg-white/10 rounded-full mb-4 group-hover:bg-accent group-hover:shadow-[0_0_10px_#a855f7] transition-all duration-500"></div>
@@ -118,7 +119,7 @@ export const Stats: React.FC = () => {
              {/* Stat Item 2 */}
              <StatCard delay={0.1}>
                 {/* Added pb-2 to fix clipping */}
-                <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-4 pb-2 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-4 pb-2 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                     <Counter value={7} from={45} suffix=" Days" />
                 </div>
                 <div className="h-1 w-12 bg-white/10 rounded-full mb-4 group-hover:bg-accent group-hover:shadow-[0_0_10px_#a855f7] transition-all duration-500"></div>
@@ -127,7 +128,7 @@ export const Stats: React.FC = () => {
 
              {/* Stat Item 3 */}
              <StatCard delay={0.2}>
-                <div className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tighter drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                     <Counter value={90} suffix="+" />
                 </div>
                 <div className="h-1 w-12 bg-white/10 rounded-full mb-4 group-hover:bg-accent group-hover:shadow-[0_0_10px_#a855f7] transition-all duration-500"></div>
@@ -137,7 +138,7 @@ export const Stats: React.FC = () => {
              {/* Stat Item 4 */}
              <StatCard delay={0.3}>
                 {/* Added pb-2 to fix clipping */}
-                <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-4 pb-2 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-4 pb-2 tracking-tighter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                     <Counter value={99} suffix="%" />
                 </div>
                 <div className="h-1 w-12 bg-white/10 rounded-full mb-4 group-hover:bg-accent group-hover:shadow-[0_0_10px_#a855f7] transition-all duration-500"></div>

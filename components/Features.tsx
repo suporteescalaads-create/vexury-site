@@ -188,8 +188,8 @@ export const Features: React.FC = () => {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Increased max-width to 1400px */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1400px]">
+      {/* Reduced max-width to 1280px for better desktop fit */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1280px]">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
                 <motion.div 
@@ -207,7 +207,7 @@ export const Features: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2, duration: 0.8 }}
-                    className="text-5xl md:text-6xl font-bold text-white tracking-tight"
+                    className="text-4xl md:text-5xl font-bold text-white tracking-tight"
                 >
                     Real Impact for <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-white animate-pulse-slow">Real Businesses</span>
                 </motion.h2>
@@ -289,7 +289,7 @@ export const Features: React.FC = () => {
                                 <span className="text-[10px] font-bold text-accent uppercase tracking-widest">Limited Availability</span>
                             </motion.div>
 
-                            <h3 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                            <h3 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
                                 Have a Website That <br/>
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-white animate-pulse-slow drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">
                                     Represents Your Business
@@ -323,19 +323,19 @@ export const Features: React.FC = () => {
                            <motion.div 
                                 animate={{ y: [-10, 10, -10] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                className="w-32 h-32 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] z-10 relative"
+                                className="w-28 h-28 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] z-10 relative"
                             >
                               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-2xl opacity-50" />
-                              <Target size={48} className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
+                              <Target size={40} className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
                            </motion.div>
 
                            <motion.div 
                                 animate={{ y: [10, -10, 10] }}
                                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                                className="w-32 h-32 bg-[#0f0518] rounded-2xl border border-accent/40 flex items-center justify-center backdrop-blur-xl shadow-[0_0_30px_rgba(168,85,247,0.2)] z-10 relative mt-12"
+                                className="w-28 h-28 bg-[#0f0518] rounded-2xl border border-accent/40 flex items-center justify-center backdrop-blur-xl shadow-[0_0_30px_rgba(168,85,247,0.2)] z-10 relative mt-12"
                             >
                               <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent rounded-2xl opacity-50" />
-                              <Award size={48} className="text-accent drop-shadow-[0_0_20px_#a855f7]" />
+                              <Award size={40} className="text-accent drop-shadow-[0_0_20px_#a855f7]" />
                            </motion.div>
                         </div>
                     </div>

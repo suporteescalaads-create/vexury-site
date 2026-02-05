@@ -227,15 +227,16 @@ export const Work: React.FC = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(168,85,247,0.1),transparent_80%)]" />
       <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1400px]">
+      {/* Reduced container max-width to 1280px */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1280px]">
         
-        {/* Header */}
+        {/* Header - scaled headings */}
         <div className="text-center mb-16 max-w-4xl mx-auto">
             <motion.h2 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="text-5xl md:text-8xl font-bold text-white mb-8 tracking-tighter uppercase"
+                className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter uppercase"
             >
                 The <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-white text-shine">Vexury</span> Method
             </motion.h2>
@@ -276,7 +277,7 @@ export const Work: React.FC = () => {
                                 )}
                             </div>
 
-                            <h3 className={`text-3xl md:text-4xl font-bold mb-4 transition-colors duration-300 ${
+                            <h3 className={`text-2xl md:text-3xl font-bold mb-4 transition-colors duration-300 ${
                                 isActive ? 'text-white' : 'text-gray-500'
                             }`}>
                                 {step.title}

@@ -278,7 +278,7 @@ export const Hero: React.FC = () => {
 
       <div className="container mx-auto px-0 md:px-6 text-center relative z-20 flex flex-col items-center">
         
-        <div className="px-4 md:px-0 max-w-5xl">
+        <div className="px-4 md:px-0 max-w-4xl">
             <motion.div 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -298,7 +298,7 @@ export const Hero: React.FC = () => {
                     initial={{ y: "110%" }}
                     animate={{ y: 0 }}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="text-5xl md:text-8xl font-bold tracking-tight leading-[1.1] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                    className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
                     >
                     Your business deserves a website that <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-accent animate-pulse-slow">truly represents its value</span>.
                     </motion.h1>
@@ -345,10 +345,10 @@ export const Hero: React.FC = () => {
             </div>
         </div>
 
-        {/* HERO IMAGE - GLUED TO BOTTOM */}
+        {/* HERO IMAGE - GLUED TO BOTTOM - Reduced size slightly */}
         <motion.div 
           style={{ scale, opacity, filter: blur }}
-          className="relative w-full max-w-7xl mx-auto z-20 flex justify-center items-end"
+          className="relative w-full max-w-[1200px] mx-auto z-20 flex justify-center items-end"
         >
             <motion.div
                 initial={{ y: 100, opacity: 0 }}

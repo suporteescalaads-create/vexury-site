@@ -26,7 +26,7 @@ export const Pricing: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1 }}
-                className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight"
+                className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight"
             >
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-400">Investment</span>
             </motion.h2>
@@ -35,8 +35,8 @@ export const Pricing: React.FC = () => {
             </p>
         </div>
 
-        {/* Pricing Grid - Wider container at 1400px */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-[1400px] mx-auto items-stretch">
+        {/* Pricing Grid - Wider container at 1280px for better fit */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-[1280px] mx-auto items-stretch">
             
             {/* PLAN 1: PROFESSIONAL */}
             <motion.div 
