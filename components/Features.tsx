@@ -10,38 +10,43 @@ const features = [
         icon: <Target className="text-white" size={24} />,
         colSpan: "md:col-span-1",
         visual: (
-            <div className="bg-black/40 rounded-xl p-4 border border-white/10 backdrop-blur-md shadow-inner relative overflow-hidden min-h-[160px] flex items-center justify-between gap-3">
-                {/* Simulated Lead Notifications - Slightly Larger Content */}
+            <div className="bg-black/40 rounded-xl p-5 border border-white/10 backdrop-blur-md shadow-inner relative overflow-hidden min-h-[190px] flex items-center justify-between gap-4">
+                {/* Simulated Lead Notifications - Vertical Layout */}
                 <motion.div 
                     initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="flex-1 flex flex-col gap-2.5 bg-white/5 p-4 rounded-xl border border-white/5 relative z-10 min-w-0"
+                    className="flex-1 flex flex-col gap-4 bg-white/5 p-5 rounded-2xl border border-white/5 relative z-10 min-w-0 h-full justify-center"
                 >
-                    <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30 shrink-0">
-                            <MousePointerClick size={14} className="text-green-400" />
+                    <div className="flex flex-col items-start gap-3">
+                        <div className="w-11 h-11 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30 shrink-0">
+                            <MousePointerClick size={18} className="text-green-400" />
                         </div>
-                        <div className="text-xs text-white font-bold leading-tight">New client inquiry</div>
+                        <div className="flex flex-col">
+                            <div className="text-[13px] text-white font-bold leading-tight mb-1">New client</div>
+                            <div className="text-[13px] text-white font-bold leading-tight">inquiry</div>
+                        </div>
                     </div>
-                    <div className="text-[10px] text-gray-400 leading-tight">Generated via your website</div>
+                    <div className="text-[10px] text-gray-500 leading-tight font-medium">Generated via website</div>
                 </motion.div>
 
                 <motion.div 
                     initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="flex-1 flex flex-col gap-2.5 bg-white/5 p-4 rounded-xl border border-white/5 opacity-60 relative z-10 min-w-0"
+                    className="flex-1 flex flex-col gap-4 bg-white/5 p-5 rounded-2xl border border-white/5 opacity-60 relative z-10 min-w-0 h-full justify-center"
                 >
-                    <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 shrink-0">
-                            <MousePointerClick size={14} className="text-accent" />
+                    <div className="flex flex-col items-start gap-3">
+                        <div className="w-11 h-11 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 shrink-0">
+                            <MousePointerClick size={18} className="text-accent" />
                         </div>
-                         <div className="text-xs text-white font-bold leading-tight">Call Scheduled</div>
+                         <div className="flex flex-col">
+                            <div className="text-[13px] text-white font-bold leading-tight mb-1">Call</div>
+                            <div className="text-[13px] text-white font-bold leading-tight">Scheduled</div>
+                         </div>
                     </div>
-                    <div className="text-[10px] text-gray-400 leading-tight">
-                        Qualified lead
-                        <div className="mt-0.5">2 mins ago</div>
+                    <div className="text-[10px] text-gray-500 leading-tight font-medium">
+                        Qualified lead · 2m
                     </div>
                 </motion.div>
                 
@@ -56,24 +61,24 @@ const features = [
         icon: <Award className="text-white" size={24} />,
         colSpan: "md:col-span-1",
         visual: (
-             <div className="flex items-center justify-center min-h-[160px] bg-black/40 rounded-xl border border-white/10 backdrop-blur-md relative overflow-hidden group/viz">
+             <div className="flex items-center justify-center min-h-[190px] bg-black/40 rounded-xl border border-white/10 backdrop-blur-md relative overflow-hidden group/viz">
                 <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent opacity-0 group-hover/viz:opacity-100 transition-opacity duration-700"></div>
                 
-                {/* Authority Badge Visual - Slightly Larger Scale */}
-                <div className="relative z-10 flex flex-col items-center justify-center py-4 text-center">
+                {/* Authority Badge Visual - Significantly Larger */}
+                <div className="relative z-10 flex flex-col items-center justify-center py-5 text-center w-full px-2">
                     <motion.div 
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                        className="w-16 h-16 rounded-full border-2 border-accent/50 flex items-center justify-center shadow-[0_0_40px_rgba(168,85,247,0.3)] bg-[#03000a] mb-4"
+                        className="w-20 h-20 rounded-full border-2 border-accent/50 flex items-center justify-center shadow-[0_0_50px_rgba(168,85,247,0.4)] bg-[#03000a] mb-5"
                     >
-                        <CheckCircle2 size={32} className="text-white" />
+                        <CheckCircle2 size={40} className="text-white drop-shadow-[0_0_10px_white]" />
                     </motion.div>
                     
-                    {/* Centered Badge Text */}
-                    <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
-                        <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#a855f7]"></div>
-                        <span className="text-xs uppercase tracking-[0.2em] text-gray-300 font-bold whitespace-nowrap">Professional Verified</span>
+                    {/* Centered Badge Text - Adjusted Tracking and Padding */}
+                    <div className="inline-flex items-center justify-center gap-3 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_12px_#a855f7]"></div>
+                        <span className="text-[12px] uppercase tracking-[0.12em] text-white font-bold whitespace-nowrap">Professional Verified</span>
                     </div>
                 </div>
             </div>
@@ -85,16 +90,16 @@ const features = [
         icon: <Zap className="text-white" size={24} />,
         colSpan: "md:col-span-1",
         visual: (
-            <div className="flex flex-col items-center gap-4 bg-black/40 rounded-xl p-5 border border-white/10 relative overflow-hidden backdrop-blur-md min-h-[160px] justify-between">
+            <div className="flex flex-col items-center gap-4 bg-black/40 rounded-xl p-6 border border-white/10 relative overflow-hidden backdrop-blur-md min-h-[190px] justify-between">
                 
                 {/* Top Part: Score & Load Time */}
-                <div className="w-full space-y-3 relative z-10">
-                    <div className="space-y-1.5">
-                        <div className="flex justify-between text-[10px] text-gray-400 uppercase tracking-wider font-bold">
+                <div className="w-full space-y-4 relative z-10">
+                    <div className="space-y-2">
+                        <div className="flex justify-between text-[11px] text-gray-400 uppercase tracking-wider font-bold">
                             <span>Performance</span>
                             <span className="text-green-400">100/100</span>
                         </div>
-                        <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
                             <motion.div 
                                 initial={{ width: 0 }}
                                 whileInView={{ width: "100%" }}
@@ -103,22 +108,22 @@ const features = [
                             />
                         </div>
                     </div>
-                     <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg border border-white/5">
-                        <div className="flex items-center gap-1.5">
-                            <Zap size={12} className="text-yellow-400" />
-                            <span className="text-[10px] text-gray-200 font-medium">Load Time</span>
+                     <div className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
+                        <div className="flex items-center gap-2">
+                            <Zap size={14} className="text-yellow-400" />
+                            <span className="text-[11px] text-gray-200 font-medium">Load Time</span>
                         </div>
-                        <span className="text-xs font-mono text-white font-bold">0.4s</span>
+                        <span className="text-sm font-mono text-white font-bold">0.4s</span>
                      </div>
                 </div>
                 
                 {/* Bottom Part: Bounce Rate */}
-                <div className="flex items-center justify-between w-full border-t border-white/5 pt-3">
-                    <div className="text-[9px] text-gray-500 uppercase tracking-wider font-bold">Bounce Rate</div>
+                <div className="flex items-center justify-between w-full border-t border-white/5 pt-4">
+                    <div className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Bounce Rate</div>
                      <motion.div 
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
-                        className="text-sm font-bold text-white bg-white/10 px-2 py-0.5 rounded"
+                        className="text-xs font-bold text-white bg-white/10 px-3 py-1 rounded-lg"
                      >
                         Ultra-Low
                      </motion.div>
@@ -183,7 +188,8 @@ export const Features: React.FC = () => {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-7xl">
+      {/* Increased max-width to 1400px */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1400px]">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
                 <motion.div 
@@ -217,7 +223,7 @@ export const Features: React.FC = () => {
             </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, idx) => (
                 <FeatureCard key={idx} feature={feature} index={idx} />
             ))}
@@ -292,15 +298,21 @@ export const Features: React.FC = () => {
                             <p className="opacity-80 mb-10 text-lg text-gray-300 font-light max-w-md">
                                 Don't let a poor digital presence undervalue your brand. Upgrade to a Vexury standard today.
                             </p>
-                            <motion.button 
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="bg-white text-black px-12 py-5 rounded-full text-sm font-bold hover:bg-gray-200 transition-all duration-300 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.3)] relative overflow-hidden group/btn"
+                            <a 
+                                href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
-                                <span className="relative z-10">Start Your Website</span>
-                                <ArrowUpRight size={18} className="relative z-10" />
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300/50 to-transparent skew-x-12 translate-x-[-100%] group-hover/btn:animate-shimmer" />
-                            </motion.button>
+                                <motion.button 
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="bg-white text-black px-12 py-5 rounded-full text-sm font-bold hover:bg-gray-200 transition-all duration-300 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.3)] relative overflow-hidden group/btn"
+                                >
+                                    <span className="relative z-10">Start Your Website</span>
+                                    <ArrowUpRight size={18} className="relative z-10" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300/50 to-transparent skew-x-12 translate-x-[-100%] group-hover/btn:animate-shimmer" />
+                                </motion.button>
+                            </a>
                         </div>
                         
                         {/* 3D Floating Icons Container */}

@@ -227,7 +227,7 @@ export const Work: React.FC = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(168,85,247,0.1),transparent_80%)]" />
       <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-7xl">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1400px]">
         
         {/* Header */}
         <div className="text-center mb-16 max-w-4xl mx-auto">

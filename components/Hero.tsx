@@ -327,14 +327,20 @@ export const Hero: React.FC = () => {
                 transition={{ duration: 1, delay: 1 }}
                 className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-20"
                 >
-                <motion.button 
-                    whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(168, 85, 247, 0.6)" }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-12 py-5 bg-white text-black rounded-full font-bold transition-all duration-500 shadow-[0_0_40px_rgba(255,255,255,0.3)] flex items-center gap-2 group relative overflow-hidden"
+                <a 
+                    href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
-                    <span className="relative z-10 flex items-center gap-2">Build My Website Now <ArrowRight size={18} /></span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent-light/50 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
-                </motion.button>
+                    <motion.button 
+                        whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(168, 85, 247, 0.6)" }}
+                        whileTap={{ scale: 0.95 }}
+                        className="px-12 py-5 bg-white text-black rounded-full font-bold transition-all duration-500 shadow-[0_0_40px_rgba(255,255,255,0.3)] flex items-center gap-2 group relative overflow-hidden"
+                    >
+                        <span className="relative z-10 flex items-center gap-2">Build My Website Now <ArrowRight size={18} /></span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent-light/50 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
+                    </motion.button>
+                </a>
                 </motion.div>
             </div>
         </div>

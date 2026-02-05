@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Check, Sparkles, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -34,8 +35,8 @@ export const Pricing: React.FC = () => {
             </p>
         </div>
 
-        {/* Pricing Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
+        {/* Pricing Grid - Wider container at 1400px */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-[1400px] mx-auto items-stretch">
             
             {/* PLAN 1: PROFESSIONAL */}
             <motion.div 
@@ -56,7 +57,7 @@ export const Pricing: React.FC = () => {
                         <span className="text-4xl font-bold text-white">$1,200</span>
                         <span className="text-sm text-gray-500">one-time</span>
                     </div>
-                    <div className="text-xs text-accent font-medium uppercase tracking-wide">
+                    <div className="text-[10px] text-accent font-medium uppercase tracking-wide">
                         $600 / year — starting year 2
                     </div>
                 </div>
@@ -75,9 +76,16 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300 mb-8">
-                    Start My Website
-                </button>
+                <a 
+                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20the%20Professional%20Website%20plan." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block mb-8"
+                >
+                    <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
+                        Start My Website
+                    </button>
+                </a>
 
                 {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
@@ -116,7 +124,7 @@ export const Pricing: React.FC = () => {
                             <span className="text-5xl font-bold text-white tracking-tight">$3,800</span>
                             <span className="text-sm text-gray-500">one-time</span>
                         </div>
-                        <div className="text-xs text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
+                        <div className="text-[10px] text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
                             $1,000 / year — starting year 2
                         </div>
@@ -140,10 +148,17 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden mb-8">
-                    <span className="relative z-10 flex items-center justify-center gap-2">Start Your Project <ArrowRight size={18} /></span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
-                </button>
+                <a 
+                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20the%20Premium%20Website%20plan." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block mb-8"
+                >
+                    <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
+                        <span className="relative z-10 flex items-center justify-center gap-2">Start Your Project <ArrowRight size={18} /></span>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
+                    </button>
+                </a>
 
                 {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-400 leading-relaxed space-y-2">
@@ -171,7 +186,7 @@ export const Pricing: React.FC = () => {
                     <div className="flex items-center gap-1 mb-1 h-[48px]">
                         <span className="text-3xl font-bold text-white">Custom Pricing</span>
                     </div>
-                    <div className="text-xs text-gray-500 font-medium uppercase tracking-wide">
+                    <div className="text-[10px] text-gray-500 font-medium uppercase tracking-wide">
                         Tailored to your needs
                     </div>
                 </div>
@@ -191,9 +206,16 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300 mb-8">
-                    Let’s Talk
-                </button>
+                <a 
+                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20a%20Custom/Enterprise%20solution." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block mb-8"
+                >
+                    <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
+                        Let’s Talk
+                    </button>
+                </a>
 
                 {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">

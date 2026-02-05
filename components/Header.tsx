@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { NavItem } from '../types';
@@ -124,9 +125,15 @@ export const Header: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <button className="bg-white text-black w-full py-5 font-bold mt-4 rounded-full tracking-wider uppercase text-sm">
-                Start Project
-            </button>
+            <a 
+                href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <button className="bg-white text-black w-full py-5 font-bold mt-4 rounded-full tracking-wider uppercase text-sm">
+                    Start Project
+                </button>
+            </a>
           </div>
         </div>
       )}
