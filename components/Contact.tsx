@@ -154,8 +154,8 @@ export const Contact: React.FC = () => {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
             <p>© 2026 Vexury. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-                <a href="#/privacy" className="hover:text-gray-400 transition-colors">Privacy</a>
-                <a href="#/terms" className="hover:text-gray-400 transition-colors">Terms</a>
+                <a href="privacy.html" className="hover:text-gray-400 transition-colors">Privacy</a>
+                <a href="terms.html" className="hover:text-gray-400 transition-colors">Terms</a>
             </div>
         </div>
       </div>
