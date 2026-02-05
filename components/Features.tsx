@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Target, Award, Zap, ArrowUpRight, MousePointerClick, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -9,36 +10,36 @@ const features = [
         icon: <Target className="text-white" size={24} />,
         colSpan: "md:col-span-1",
         visual: (
-            <div className="bg-black/40 rounded-xl p-4 border border-white/10 backdrop-blur-md shadow-inner relative overflow-hidden min-h-[140px] flex items-center justify-between gap-3">
-                {/* Simulated Lead Notifications - Side by Side */}
+            <div className="bg-black/40 rounded-xl p-4 border border-white/10 backdrop-blur-md shadow-inner relative overflow-hidden min-h-[160px] flex items-center justify-between gap-3">
+                {/* Simulated Lead Notifications - Slightly Larger Content */}
                 <motion.div 
                     initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="flex-1 flex flex-col gap-2 bg-white/5 p-3 rounded-lg border border-white/5 relative z-10 min-w-0"
+                    className="flex-1 flex flex-col gap-2.5 bg-white/5 p-4 rounded-xl border border-white/5 relative z-10 min-w-0"
                 >
-                    <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30 shrink-0">
-                            <MousePointerClick size={12} className="text-green-400" />
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center border border-green-500/30 shrink-0">
+                            <MousePointerClick size={14} className="text-green-400" />
                         </div>
-                        <div className="text-[10px] text-white font-bold leading-tight">New client inquiry</div>
+                        <div className="text-xs text-white font-bold leading-tight">New client inquiry</div>
                     </div>
-                    <div className="text-[9px] text-gray-400 leading-tight">Generated via your website</div>
+                    <div className="text-[10px] text-gray-400 leading-tight">Generated via your website</div>
                 </motion.div>
 
                 <motion.div 
                     initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="flex-1 flex flex-col gap-2 bg-white/5 p-3 rounded-lg border border-white/5 opacity-60 relative z-10 min-w-0"
+                    className="flex-1 flex flex-col gap-2.5 bg-white/5 p-4 rounded-xl border border-white/5 opacity-60 relative z-10 min-w-0"
                 >
-                    <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 shrink-0">
-                            <MousePointerClick size={12} className="text-accent" />
+                    <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center border border-accent/30 shrink-0">
+                            <MousePointerClick size={14} className="text-accent" />
                         </div>
-                         <div className="text-[10px] text-white font-bold leading-tight">Call Scheduled</div>
+                         <div className="text-xs text-white font-bold leading-tight">Call Scheduled</div>
                     </div>
-                    <div className="text-[9px] text-gray-400 leading-tight">
+                    <div className="text-[10px] text-gray-400 leading-tight">
                         Qualified lead
                         <div className="mt-0.5">2 mins ago</div>
                     </div>
@@ -55,24 +56,24 @@ const features = [
         icon: <Award className="text-white" size={24} />,
         colSpan: "md:col-span-1",
         visual: (
-             <div className="flex items-center justify-center min-h-[140px] bg-black/40 rounded-xl border border-white/10 backdrop-blur-md relative overflow-hidden group/viz">
+             <div className="flex items-center justify-center min-h-[160px] bg-black/40 rounded-xl border border-white/10 backdrop-blur-md relative overflow-hidden group/viz">
                 <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent opacity-0 group-hover/viz:opacity-100 transition-opacity duration-700"></div>
                 
-                {/* Authority Badge Visual */}
+                {/* Authority Badge Visual - Slightly Larger Scale */}
                 <div className="relative z-10 flex flex-col items-center justify-center py-4 text-center">
                     <motion.div 
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ type: "spring", stiffness: 200, damping: 10 }}
-                        className="w-12 h-12 rounded-full border-2 border-accent/50 flex items-center justify-center shadow-[0_0_30px_rgba(168,85,247,0.2)] bg-[#03000a] mb-3"
+                        className="w-16 h-16 rounded-full border-2 border-accent/50 flex items-center justify-center shadow-[0_0_40px_rgba(168,85,247,0.3)] bg-[#03000a] mb-4"
                     >
-                        <CheckCircle2 size={24} className="text-white" />
+                        <CheckCircle2 size={32} className="text-white" />
                     </motion.div>
                     
                     {/* Centered Badge Text */}
-                    <div className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 backdrop-blur-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shadow-[0_0_8px_#a855f7]"></div>
-                        <span className="text-[9px] uppercase tracking-widest text-gray-300 font-bold whitespace-nowrap">Professional Verified</span>
+                    <div className="inline-flex items-center justify-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
+                        <div className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_10px_#a855f7]"></div>
+                        <span className="text-xs uppercase tracking-[0.2em] text-gray-300 font-bold whitespace-nowrap">Professional Verified</span>
                     </div>
                 </div>
             </div>
@@ -84,7 +85,7 @@ const features = [
         icon: <Zap className="text-white" size={24} />,
         colSpan: "md:col-span-1",
         visual: (
-            <div className="flex flex-col items-center gap-4 bg-black/40 rounded-xl p-5 border border-white/10 relative overflow-hidden backdrop-blur-md min-h-[140px] justify-between">
+            <div className="flex flex-col items-center gap-4 bg-black/40 rounded-xl p-5 border border-white/10 relative overflow-hidden backdrop-blur-md min-h-[160px] justify-between">
                 
                 {/* Top Part: Score & Load Time */}
                 <div className="w-full space-y-3 relative z-10">
@@ -111,7 +112,7 @@ const features = [
                      </div>
                 </div>
                 
-                {/* Bottom Part: Bounce Rate (Horizontal layout for compactness) */}
+                {/* Bottom Part: Bounce Rate */}
                 <div className="flex items-center justify-between w-full border-t border-white/5 pt-3">
                     <div className="text-[9px] text-gray-500 uppercase tracking-wider font-bold">Bounce Rate</div>
                      <motion.div 
@@ -182,7 +183,6 @@ export const Features: React.FC = () => {
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* UPDATED: Added md:px-12 lg:px-20 and max-w-7xl for better desktop harmony */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
@@ -217,13 +217,12 @@ export const Features: React.FC = () => {
             </motion.p>
         </div>
 
-        {/* UPDATED GRID: grid-cols-1 md:grid-cols-3 (3 Columns Equal Width) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {features.map((feature, idx) => (
                 <FeatureCard key={idx} feature={feature} index={idx} />
             ))}
 
-            {/* Promo Card - Spans all 3 columns now */}
+            {/* Promo Card */}
             <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -235,8 +234,6 @@ export const Features: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-accent via-blue-500 to-accent opacity-60 blur-md group-hover:opacity-100 group-hover:blur-xl transition-all duration-1000 animate-pulse-slow" />
                 
                 <div className="relative h-full bg-[#03000a] rounded-[22px] p-10 md:p-14 overflow-hidden isolate">
-                    
-                    {/* --- BACKGROUND EFFECTS --- */}
                     
                     {/* Moving Grid Floor */}
                     <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" 

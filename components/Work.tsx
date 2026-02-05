@@ -331,8 +331,8 @@ export const Work: React.FC = () => {
 
         </div>
 
-        {/* Footer Statement */}
-        <div className="mt-32 text-center">
+        {/* Footer Statement - Reduced margin for tighter layout */}
+        <div className="mt-16 text-center">
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
