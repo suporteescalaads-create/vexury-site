@@ -10,11 +10,11 @@
         theme: {
           extend: {
             colors: {
-              background: '#03000a', // Deeper, darker black for neon contrast
+              background: '#03000a',
               surface: '#0f0518',
               primary: '#ffffff',
               secondary: '#9ca3af',
-              accent: '#a855f7',     // Purple 500 - Brighter Neon
+              accent: '#a855f7',
               'accent-dark': '#9333ea',
               'accent-light': '#d8b4fe',
               'glass': 'rgba(255, 255, 255, 0.05)',
@@ -44,18 +44,12 @@
                 '0%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)' },
                 '100%': { boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' },
               }
-            },
-            transitionDuration: {
-                '400': '400ms',
-                '700': '700ms',
-                '2000': '2000ms',
             }
           },
         },
       }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Spline Viewer Script -->
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.47/build/spline-viewer.js"></script>
     <style>
       body {
@@ -79,47 +73,36 @@
         background-color: #a855f7;
         color: white;
       }
-      
       .glass-panel {
         background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.08);
       }
-      
-      .neon-border {
-        box-shadow: 0 0 10px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1);
-      }
-
-      /* Strong Text Shine */
       .text-shine {
-        background: linear-gradient(
-          110deg, 
-          #a855f7 30%, 
-          #ffffff 50%, 
-          #a855f7 70%
-        );
+        background: linear-gradient(110deg, #a855f7 30%, #ffffff 50%, #a855f7 70%);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: shimmer 4s ease-in-out infinite;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
-    "react": "https://esm.sh/react@18.2.0",
-    "react/": "https://esm.sh/react@18.2.0/",
-    "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
+        "react": "https://esm.sh/react@18.2.0",
+        "react/": "https://esm.sh/react@18.2.0/",
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
+      }
+    }
+    </script>
+  </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
