@@ -55,7 +55,7 @@ export const Pricing: React.FC = () => {
                 <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5">
                     <div className="flex items-baseline gap-1 mb-1">
                         <span className="text-4xl font-bold text-white">$1,200</span>
-                        <span className="text-sm text-gray-500">one-time</span>
+                        <span className="text-sm text-gray-500 whitespace-nowrap">one-time</span>
                     </div>
                     <div className="text-[10px] text-accent font-medium uppercase tracking-wide">
                         $600 / year — starting year 2
@@ -120,9 +120,9 @@ export const Pricing: React.FC = () => {
                 <div className="mb-8 p-6 bg-accent/5 rounded-2xl border border-accent/20 relative overflow-hidden">
                     <div className="absolute inset-0 bg-accent/5 animate-pulse-slow"></div>
                     <div className="relative z-10">
-                        <div className="flex items-baseline gap-1 mb-1">
-                            <span className="text-5xl font-bold text-white tracking-tight">$3,800</span>
-                            <span className="text-sm text-gray-500">one-time</span>
+                        <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
+                            <span className="text-4xl xs:text-5xl font-bold text-white tracking-tight">$3,800</span>
+                            <span className="text-xs xs:text-sm text-gray-500 whitespace-nowrap">one-time</span>
                         </div>
                         <div className="text-[10px] text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
@@ -183,10 +183,10 @@ export const Pricing: React.FC = () => {
                 </div>
 
                 <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5">
-                    <div className="flex items-center gap-1 mb-1 h-[48px]">
-                        <span className="text-3xl font-bold text-white">Custom Pricing</span>
+                    <div className="flex items-center gap-1 mb-1">
+                        <span className="text-3xl font-bold text-white leading-tight">Custom Pricing</span>
                     </div>
-                    <div className="text-[10px] text-gray-500 font-medium uppercase tracking-wide">
+                    <div className="text-[10px] text-gray-500 font-medium uppercase tracking-wide pt-1">
                         Tailored to your needs
                     </div>
                 </div>

@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vexury | Arquitetos Digitais</title>
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/6f67f3e6f98450861e8a1d191faab378f805a283/faviconvexuryfinal.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -86,6 +88,16 @@
         -webkit-text-fill-color: transparent;
         animation: shimmer 4s ease-in-out infinite;
       }
+      #bg-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.6;
+      }
     </style>
     <script type="importmap">
     {
@@ -102,7 +114,78 @@
     </script>
   </head>
   <body>
+    <canvas id="bg-canvas"></canvas>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
+    <script>
+      (function() {
+        const canvas = document.getElementById('bg-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        let width, height;
+        const setCanvasSize = () => {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width;
+          canvas.height = height;
+        };
+        window.addEventListener('resize', setCanvasSize);
+        setCanvasSize();
+
+        class Meteor {
+          constructor() {
+            this.reset(true);
+          }
+          reset(initial = false) {
+            this.x = Math.random() * width * 1.5;
+            this.y = initial ? Math.random() * height : -100;
+            this.length = Math.random() * 80 + 20;
+            this.speed = Math.random() * 3 + 1.5;
+            this.opacity = Math.random() * 0.3 + 0.05;
+            this.width = Math.random() * 1.5 + 0.5;
+          }
+          update() {
+            this.x -= this.speed;
+            this.y += this.speed;
+            if (this.x < -100 || this.y > height + 100) {
+              this.reset();
+            }
+          }
+          draw() {
+            ctx.beginPath();
+            const tailX = this.x + this.length;
+            const tailY = this.y - this.length;
+            const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+            gradient.addColorStop(0.2, `rgba(168, 85, 247, ${this.opacity * 0.8})`);
+            gradient.addColorStop(1, `rgba(168, 85, 247, 0)`);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = this.width;
+            ctx.lineCap = 'round';
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(tailX, tailY);
+            ctx.stroke();
+          }
+        }
+
+        const meteors = [];
+        const count = Math.floor(window.innerWidth / 120);
+        for (let i = 0; i < count; i++) {
+          meteors.push(new Meteor());
+        }
+
+        function render() {
+          ctx.clearRect(0, 0, width, height);
+          for (let i = 0; i < meteors.length; i++) {
+            meteors[i].update();
+            meteors[i].draw();
+          }
+          requestAnimationFrame(render);
+        }
+        render();
+      })();
+    </script>
   </body>
 </html>
