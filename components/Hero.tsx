@@ -13,14 +13,11 @@ export const Hero: React.FC = () => {
   // Scroll Physics
   const { scrollY } = useScroll();
   
-  // Revised Scroll Physics for "Folding" & "Rising" Effect
+  // Revised Scroll Physics for "Folding" & "Receding" Effect
   const rotateX = useTransform(scrollY, [0, 1000], [0, 20]); 
   const scale = useTransform(scrollY, [0, 1000], [1, 0.9]);
   const opacity = useTransform(scrollY, [0, 800], [1, 0.6]);
   const blur = useTransform(scrollY, [0, 800], ["0px", "5px"]);
-  
-  // Parallax Y: Moves the image UP as user scrolls DOWN
-  const y = useTransform(scrollY, [0, 1000], [0, -250]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -354,7 +351,7 @@ export const Hero: React.FC = () => {
         </div>
 
         <motion.div 
-          style={{ rotateX, scale, opacity, filter: blur, y }}
+          style={{ rotateX, scale, opacity, filter: blur }}
           className="relative max-w-7xl mx-auto z-20 perspective-1000"
         >
             <motion.div
