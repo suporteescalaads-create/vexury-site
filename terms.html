@@ -37,9 +37,10 @@
         background-color: #03000a;
         color: #ffffff;
         overflow-x: hidden;
+        font-family: 'Inter', sans-serif;
       }
       .glass-panel {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.02);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.08);
@@ -54,10 +55,62 @@
         z-index: 0;
         opacity: 0.6;
       }
-      .prose h2 { color: white; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.5rem; }
-      .prose p { color: #9ca3af; line-height: 1.8; margin-bottom: 1.5rem; }
-      .prose ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #9ca3af; }
-      .prose li { margin-bottom: 0.5rem; }
+      .prose h2 { 
+        color: white; 
+        font-weight: 700; 
+        margin-top: 3rem; 
+        margin-bottom: 1.5rem; 
+        font-size: 1.75rem;
+        letter-spacing: -0.025em;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .prose h2::before {
+        content: '';
+        width: 24px;
+        height: 2px;
+        background: #a855f7;
+        display: block;
+      }
+      .prose p { 
+        color: #9ca3af; 
+        line-height: 1.8; 
+        margin-bottom: 1.5rem; 
+        font-weight: 300;
+      }
+      .prose strong {
+        color: white;
+        font-weight: 600;
+      }
+      .prose ul { 
+        list-style-type: none; 
+        padding-left: 0; 
+        margin-bottom: 2rem; 
+        color: #9ca3af; 
+      }
+      .prose li { 
+        margin-bottom: 0.75rem; 
+        padding-left: 1.5rem;
+        position: relative;
+      }
+      .prose li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: #a855f7;
+        font-weight: bold;
+      }
+      .text-shine {
+        background: linear-gradient(to r, #fff, #a855f7, #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 5s linear infinite;
+      }
+      @keyframes shine {
+        to { background-position: 200% center; }
+      }
     </style>
   </head>
   <body>
@@ -66,97 +119,130 @@
     <!-- Header / Nav -->
     <header class="fixed top-0 left-0 w-full z-50 bg-[#03000a]/90 backdrop-blur-xl border-b border-white/5 py-6">
       <div class="container mx-auto px-6 flex justify-between items-center">
-        <a href="index.html" class="flex items-center gap-3">
-          <img src="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/f9919f2dbcb39b4b4d39ec34ea9363373584515b/logo_vexury.svg" alt="Vexury Logo" class="w-8 h-8">
+        <a href="https://vexury.com/" class="flex items-center gap-3 group">
+          <div class="relative w-8 h-8 transition-transform duration-500 group-hover:scale-110">
+            <img src="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/f9919f2dbcb39b4b4d39ec34ea9363373584515b/logo_vexury.svg" alt="Vexury Logo" class="w-full h-full">
+          </div>
           <span class="font-display font-bold tracking-[0.25em] uppercase text-white text-lg">Vexury</span>
         </a>
-        <a href="index.html" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all">
-          ← Back to Home
+        <a href="https://vexury.com/" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:bg-white/10 hover:border-white/20 transition-all duration-300">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          Back to Home
         </a>
       </div>
     </header>
 
-    <main class="pt-40 pb-20 relative z-10">
+    <main class="pt-40 pb-24 relative z-10">
       <div class="container mx-auto px-6 max-w-4xl">
         
-        <div class="text-center mb-16">
-          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
-            Agreement
+        <div class="text-center mb-20">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-accent text-xs font-bold uppercase tracking-widest mb-8">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+            </span>
+            Official Agreement
           </div>
-          <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6">
-            Terms of <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-accent">Service</span>
+          <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-8">
+            Terms of <span class="text-shine">Service</span>
           </h1>
-          <p class="text-gray-400 text-lg">Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
+          <p class="text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+            Welcome to Vexury. These terms outline our commitment to you and your responsibilities as a client of our premium digital services.
+          </p>
         </div>
 
-        <div class="glass-panel rounded-[2.5rem] p-8 md:p-12 prose max-w-none">
+        <div class="glass-panel rounded-[3rem] p-8 md:p-16 prose max-w-none shadow-[0_0_100px_rgba(0,0,0,0.5)]">
+          <p class="text-sm font-mono text-accent mb-8">Last Updated: March 15, 2024</p>
+          
           <h2>1. Acceptance of Terms</h2>
           <p>
-            By accessing and using the Vexury website and services ("Service"), you accept and agree to be bound by the terms and provision of this agreement. These terms apply to all visitors, users, and clients of our high-performance website solutions.
+            By engaging with Vexury and our digital properties, you agree to be bound by these Terms of Service. These terms constitute a legally binding agreement between you ("the Client") and Vexury ("the Agency"). If you are entering into this agreement on behalf of a company or other legal entity, you represent that you have the authority to bind such entity to these terms.
           </p>
 
-          <div class="w-full h-px bg-white/10 my-8"></div>
-
-          <h2>2. Service Description</h2>
+          <h2>2. Scope of Services</h2>
           <p>
-            Vexury provides premium digital design, development, and branding services. The specific deliverables, timelines, and costs for each project are detailed in individual service plans (Professional, Premium, or Custom) selected by the client.
-          </p>
-
-          <div class="w-full h-px bg-white/10 my-8"></div>
-
-          <h2>3. Intellectual Property</h2>
-          <p>
-            Upon full payment of all fees, the Client shall own the final website designs and build files created specifically for them as part of their project. 
+            Vexury provides high-performance digital solutions, including but not limited to <strong>Website Design, Frontend Development, Branding, and Technical Strategy</strong>. Each project is governed by a specific service tier (Professional, Premium, or Custom) selected by the Client at the time of purchase.
           </p>
           <p>
-            Vexury retains the right to display the completed project and preliminary designs for promotional purposes, including in our digital portfolio and social media presence, unless otherwise agreed in writing.
+            We strive for excellence in every pixel. However, we do not guarantee specific financial results or conversion rates, as these are influenced by external market factors beyond the technical scope of the website.
           </p>
 
-          <div class="w-full h-px bg-white/10 my-8"></div>
-
-          <h2>4. Payments and Renewals</h2>
+          <h2>3. Intellectual Property Rights</h2>
           <p>
-            Project fees are typically structured as a one-time initial investment. To maintain hosting, support, and domain services, an annual renewal fee applies starting from the second year. This renewal fee is significantly reduced compared to the initial design investment.
+            <strong>Ownership:</strong> Upon receipt of full payment for the services rendered, the Client shall own all proprietary rights to the final deliverables created specifically for them (e.g., website source code, visual assets, and UI components).
           </p>
-
-          <div class="w-full h-px bg-white/10 my-8"></div>
-
-          <h2>5. Limitation of Liability</h2>
           <p>
-            Vexury is not liable for any indirect, incidental, or consequential damages resulting from the use of our websites or services. We aim for 99.9% uptime and high-performance scores, but do not guarantee specific business revenue outcomes.
+            <strong>Agency Rights:</strong> Vexury retains the right to display the completed work, project screenshots, and case studies in our digital portfolio, social media channels, and marketing materials to demonstrate our expertise, unless a separate Non-Disclosure Agreement (NDA) is explicitly signed.
           </p>
 
-          <div class="w-full h-px bg-white/10 my-8"></div>
-
-          <h2>6. Governing Law</h2>
+          <h2>4. Payments & Renewals</h2>
           <p>
-            These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which Vexury operates.
+            <strong>Project Fees:</strong> All initial project fees are one-time payments due at the project start or as per the agreed milestone schedule. 
+          </p>
+          <p>
+            <strong>Maintenance & Support:</strong> To maintain the high standards of performance and security, an annual renewal fee applies starting from the second year. This fee covers high-speed hosting, security patches, technical support, and domain management. Failure to pay the renewal fee may result in the suspension of hosted services.
           </p>
 
-          <div class="mt-12 pt-8 border-t border-white/10">
-            <h3 class="text-white font-bold mb-2">Questions?</h3>
-            <p>Please send any questions regarding these Terms to <a href="mailto:hello@vexury.com" class="text-accent hover:text-white transition-colors">hello@vexury.com</a>.</p>
+          <h2>5. Client Responsibilities</h2>
+          <p>
+            To ensure timely delivery within our 7-day average, the Client agrees to:
+          </p>
+          <ul>
+            <li>Provide timely feedback and approvals on project milestones.</li>
+            <li>Supply necessary business content, high-resolution imagery, and logos.</li>
+            <li>Maintain clear and professional communication via our primary channels (WhatsApp/Email).</li>
+          </ul>
+
+          <h2>6. Limitation of Liability</h2>
+          <p>
+            Vexury provides its services "as is" and "as available." To the maximum extent permitted by law, the Agency shall not be liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use the Service, including but not limited to lost profits or data.
+          </p>
+
+          <h2>7. Termination</h2>
+          <p>
+            Either party may terminate the project agreement with written notice if the other party breaches a material term of this agreement. Upon termination, the Client remains responsible for payment for all work completed up to the termination date.
+          </p>
+
+          <h2>8. Governing Law</h2>
+          <p>
+            These Terms shall be governed by and construed in accordance with the laws of the jurisdiction in which Vexury is registered. Any disputes shall be subject to the exclusive jurisdiction of the local courts.
+          </p>
+
+          <div class="mt-20 pt-12 border-t border-white/10 text-center">
+            <h3 class="text-white text-2xl font-bold mb-4">Have Questions?</h3>
+            <p class="mb-8">Our legal and support teams are here to clarify any points of this agreement.</p>
+            <a href="mailto:hello@vexury.com" class="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-accent text-white font-bold hover:bg-white hover:text-black hover:shadow-[0_0_30px_#a855f7] transition-all duration-500 group">
+              Contact Legal Team
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
+            </a>
           </div>
         </div>
       </div>
     </main>
 
-    <footer class="bg-[#03000a] py-12 border-t border-white/5 relative z-10">
-      <div class="container mx-auto px-6 text-center">
-        <p class="text-gray-500 text-sm">© 2026 Vexury. All rights reserved.</p>
+    <footer class="bg-[#03000a] py-16 border-t border-white/5 relative z-10">
+      <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex items-center gap-3">
+          <img src="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/f9919f2dbcb39b4b4d39ec34ea9363373584515b/logo_vexury.svg" alt="Vexury Logo" class="w-6 h-6">
+          <span class="font-display font-bold tracking-widest uppercase text-white text-sm">Vexury</span>
+        </div>
+        <p class="text-gray-500 text-sm">© 2026 Vexury. Crafted for the elite business world.</p>
+        <div class="flex gap-6 text-sm">
+          <a href="privacy.html" class="text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
+          <a href="mailto:hello@vexury.com" class="text-gray-500 hover:text-white transition-colors">Support</a>
+        </div>
       </div>
     </footer>
 
     <script>
       (function() {
         const canvas = document.getElementById('bg-canvas');
-        if (!canvas) return;
         const ctx = canvas.getContext('2d');
-        if (!ctx) return;
         let width, height;
         const setSize = () => { width = window.innerWidth; height = window.innerHeight; canvas.width = width; canvas.height = height; };
         window.addEventListener('resize', setSize);
         setSize();
+        
         class Meteor {
           constructor() { this.reset(true); }
           reset(initial = false) {
@@ -173,16 +259,15 @@
           }
           draw() {
             ctx.beginPath();
-            const tailX = this.x + this.length;
-            const tailY = this.y - this.length;
-            const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+            const gradient = ctx.createLinearGradient(this.x, this.y, this.x + this.length, this.y - this.length);
             gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
             gradient.addColorStop(0.2, `rgba(168, 85, 247, ${this.opacity * 0.8})`);
             gradient.addColorStop(1, `rgba(168, 85, 247, 0)`);
             ctx.strokeStyle = gradient; ctx.lineWidth = this.width; ctx.lineCap = 'round';
-            ctx.moveTo(this.x, this.y); ctx.lineTo(tailX, tailY); ctx.stroke();
+            ctx.moveTo(this.x, this.y); ctx.lineTo(this.x + this.length, this.y - this.length); ctx.stroke();
           }
         }
+        
         const meteors = Array.from({ length: 15 }, () => new Meteor());
         function render() {
           ctx.clearRect(0, 0, width, height);
