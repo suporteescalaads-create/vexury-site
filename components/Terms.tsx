@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, ArrowLeft } from 'lucide-react';
@@ -21,7 +22,7 @@ export const Terms: React.FC = () => {
         <div className="container mx-auto px-6 relative z-10 max-w-4xl">
           
           <div className="mb-8">
-            <a href="#" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
+            <a href="https://vexury.com/#" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors">
                 <ArrowLeft size={16} /> Back to Home
             </a>
           </div>

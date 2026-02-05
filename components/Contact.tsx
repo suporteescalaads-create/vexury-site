@@ -9,25 +9,22 @@ export const Contact: React.FC = () => {
     // Check if we are on the home page (hash doesn't start with #/)
     const isHomePage = !window.location.hash.startsWith('#/');
 
-    // If we are NOT on home page, allow default navigation to occur.
-    if (!isHomePage) {
-        return;
-    }
+    // If on home page and it's an internal anchor link, manual smooth scroll
+    if (isHomePage && href.includes('#') && !href.includes('#/')) {
+      e.preventDefault();
+      const targetId = href.split('#')[1];
+      const element = document.getElementById(targetId);
+      
+      if (element) {
+        const headerOffset = 100; 
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-    // If on home page, manual smooth scroll
-    e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      const headerOffset = 100; 
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
     }
   };
 
@@ -102,11 +99,10 @@ export const Contact: React.FC = () => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-16">
             <div className="col-span-2 md:col-span-1">
-                 <a href="#" className="inline-block mb-6" onClick={(e) => {
-                     if (!window.location.hash.startsWith('#/')) {
-                         e.preventDefault();
-                         window.scrollTo({ top: 0, behavior: 'smooth' });
-                     }
+                 <a href="https://vexury.com/#" className="inline-block mb-6" onClick={(e) => {
+                     e.preventDefault();
+                     window.location.hash = '#';
+                     window.scrollTo({ top: 0, behavior: 'smooth' });
                  }}>
                     <Logo className="w-10 h-10" textClassName="text-lg" />
                 </a>
@@ -119,16 +115,16 @@ export const Contact: React.FC = () => {
                 <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Product</h4>
                 <ul className="space-y-4 text-gray-500 text-sm">
                     <li>
-                        <a href="#services" onClick={(e) => handleNavClick(e, '#services')} className="hover:text-white transition-colors">Services</a>
+                        <a href="https://vexury.com/#services" onClick={(e) => handleNavClick(e, 'https://vexury.com/#services')} className="hover:text-white transition-colors">Services</a>
                     </li>
                     <li>
-                        <a href="#team" onClick={(e) => handleNavClick(e, '#team')} className="hover:text-white transition-colors">Team</a>
+                        <a href="https://vexury.com/#team" onClick={(e) => handleNavClick(e, 'https://vexury.com/#team')} className="hover:text-white transition-colors">Team</a>
                     </li>
                     <li>
-                        <a href="#pricing" onClick={(e) => handleNavClick(e, '#pricing')} className="hover:text-white transition-colors">Pricing</a>
+                        <a href="https://vexury.com/#pricing" onClick={(e) => handleNavClick(e, 'https://vexury.com/#pricing')} className="hover:text-white transition-colors">Pricing</a>
                     </li>
                     <li>
-                        <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="hover:text-white transition-colors">Contact</a>
+                        <a href="https://vexury.com/#contact" onClick={(e) => handleNavClick(e, 'https://vexury.com/#contact')} className="hover:text-white transition-colors">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -154,8 +150,8 @@ export const Contact: React.FC = () => {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
             <p>© 2026 Vexury. All rights reserved.</p>
             <div className="flex gap-6 mt-4 md:mt-0">
-                <a href="https://vexury.com/privacy.html" className="hover:text-gray-400 transition-colors">Privacy</a>
-                <a href="https://vexury.com/terms.html" className="hover:text-gray-400 transition-colors">Terms</a>
+                <a href="https://vexury.com/#/terms.html" className="hover:text-gray-400 transition-colors">Terms</a>
+                <a href="https://vexury.com/#/privacy.html" className="hover:text-gray-400 transition-colors">Privacy</a>
             </div>
         </div>
       </div>

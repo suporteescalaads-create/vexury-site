@@ -5,10 +5,10 @@ import { NavItem } from '../types';
 import { Logo } from './Logo';
 
 const navItems: NavItem[] = [
-  { label: 'Services', href: '#services' },
-  { label: 'Team', href: '#team' },
-  { label: 'Pricing', href: '#pricing' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Services', href: 'https://vexury.com/#services' },
+  { label: 'Team', href: 'https://vexury.com/#team' },
+  { label: 'Pricing', href: 'https://vexury.com/#pricing' },
+  { label: 'Contact', href: 'https://vexury.com/#contact' },
 ];
 
 export const Header: React.FC = () => {
@@ -17,10 +17,10 @@ export const Header: React.FC = () => {
   const [isHomePage, setIsHomePage] = useState(true);
 
   useEffect(() => {
-    // Check if we are on the home page (hash is empty or just # or section anchor)
-    // If hash starts with #/, we are on a subpage like #/privacy
     const checkPath = () => {
-        setIsHomePage(!window.location.hash.startsWith('#/'));
+        // In this hash-routing setup, home is when hash is empty or a section ID, not #/subpage.html
+        const hash = window.location.hash;
+        setIsHomePage(!hash.startsWith('#/'));
     };
     
     checkPath();
@@ -30,37 +30,38 @@ export const Header: React.FC = () => {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener('scroll', handleScroll);
+    
     return () => {
-        window.removeEventListener('scroll', handleScroll);
         window.removeEventListener('hashchange', checkPath);
+        window.removeEventListener('scroll', handleScroll);
     }
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // If not on homepage, let the link behave naturally.
-    // Example: clicking #services while on #/privacy will change URL to #services.
-    // App.tsx detects this change, switches to Home view, and handles the scroll.
-    if (!isHomePage) {
-        setIsMenuOpen(false);
-        return; 
-    }
-
-    // If on homepage, manual smooth scroll
-    e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
+    const isInternalHash = href.includes('#') && !href.includes('#/');
     
-    if (element) {
-      const headerOffset = 100; // Adjust for fixed header height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    if (isInternalHash) {
+      if (isHomePage) {
+        e.preventDefault();
+        const targetId = href.split('#')[1];
+        const element = document.getElementById(targetId);
+        
+        if (element) {
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      
-      setIsMenuOpen(false);
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+          
+          setIsMenuOpen(false);
+        }
+      } else {
+        // If not on home page, let the link take us back to home with the hash
+        setIsMenuOpen(false);
+      }
     }
   };
 
@@ -72,16 +73,16 @@ export const Header: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Premium Logo */}
+          {/* Premium Logo - Points to home */}
           <a 
-            href="#" 
+            href="https://vexury.com/#" 
             className="flex items-center"
             onClick={(e) => {
                if(isHomePage) {
                    e.preventDefault();
                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                   window.location.hash = '#';
                }
-               // If not home page, href="#" will reset hash to empty string (home)
             }}
           >
             <Logo className="w-10 h-10" textClassName="text-lg" />
@@ -115,7 +116,7 @@ export const Header: React.FC = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[#03000a] pt-32 px-6 md:hidden">
           <div className="flex flex-col gap-8">
-            {navItems.map((item, i) => (
+            {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
