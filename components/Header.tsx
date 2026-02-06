@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { NavItem } from '../types';
 import { Logo } from './Logo';
 
@@ -18,7 +17,6 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const checkPath = () => {
-        // In this hash-routing setup, home is when hash is empty or a section ID, not #/subpage.html
         const hash = window.location.hash;
         setIsHomePage(!hash.startsWith('#/'));
     };
@@ -27,15 +25,21 @@ export const Header: React.FC = () => {
     window.addEventListener('hashchange', checkPath);
     
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      if (window.scrollY > 20) {
+        if (!isScrolled) setIsScrolled(true);
+      } else {
+        if (isScrolled) setIsScrolled(false);
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+    
+    // Using passive listeners for better scroll performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => {
         window.removeEventListener('hashchange', checkPath);
         window.removeEventListener('scroll', handleScroll);
     }
-  }, []);
+  }, [isScrolled]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     const isInternalHash = href.includes('#') && !href.includes('#/');
@@ -59,7 +63,6 @@ export const Header: React.FC = () => {
           setIsMenuOpen(false);
         }
       } else {
-        // If not on home page, let the link take us back to home with the hash
         setIsMenuOpen(false);
       }
     }
@@ -68,12 +71,12 @@ export const Header: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 border-b ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b ${
           isScrolled ? 'bg-[#03000a]/90 backdrop-blur-xl border-white/5 py-4' : 'bg-transparent border-transparent py-8'
         }`}
+        style={{ minHeight: isScrolled ? '81px' : '113px' }} // Critical: Prevent CLS
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Premium Logo - Points to home */}
           <a 
             href="https://vexury.com/#" 
             className="flex items-center"
@@ -84,11 +87,11 @@ export const Header: React.FC = () => {
                    window.location.hash = '#';
                }
             }}
+            aria-label="Vexury Home"
           >
             <Logo className="w-10 h-10" textClassName="text-lg" />
           </a>
 
-          {/* Desktop Nav - Minimalist */}
           <nav className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <a
@@ -102,17 +105,16 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-white hover:text-accent transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </header>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[#03000a] pt-32 px-6 md:hidden">
           <div className="flex flex-col gap-8">
@@ -126,15 +128,6 @@ export const Header: React.FC = () => {
                 {item.label}
               </a>
             ))}
-            <a 
-                href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <button className="bg-white text-black w-full py-5 font-bold mt-4 rounded-full tracking-wider uppercase text-sm">
-                    Start Project
-                </button>
-            </a>
           </div>
         </div>
       )}
