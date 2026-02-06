@@ -16,22 +16,6 @@
     <meta name="description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website built by Vexury.">
 
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/6f67f3e6f98450861e8a1d191faab378f805a283/faviconvexuryfinal.svg" />
-    
-    <!-- Critical CSS for FCP Improvement -->
-    <style>
-      :root { --bg: #03000a; }
-      body { background-color: var(--bg); color: #fff; margin: 0; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-      .hero-section { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; }
-      .content-lazy { content-visibility: auto; contain-intrinsic-size: 1px 500px; }
-      .hero-title {
-        background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      /* Pre-define space for hero image to prevent layout shift */
-      .image-container { aspect-ratio: 2 / 1; width: 100%; max-width: 1200px; }
-    </style>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -50,25 +34,64 @@
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
               display: ['Inter', 'sans-serif'],
+            },
+            animation: {
+              'blob': 'pulse 10s infinite',
+              'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'shimmer': 'shimmer 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glow': 'glow 3s ease-in-out infinite alternate',
+            },
+            keyframes: {
+              shimmer: {
+                '0%, 100%': { backgroundPosition: '-200% center' },
+                '50%': { backgroundPosition: '200% center' },
+              },
+              glow: {
+                '0%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)' },
+                '100%': { boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' },
+              }
             }
           },
         },
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #03000a;
+        color: #ffffff;
+        overflow-x: hidden;
+        cursor: auto !important;
+        /* Reduz o CLS e melhora a percepção de velocidade */
+        content-visibility: auto;
+      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      html {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        scroll-padding-top: 100px;
+      }
+      ::selection { background-color: #a855f7; color: white; }
+      /* Pre-render critical classes to avoid FOUC */
+      .hero-title {
+        background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
     <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
-    "react": "https://esm.sh/react@18.2.0",
-    "react/": "https://esm.sh/react@18.2.0/",
-    "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
-  }
-}
-</script>
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
+        "react": "https://esm.sh/react@18.2.0",
+        "react/": "https://esm.sh/react@18.2.0/",
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

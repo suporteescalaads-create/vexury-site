@@ -12,9 +12,7 @@ const Counter = ({ value, from = 0, suffix = "", prefix = "" }: { value: number,
         
         let start = from;
         const duration = 1500;
-        const frameDuration = 32; // Reduzido para 30fps para salvar CPU e baixar o TBT
-        const totalFrames = duration / frameDuration;
-        const increment = (value - from) / totalFrames;
+        const increment = (value - from) / (duration / 16);
         
         const timer = setInterval(() => {
             start += increment;
@@ -24,7 +22,7 @@ const Counter = ({ value, from = 0, suffix = "", prefix = "" }: { value: number,
             } else {
                 setDisplay(Math.floor(start));
             }
-        }, frameDuration);
+        }, 16);
 
         return () => clearInterval(timer);
     }, [inView, value, from]);
@@ -57,19 +55,19 @@ export const Stats: React.FC = () => {
                 </div>
                 <p className="text-gray-400 font-medium tracking-wide uppercase text-[10px]">Websites Delivered</p>
             </StatCard>
-             <StatCard delay={0.05}>
+             <StatCard delay={0.1}>
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">
                     <Counter value={7} from={2} suffix=" Days" />
                 </div>
                 <p className="text-gray-400 font-medium tracking-wide uppercase text-[10px]">Average Delivery Time</p>
             </StatCard>
-             <StatCard delay={0.1}>
+             <StatCard delay={0.2}>
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">
                     <Counter value={95} suffix="+" />
                 </div>
                 <p className="text-gray-400 font-medium tracking-wide uppercase text-[10px]">Performance Score</p>
             </StatCard>
-             <StatCard delay={0.15}>
+             <StatCard delay={0.3}>
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tighter">
                     <Counter value={99} suffix="%" />
                 </div>
