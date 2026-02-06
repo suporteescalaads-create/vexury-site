@@ -3,6 +3,10 @@
   "name": "vexury",
   "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "build": "echo 'Building static site...'",
+    "start": "echo 'Running development server...'"
+  },
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
