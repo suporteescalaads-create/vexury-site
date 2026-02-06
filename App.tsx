@@ -20,6 +20,7 @@ function App() {
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
       
+      // Handle scrolling to sections if hash is a section ID (e.g., #services)
       const hash = window.location.hash;
       if (hash && !hash.startsWith('#/')) {
         const element = document.querySelector(hash);
@@ -33,16 +34,19 @@ function App() {
           });
         }
       } else if (hash.startsWith('#/')) {
+        // Reset scroll position when switching to subpages
         window.scrollTo(0, 0);
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
+    // Trigger once on load
     handleHashChange();
 
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
+  // Simple Router
   if (currentHash === '#/privacy.html') {
     return <Privacy />;
   }
