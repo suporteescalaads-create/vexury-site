@@ -1,19 +1,17 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import { ArrowRight, PlayCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const meteorCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   
-  // Scroll Physics - Reduced to almost nothing for a "glued" feel
+  // Scroll Physics
   const { scrollY } = useScroll();
   
-  // Minimal movement for a premium feel without "flying away"
+  // Minimal movement for a premium feel
   const scale = useTransform(scrollY, [0, 500], [1, 0.98]);
   const opacity = useTransform(scrollY, [0, 500], [1, 0.9]);
   const blur = useTransform(scrollY, [0, 500], ["0px", "2px"]);
@@ -33,189 +31,6 @@ export const Hero: React.FC = () => {
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Meteor Shower Effect
-  useEffect(() => {
-    const canvas = meteorCanvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-
-    class Meteor {
-        x: number;
-        y: number;
-        length: number;
-        speed: number;
-        opacity: number;
-        width: number;
-
-        constructor() {
-            this.x = Math.random() * width;
-            this.y = Math.random() * height;
-            this.length = Math.random() * 80 + 10;
-            this.speed = Math.random() * 2 + 0.5;
-            this.opacity = Math.random() * 0.2 + 0.05;
-            this.width = Math.random() * 1 + 0.5;
-            
-            if (Math.random() > 0.5) {
-                this.x = Math.random() * width;
-                this.y = -100;
-            } else {
-                this.x = width + 100;
-                this.y = Math.random() * height;
-            }
-        }
-
-        reset() {
-             if (Math.random() > 0.5) {
-                 this.x = Math.random() * width * 1.5;
-                 this.y = -100;
-             } else {
-                 this.x = width + 100;
-                 this.y = Math.random() * height;
-             }
-             
-             this.length = Math.random() * 80 + 20;
-             this.speed = Math.random() * 4 + 2;
-             this.opacity = Math.random() * 0.4 + 0.1;
-             this.width = Math.random() * 2 + 0.5;
-        }
-
-        update() {
-            this.x -= this.speed;
-            this.y += this.speed;
-
-            if (this.x < -100 || this.y > height + 100) {
-                this.reset();
-            }
-        }
-
-        draw() {
-            ctx.beginPath();
-            const tailX = this.x + this.length;
-            const tailY = this.y - this.length;
-            
-            const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
-            gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
-            gradient.addColorStop(0.2, `rgba(168, 85, 247, ${this.opacity * 0.8})`);
-            gradient.addColorStop(1, `rgba(168, 85, 247, 0)`);
-
-            ctx.strokeStyle = gradient;
-            ctx.lineWidth = this.width;
-            ctx.lineCap = 'round';
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(tailX, tailY);
-            ctx.stroke();
-        }
-    }
-
-    const meteors: Meteor[] = [];
-    const count = Math.floor(width / 160); 
-
-    for (let i = 0; i < count; i++) {
-        meteors.push(new Meteor());
-    }
-
-    let animationFrameId: number;
-
-    const render = () => {
-        ctx.clearRect(0, 0, width, height);
-        meteors.forEach(m => {
-            m.update();
-            m.draw();
-        });
-        animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    const handleResize = () => {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-        window.removeEventListener('resize', handleResize);
-        cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
-  // Mouse Trail Effect
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let trailParticles: Array<{ x: number; y: number; radius: number; alpha: number }> = [];
-    
-    const resizeCanvas = () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    const handleMouseMove = (e: MouseEvent) => {
-        for (let i = 0; i < 2; i++) {
-             trailParticles.push({
-                x: e.clientX,
-                y: e.clientY,
-                radius: Math.random() * 15 + 20,
-                alpha: 0.8
-            });
-        }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    const render = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = trailParticles.length - 1; i >= 0; i--) {
-            const p = trailParticles[i];
-            p.alpha -= 0.02;
-            p.radius += 0.5; 
-            
-            if (p.alpha <= 0) {
-                trailParticles.splice(i, 1);
-                continue;
-            }
-
-            const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius);
-            gradient.addColorStop(0, `rgba(168, 85, 247, ${p.alpha})`); 
-            gradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = gradient;
-            ctx.globalCompositeOperation = 'lighter';
-            ctx.fill();
-            ctx.globalCompositeOperation = 'source-over';
-        }
-
-        animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-        window.removeEventListener('resize', resizeCanvas);
-        window.removeEventListener('mousemove', handleMouseMove);
-        cancelAnimationFrame(animationFrameId);
-    };
   }, []);
 
   return (
@@ -271,8 +86,6 @@ export const Hero: React.FC = () => {
             }}
           />
 
-          <canvas ref={meteorCanvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-60" />
-          <canvas ref={canvasRef} className="absolute inset-0 z-10 pointer-events-none" />
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 brightness-100 contrast-150 mix-blend-overlay pointer-events-none"></div>
       </div>
 
@@ -345,7 +158,7 @@ export const Hero: React.FC = () => {
             </div>
         </div>
 
-        {/* HERO IMAGE - GLUED TO BOTTOM - Reduced size slightly */}
+        {/* HERO IMAGE - GLUED TO BOTTOM */}
         <motion.div 
           style={{ scale, opacity, filter: blur }}
           className="relative w-full max-w-[1200px] mx-auto z-20 flex justify-center items-end"
