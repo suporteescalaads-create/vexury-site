@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "echo 'Building static site...'",
+    "build": "echo 'Deploying static files from root...'",
     "start": "echo 'Running development server...'"
   },
   "dependencies": {
