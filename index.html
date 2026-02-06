@@ -6,30 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- Resource Prioritization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/image-hero.webp" fetchpriority="high">
     
     <!-- Primary Meta Tags -->
     <title>Vexury | High-Performance Websites for Your Business</title>
     <meta name="title" content="Vexury | High-Performance Websites for Your Business">
     <meta name="description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website built by Vexury.">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vexury.com/">
-    <meta property="og:title" content="Vexury | High-Performance Websites for Your Business">
-    <meta property="og:description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/main/imagecompartpng.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/main/imagecompartpng.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="789">
-    <meta property="og:image:height" content="218">
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://vexury.com/">
-    <meta property="twitter:title" content="Vexury | High-Performance Websites for Your Business">
-    <meta property="twitter:description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website.">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/main/imagecompartpng.png">
 
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/6f67f3e6f98450861e8a1d191faab378f805a283/faviconvexuryfinal.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -78,35 +62,21 @@
         color: #ffffff;
         overflow-x: hidden;
         cursor: auto !important;
+        /* Reduz o CLS e melhora a percepção de velocidade */
+        content-visibility: auto;
       }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
+      .no-scrollbar::-webkit-scrollbar { display: none; }
       html {
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
         scroll-padding-top: 100px;
       }
-      ::selection {
-        background-color: #a855f7;
-        color: white;
-      }
-      .glass-panel {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .text-shine {
-        background: linear-gradient(110deg, #a855f7 30%, #ffffff 50%, #a855f7 70%);
-        background-size: 200% auto;
+      ::selection { background-color: #a855f7; color: white; }
+      /* Pre-render critical classes to avoid FOUC */
+      .hero-title {
+        background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shimmer 4s ease-in-out infinite;
       }
     </style>
     <script type="importmap">
