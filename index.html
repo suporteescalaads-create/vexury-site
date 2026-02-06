@@ -5,18 +5,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- SEO & Performance Headers -->
+    <!-- Primary Meta Tags -->
     <title>Vexury | High-Performance Websites for Your Business</title>
+    <meta name="title" content="Vexury | High-Performance Websites for Your Business">
     <meta name="description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website built by Vexury.">
-    
-    <!-- Resource Prioritization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://raw.githubusercontent.com">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/6f67f3e6f98450861e8a1d191faab378f805a283/faviconvexuryfinal.svg" />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vexury.com/">
+    <meta property="og:title" content="Vexury | High-Performance Websites for Your Business">
+    <meta property="og:description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/main/imagecompartpng.png">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/main/imagecompartpng.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="789">
+    <meta property="og:image:height" content="218">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vexury.com/">
+    <meta property="twitter:title" content="Vexury | High-Performance Websites for Your Business">
+    <meta property="twitter:description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/main/imagecompartpng.png">
+
+    <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/6f67f3e6f98450861e8a1d191faab378f805a283/faviconvexuryfinal.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -30,30 +42,68 @@
               accent: '#a855f7',
               'accent-dark': '#9333ea',
               'accent-light': '#d8b4fe',
+              'glass': 'rgba(255, 255, 255, 0.05)',
             },
             fontFamily: {
-              sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+              sans: ['Inter', 'sans-serif'],
+              display: ['Inter', 'sans-serif'],
             },
             animation: {
+              'blob': 'blob 10s infinite',
               'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shimmer': 'shimmer 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'glow': 'glow 3s ease-in-out infinite alternate',
             },
             keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.2)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.8)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
               shimmer: {
                 '0%, 100%': { backgroundPosition: '-200% center' },
                 '50%': { backgroundPosition: '200% center' },
+              },
+              glow: {
+                '0%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)' },
+                '100%': { boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' },
               }
             }
           },
         },
       }
     </script>
-
-    <!-- Critical CSS Inlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.47/build/spline-viewer.js"></script>
     <style>
-      :root { color-scheme: dark; }
-      body { background-color: #03000a; color: #ffffff; margin: 0; min-height: 100vh; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-      /* Pre-render Hero styles to avoid CLS and Flash of Unstyled Content */
+      body {
+        background-color: #03000a;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      html {
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        scroll-padding-top: 100px;
+      }
+      ::selection {
+        background-color: #a855f7;
+        color: white;
+      }
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
       .text-shine {
         background: linear-gradient(110deg, #a855f7 30%, #ffffff 50%, #a855f7 70%);
         background-size: 200% auto;
@@ -61,67 +111,103 @@
         -webkit-text-fill-color: transparent;
         animation: shimmer 4s ease-in-out infinite;
       }
-      @keyframes shimmer { 0%, 100% { background-position: -200% center; } 50% { background-position: 200% center; } }
-      #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.5; contain: strict; }
-      #root { position: relative; z-index: 1; }
-      /* Font Display Swap for performance */
-      @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300 700; font-display: swap; src: url(https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuOKfAZJhiI2B.woff2) format('woff2'); }
+      #bg-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.6;
+      }
     </style>
-
     <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
-    "react": "https://esm.sh/react@18.2.0",
-    "react/": "https://esm.sh/react@18.2.0/",
-    "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom",
-    "react-dom/": "https://esm.sh/react-dom@18.2.0/"
-  }
-}
-</script>
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react",
+        "react": "https://esm.sh/react@18.2.0",
+        "react/": "https://esm.sh/react@18.2.0/",
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "framer-motion": "https://esm.sh/framer-motion@11.0.8?external=react,react-dom"
+      }
+    }
+    </script>
   </head>
   <body>
     <canvas id="bg-canvas"></canvas>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
     <script>
-      /* Optimized Background Script - Reduced CPU cycles */
       (function() {
         const canvas = document.getElementById('bg-canvas');
         if (!canvas) return;
-        const ctx = canvas.getContext('2d', { alpha: true });
-        let w, h, meteors = [];
-        const setSize = () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; };
-        window.addEventListener('resize', setSize);
-        setSize();
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        let width, height;
+        const setCanvasSize = () => {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = width;
+          canvas.height = height;
+        };
+        window.addEventListener('resize', setCanvasSize);
+        setCanvasSize();
+
         class Meteor {
-          constructor() { this.reset(true); }
-          reset(init) {
-            this.x = Math.random() * w * 1.5; this.y = init ? Math.random() * h : -100;
-            this.l = Math.random() * 80 + 20; this.s = Math.random() * 2 + 1;
-            this.o = Math.random() * 0.2 + 0.05;
+          constructor() {
+            this.reset(true);
+          }
+          reset(initial = false) {
+            this.x = Math.random() * width * 1.5;
+            this.y = initial ? Math.random() * height : -100;
+            this.length = Math.random() * 80 + 20;
+            this.speed = Math.random() * 3 + 1.5;
+            this.opacity = Math.random() * 0.3 + 0.05;
+            this.width = Math.random() * 1.5 + 0.5;
+          }
+          update() {
+            this.x -= this.speed;
+            this.y += this.speed;
+            if (this.x < -100 || this.y > height + 100) {
+              this.reset();
+            }
           }
           draw() {
-            this.x -= this.s; this.y += this.s;
-            if (this.x < -100 || this.y > h + 100) this.reset();
             ctx.beginPath();
-            const g = ctx.createLinearGradient(this.x, this.y, this.x + this.l, this.y - this.l);
-            g.addColorStop(0, `rgba(255, 255, 255, ${this.o})`);
-            g.addColorStop(0.2, `rgba(168, 85, 247, ${this.o * 0.8})`);
-            g.addColorStop(1, `rgba(168, 85, 247, 0)`);
-            ctx.strokeStyle = g; ctx.lineWidth = 1; ctx.moveTo(this.x, this.y); ctx.lineTo(this.x + this.l, this.y - this.l); ctx.stroke();
+            const tailX = this.x + this.length;
+            const tailY = this.y - this.length;
+            const gradient = ctx.createLinearGradient(this.x, this.y, tailX, tailY);
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+            gradient.addColorStop(0.2, `rgba(168, 85, 247, ${this.opacity * 0.8})`);
+            gradient.addColorStop(1, `rgba(168, 85, 247, 0)`);
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = this.width;
+            ctx.lineCap = 'round';
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(tailX, tailY);
+            ctx.stroke();
           }
         }
-        const count = Math.min(Math.floor(w / 150), 12);
-        for (let i = 0; i < count; i++) meteors.push(new Meteor());
-        function run() {
-          ctx.clearRect(0, 0, w, h);
-          for (let i = 0; i < meteors.length; i++) meteors[i].draw();
-          requestAnimationFrame(run);
+
+        const meteors = [];
+        const count = Math.floor(window.innerWidth / 120);
+        for (let i = 0; i < count; i++) {
+          meteors.push(new Meteor());
         }
-        run();
+
+        function render() {
+          ctx.clearRect(0, 0, width, height);
+          for (let i = 0; i < meteors.length; i++) {
+            meteors[i].update();
+            meteors[i].draw();
+          }
+          requestAnimationFrame(render);
+        }
+        render();
       })();
     </script>
   </body>
