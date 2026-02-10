@@ -183,14 +183,14 @@ const FeatureCard: React.FC<{ feature: any, index: number }> = ({ feature, index
 
 export const Features: React.FC = () => {
   return (
-    <section id="services" className="pt-8 md:pt-20 pb-20 bg-[#03000a] relative">
+    <section id="services" className="pt-8 md:pt-20 pb-12 md:pb-20 bg-[#03000a] relative">
        {/* Background Glows */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
 
       {/* Reduced max-width to 1280px for better desktop fit */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1280px]">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
             <div className="max-w-2xl">
                 <motion.div 
                     initial={{ opacity: 0, x: -20 }}

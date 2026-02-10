@@ -24,7 +24,7 @@ export const Hero: React.FC = () => {
   return (
     <section 
       ref={containerRef} 
-      className="hero-section relative pt-24 md:pt-32 pb-0 overflow-hidden bg-[#03000a]"
+      className="hero-section relative pt-20 md:pt-32 pb-0 overflow-hidden bg-[#03000a]"
     >
       
       {/* BACKGROUND DE ALTO IMPACTO - MOVIMENTAÇÃO INTENSA */}
@@ -103,10 +103,10 @@ export const Hero: React.FC = () => {
 
       <div className="relative z-20 flex flex-col items-center">
         
-        {/* Texto da Hero - mb ajustado no mobile para aproximar sem encostar */}
-        <div className="container mx-auto px-6 text-center mb-6 md:mb-6">
+        {/* Texto da Hero */}
+        <div className="container mx-auto px-6 text-center mb-4 md:mb-6">
             <motion.div style={{ opacity: textOpacity, y: textY }} className="max-w-4xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-accent-light text-sm font-medium mb-8 md:mb-10 shadow-[0_0_20px_rgba(168,85,247,0.3)]">
+                <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-accent-light text-sm font-medium mb-6 md:mb-10 shadow-[0_0_20px_rgba(168,85,247,0.3)]">
                     <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -114,13 +114,13 @@ export const Hero: React.FC = () => {
                     <span className="tracking-widest uppercase text-[10px] md:text-xs font-semibold">AVAILABLE FOR NEW PROJECTS</span>
                 </div>
 
-                <div className="mb-6 md:mb-8">
+                <div className="mb-4 md:mb-8">
                     <h1 className="text-4xl md:text-7xl font-bold tracking-tight leading-[1.1] text-white">
                     Your business deserves a website that <span className="hero-title">truly represents its value</span>.
                     </h1>
                 </div>
 
-                <p className="max-w-3xl mx-auto text-base md:text-xl text-gray-400 mb-8 md:mb-10 leading-relaxed font-light">
+                <p className="max-w-3xl mx-auto text-base md:text-xl text-gray-400 mb-6 md:mb-10 leading-relaxed font-light">
                 Whether you’re launching your first website or upgrading an outdated one, your online presence should never be the reason a client chooses your competitor.
                 </p>
 
@@ -140,12 +140,12 @@ export const Hero: React.FC = () => {
             </motion.div>
         </div>
 
-        {/* Hero Image Container - mt reduzido no mobile para aproximar mantendo leve respiro */}
+        {/* Hero Image Container */}
         <motion.div 
           style={{ 
             y: imageY,
           }}
-          className="image-container relative z-20 w-full flex flex-col items-center m-0 p-0 mt-2 md:-mt-14"
+          className="image-container relative z-20 w-full flex flex-col items-center m-0 p-0 -mt-2 md:-mt-14"
         >
             {/* Imagem Principal e Badges Flutuantes */}
             <div className="relative w-full overflow-hidden flex flex-col items-center">

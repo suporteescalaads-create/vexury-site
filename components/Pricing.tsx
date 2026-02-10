@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export const Pricing: React.FC = () => {
   return (
-    <section id="pricing" className="pt-16 pb-20 bg-[#03000a] relative overflow-hidden">
+    <section id="pricing" className="pt-10 pb-12 md:pt-16 md:pb-20 bg-[#03000a] relative overflow-hidden">
        
        {/* Wide Intense Neon Divider */}
        <div className="absolute top-0 w-full h-px">
@@ -20,7 +20,7 @@ export const Pricing: React.FC = () => {
        <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-12 max-w-4xl mx-auto">
+        <div className="text-center mb-10 md:mb-12 max-w-4xl mx-auto">
             <motion.h2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}

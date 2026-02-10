@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -33,7 +34,7 @@ export const FAQ: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-20 bg-background relative">
+    <section id="faq" className="py-12 md:py-20 bg-background relative">
       
       {/* Fine Subtle Glow Divider */}
       <div className="absolute top-0 w-full h-[1px]">
@@ -46,7 +47,7 @@ export const FAQ: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-bold text-center text-white mb-10"
+            className="text-3xl md:text-5xl font-bold text-center text-white mb-8 md:mb-10"
         >
             Frequently Asked <span className="text-gray-500">Questions</span>
         </motion.h2>

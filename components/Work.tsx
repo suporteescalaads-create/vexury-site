@@ -218,11 +218,12 @@ export const Work: React.FC = () => {
     const interval = setInterval(() => {
         setActiveStep((prev) => (prev + 1) % steps.length);
     }, 6000);
+    // Fix: line 221 - should use clearInterval(interval) instead of interval.setInterval(interval)
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section id="process" className="py-24 bg-[#03000a] relative overflow-hidden">
+    <section id="process" className="py-12 md:py-24 bg-[#03000a] relative overflow-hidden">
       {/* Cinematic Background - Exact match to page background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(168,85,247,0.1),transparent_80%)]" />
       <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
@@ -231,12 +232,12 @@ export const Work: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1280px]">
         
         {/* Header - scaled headings */}
-        <div className="text-center mb-16 max-w-4xl mx-auto">
+        <div className="text-center mb-10 md:mb-16 max-w-4xl mx-auto">
             <motion.h2 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="text-5xl md:text-7xl font-bold text-white mb-8 tracking-tighter uppercase"
+                className="text-5xl md:text-7xl font-bold text-white mb-6 md:mb-8 tracking-tighter uppercase"
             >
                 The <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-white text-shine">Vexury</span> Method
             </motion.h2>
@@ -245,17 +246,17 @@ export const Work: React.FC = () => {
             </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-32 items-center">
             
             {/* LEFT: Steps Navigation */}
-            <div className="space-y-8">
+            <div className="space-y-6 md:space-y-8">
                 {steps.map((step, index) => {
                     const isActive = activeStep === index;
                     return (
                         <div 
                             key={step.id}
                             onMouseEnter={() => setActiveStep(index)}
-                            className={`cursor-pointer group relative pl-10 py-8 transition-all duration-500 rounded-[2rem] ${
+                            className={`cursor-pointer group relative pl-10 py-6 md:py-8 transition-all duration-500 rounded-[2rem] ${
                                 isActive ? 'bg-white/[0.04] shadow-[0_0_50px_rgba(0,0,0,0.5)]' : 'hover:bg-white/[0.02]'
                             }`}
                         >
@@ -296,7 +297,7 @@ export const Work: React.FC = () => {
             </div>
 
             {/* RIGHT: Holographic Core - INTEGRATED WITH BACKGROUND */}
-            <div className="relative h-[600px] w-full flex items-center justify-center">
+            <div className="relative h-[400px] md:h-[600px] w-full flex items-center justify-center">
                 
                 {/* Stage Frame - Now Transparent to blend with page background #03000a */}
                 <div className="absolute inset-0 border border-white/5 rounded-[4rem] bg-transparent" />
@@ -308,7 +309,7 @@ export const Work: React.FC = () => {
                 <div className="absolute inset-4 border border-white/[0.03] rounded-[3.5rem] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] pointer-events-none" />
                 
                 {/* The Stage */}
-                <div className="relative w-full h-full flex items-center justify-center p-16 overflow-hidden">
+                <div className="relative w-full h-full flex items-center justify-center p-8 md:p-16 overflow-hidden">
                     {/* Centered glow to lift the content from the dark background */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/[0.03] rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
                     
@@ -332,13 +333,13 @@ export const Work: React.FC = () => {
 
         </div>
 
-        {/* Footer Statement - Reduced margin for tighter layout */}
-        <div className="mt-16 text-center">
+        {/* Footer Statement */}
+        <div className="mt-10 md:mt-16 text-center">
             <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="inline-flex flex-col items-center gap-6 bg-white/[0.03] border border-white/10 p-10 rounded-[2.5rem] backdrop-blur-2xl"
+                className="inline-flex flex-col items-center gap-6 bg-white/[0.03] border border-white/10 p-8 md:p-10 rounded-[2.5rem] backdrop-blur-2xl"
             >
                 <div className="p-4 bg-accent/20 rounded-full border border-accent/40 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
                     <CheckCircle2 size={40} className="text-white drop-shadow-[0_0_10px_white]" />

@@ -82,7 +82,7 @@ export const Testimonials: React.FC = () => {
     }, [currentIndex]);
 
     return (
-        <section className="py-20 bg-[#03000a] relative overflow-hidden flex flex-col items-center justify-center">
+        <section className="py-12 md:py-20 bg-[#03000a] relative overflow-hidden flex flex-col items-center justify-center">
             
             {/* Spotlight Divider Style */}
             <div className="absolute top-0 w-full flex justify-center">

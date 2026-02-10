@@ -39,7 +39,7 @@ export const Contact: React.FC = () => {
       <div className="container mx-auto px-6">
         
         {/* CTA Banner - Enhanced size of internal components */}
-        <div className="bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-2xl rounded-[3rem] p-12 md:p-20 text-center border border-white/10 mb-16 relative overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.6)]">
+        <div className="bg-gradient-to-r from-white/5 to-white/[0.02] backdrop-blur-2xl rounded-[3rem] p-10 md:p-20 text-center border border-white/10 mb-10 md:mb-16 relative overflow-hidden shadow-[0_0_60px_rgba(0,0,0,0.6)]">
              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/10 blur-[120px] pointer-events-none" />
              <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-blue-500/10 blur-[100px] pointer-events-none" />
              
@@ -47,7 +47,7 @@ export const Contact: React.FC = () => {
                  <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight">
                     Let's <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-300">talk</span>.
                  </h2>
-                 <p className="text-gray-300 mb-12 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
+                 <p className="text-gray-300 mb-8 md:mb-12 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
                    Connect directly with our team to start building a digital presence that truly reflects the value of your business.
                  </p>
                  
@@ -55,7 +55,7 @@ export const Contact: React.FC = () => {
                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto">
                         <a 
                           href="tel:+13054676317" 
-                          className="flex flex-col items-center gap-4 px-6 py-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-accent/50 hover:bg-white/[0.07] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-500 group"
+                          className="flex flex-col items-center gap-4 px-6 py-6 md:py-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-accent/50 hover:bg-white/[0.07] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-500 group"
                         >
                             <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-500 shadow-inner">
                                 <Phone size={24} />
@@ -68,7 +68,7 @@ export const Contact: React.FC = () => {
 
                         <a 
                           href="mailto:hello@vexury.com" 
-                          className="flex flex-col items-center gap-4 px-6 py-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-blue-400/50 hover:bg-white/[0.07] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-500 group"
+                          className="flex flex-col items-center gap-4 px-6 py-6 md:py-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-blue-400/50 hover:bg-white/[0.07] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-500 group"
                         >
                             <div className="w-14 h-14 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-500 shadow-inner">
                                 <Mail size={24} />
@@ -83,7 +83,7 @@ export const Contact: React.FC = () => {
                           href="https://wa.me/13054676317" 
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex flex-col items-center gap-4 px-6 py-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-green-500/50 hover:bg-white/[0.07] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-500 group"
+                          className="flex flex-col items-center gap-4 px-6 py-6 md:py-8 rounded-[2rem] bg-white/[0.03] border border-white/10 hover:border-green-500/50 hover:bg-white/[0.07] hover:shadow-[0_15px_35px_rgba(0,0,0,0.5)] transition-all duration-500 group"
                         >
                             <div className="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center text-green-400 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition-all duration-500 shadow-inner">
                                 <MessageSquare size={24} />
@@ -97,7 +97,7 @@ export const Contact: React.FC = () => {
              </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10 md:mb-16">
             <div className="col-span-2 md:col-span-1">
                  <a href="https://vexury.com/#/" className="inline-block mb-6" onClick={(e) => {
                      e.preventDefault();

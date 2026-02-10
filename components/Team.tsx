@@ -26,7 +26,7 @@ const members = [
 
 export const Team: React.FC = () => {
   return (
-    <section id="team" className="pt-20 pb-16 bg-[#03000a] relative overflow-hidden">
+    <section id="team" className="pt-12 pb-10 md:pt-20 md:pb-16 bg-[#03000a] relative overflow-hidden">
        
        {/* Unique "Pulse" Divider */}
        <div className="absolute top-0 w-full flex justify-center">
@@ -52,7 +52,7 @@ export const Team: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-10 md:mb-12"
         >
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight">
                 The people behind <br />
@@ -73,7 +73,7 @@ export const Team: React.FC = () => {
                     {/* Hover Glow Effect */}
                     <div className={`absolute -inset-0.5 bg-gradient-to-r ${member.accentColor} opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-700 rounded-[2rem]`} />
                     
-                    <div className="relative h-full bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-[2rem] p-10 flex flex-col items-center text-center hover:border-white/20 transition-colors duration-500 overflow-hidden">
+                    <div className="relative h-full bg-white/[0.02] backdrop-blur-md border border-white/10 rounded-[2rem] p-8 md:p-10 flex flex-col items-center text-center hover:border-white/20 transition-colors duration-500 overflow-hidden">
                         
                         {/* Avatar */}
                         <div className="relative mb-6 group-hover:scale-105 transition-transform duration-500">

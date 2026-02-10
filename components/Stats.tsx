@@ -44,7 +44,7 @@ const StatCard = ({ children, delay }: { children?: React.ReactNode, delay: numb
 
 export const Stats: React.FC = () => {
   return (
-    <section className="py-16 bg-[#08050e] relative overflow-hidden">
+    <section className="py-8 md:py-16 bg-[#08050e] relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
       
       <div className="container mx-auto px-6 md:px-12 relative z-10 max-w-7xl">
