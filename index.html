@@ -1,15 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Resource Prioritization -->
+    <!-- Priorização de Recursos Críticos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/image-hero.webp" fetchpriority="high">
     
-    <!-- Primary Meta Tags -->
+    <!-- Meta Tags Principais -->
     <title>Vexury | High-Performance Websites for Your Business</title>
     <meta name="title" content="Vexury | High-Performance Websites for Your Business">
     <meta name="description" content="Give your business the online presence it deserves. Elevate your brand with a high-performance website built by Vexury.">
@@ -38,43 +39,32 @@
               'blob': 'pulse 10s infinite',
               'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shimmer': 'shimmer 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'glow': 'glow 3s ease-in-out infinite alternate',
             },
             keyframes: {
               shimmer: {
                 '0%, 100%': { backgroundPosition: '-200% center' },
                 '50%': { backgroundPosition: '200% center' },
-              },
-              glow: {
-                '0%': { boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)' },
-                '100%': { boxShadow: '0 0 50px rgba(168, 85, 247, 0.6)' },
               }
             }
           },
         },
       }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
       body {
         background-color: #03000a;
         color: #ffffff;
         overflow-x: hidden;
-        cursor: auto !important;
       }
-      .no-scrollbar::-webkit-scrollbar { display: none; }
-      html {
-        text-rendering: optimizeLegibility;
-        -webkit-font-smoothing: antialiased;
-        scroll-padding-top: 100px;
-      }
-      ::selection { background-color: #a855f7; color: white; }
       /* Pre-render critical classes to avoid FOUC */
       .hero-title {
         background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+      /* Reduce layout shift */
+      #root { min-height: 100vh; }
     </style>
     <script type="importmap">
     {

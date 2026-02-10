@@ -1,18 +1,23 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { Features } from './components/Features';
-import { Stats } from './components/Stats';
-import { Work } from './components/Work';
-import { Testimonials } from './components/Testimonials';
-import { Pricing } from './components/Pricing';
-import { Team } from './components/Team';
-import { FAQ } from './components/FAQ';
-import { Contact } from './components/Contact';
-import { Privacy } from './components/Privacy';
-import { Terms } from './components/Terms';
 import { CookieBanner } from './components/CookieBanner';
+
+// Lazy loading components below the fold
+const Features = lazy(() => import('./components/Features').then(m => ({ default: m.Features })));
+const Stats = lazy(() => import('./components/Stats').then(m => ({ default: m.Stats })));
+const Work = lazy(() => import('./components/Work').then(m => ({ default: m.Work })));
+const Team = lazy(() => import('./components/Team').then(m => ({ default: m.Team })));
+const Pricing = lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })));
+const Testimonials = lazy(() => import('./components/Testimonials').then(m => ({ default: m.Testimonials })));
+const FAQ = lazy(() => import('./components/FAQ').then(m => ({ default: m.FAQ })));
+const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })));
+const Privacy = lazy(() => import('./components/Privacy').then(m => ({ default: m.Privacy })));
+const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
+
+// Simple loading placeholder to avoid layout shift
+const SectionLoader = () => <div className="h-96 bg-background animate-pulse" />;
 
 function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
@@ -47,7 +52,9 @@ function App() {
   if (currentHash === '#/privacy.html') {
     return (
       <div className="bg-background text-white min-h-screen">
-        <Privacy />
+        <Suspense fallback={<SectionLoader />}>
+          <Privacy />
+        </Suspense>
         <CookieBanner />
       </div>
     );
@@ -56,7 +63,9 @@ function App() {
   if (currentHash === '#/terms.html') {
     return (
       <div className="bg-background text-white min-h-screen">
-        <Terms />
+        <Suspense fallback={<SectionLoader />}>
+          <Terms />
+        </Suspense>
         <CookieBanner />
       </div>
     );
@@ -67,14 +76,16 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <Features />
-        <Stats />
-        <Work />
-        <Team />
-        <Pricing />
-        <Testimonials />
-        <FAQ />
-        <Contact />
+        <Suspense fallback={<SectionLoader />}>
+          <Features />
+          <Stats />
+          <Work />
+          <Team />
+          <Pricing />
+          <Testimonials />
+          <FAQ />
+          <Contact />
+        </Suspense>
       </main>
       <CookieBanner />
     </div>
