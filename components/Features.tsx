@@ -183,7 +183,7 @@ const FeatureCard: React.FC<{ feature: any, index: number }> = ({ feature, index
 
 export const Features: React.FC = () => {
   return (
-    <section id="services" className="py-20 bg-[#03000a] relative">
+    <section id="services" className="pt-8 md:pt-20 pb-20 bg-[#03000a] relative">
        {/* Background Glows */}
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
