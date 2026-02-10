@@ -103,8 +103,8 @@ export const Hero: React.FC = () => {
 
       <div className="relative z-20 flex flex-col items-center">
         
-        {/* Texto da Hero */}
-        <div className="container mx-auto px-6 text-center mb-4 md:mb-16">
+        {/* Texto da Hero - mb ajustado no mobile para aproximar sem encostar */}
+        <div className="container mx-auto px-6 text-center mb-6 md:mb-6">
             <motion.div style={{ opacity: textOpacity, y: textY }} className="max-w-4xl mx-auto">
                 <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-accent-light text-sm font-medium mb-8 md:mb-10 shadow-[0_0_20px_rgba(168,85,247,0.3)]">
                     <span className="relative flex h-2 w-2">
@@ -140,24 +140,24 @@ export const Hero: React.FC = () => {
             </motion.div>
         </div>
 
-        {/* Hero Image Container */}
+        {/* Hero Image Container - mt reduzido no mobile para aproximar mantendo leve respiro */}
         <motion.div 
           style={{ 
             y: imageY,
           }}
-          className="image-container relative z-20 w-full flex flex-col items-center m-0 p-0"
+          className="image-container relative z-20 w-full flex flex-col items-center m-0 p-0 mt-2 md:-mt-14"
         >
             {/* Imagem Principal e Badges Flutuantes */}
             <div className="relative w-full overflow-hidden flex flex-col items-center">
                 
-                {/* Elementos Flutuantes (Floating UI) - Versão mobile compacta */}
+                {/* Elementos Flutuantes (Floating UI) - Versão compacta com escala ajustada */}
                 <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center">
                     <div className="relative w-[120%] md:w-full h-full">
-                        {/* Speed Badge - Escala reduzida e posicionamento ajustado no mobile */}
+                        {/* Speed Badge */}
                         <motion.div 
                             animate={{ y: [0, -8, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute left-[5%] md:left-[15%] top-[18%] md:top-[25%] flex items-center gap-2 md:gap-3 bg-[#1a0b2e]/85 backdrop-blur-xl border border-white/10 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-auto scale-[0.7] md:scale-100 origin-left"
+                            className="absolute left-[5%] md:left-[15%] top-[14%] md:top-[25%] flex items-center gap-2 md:gap-3 bg-[#1a0b2e]/85 backdrop-blur-xl border border-white/10 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-auto scale-[0.7] md:scale-[0.85] origin-left"
                         >
                             <div className="w-8 h-8 md:w-11 md:h-11 rounded-full bg-accent/20 flex items-center justify-center text-accent shadow-inner border border-accent/20">
                                 <Zap size={isMobile ? 14 : 22} fill="currentColor" className="opacity-80" />
@@ -168,11 +168,11 @@ export const Hero: React.FC = () => {
                             </div>
                         </motion.div>
 
-                        {/* Security Badge - Escala reduzida e posicionamento ajustado no mobile */}
+                        {/* Security Badge */}
                         <motion.div 
                             animate={{ y: [0, 8, 0] }}
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute right-[5%] md:right-[15%] top-[38%] md:top-[45%] flex items-center gap-2 md:gap-3 bg-[#1a0b2e]/85 backdrop-blur-xl border border-white/10 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-auto scale-[0.7] md:scale-100 origin-right"
+                            className="absolute right-[5%] md:right-[15%] top-[34%] md:top-[45%] flex items-center gap-2 md:gap-3 bg-[#1a0b2e]/85 backdrop-blur-xl border border-white/10 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.6)] pointer-events-auto scale-[0.7] md:scale-[0.85] origin-right"
                         >
                             <div className="w-8 h-8 md:w-11 md:h-11 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shadow-inner border border-blue-500/20">
                                 <Shield size={isMobile ? 14 : 22} fill="currentColor" className="opacity-80" />
