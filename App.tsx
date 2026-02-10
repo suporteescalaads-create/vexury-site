@@ -12,6 +12,7 @@ import { FAQ } from './components/FAQ';
 import { Contact } from './components/Contact';
 import { Privacy } from './components/Privacy';
 import { Terms } from './components/Terms';
+import { CookieBanner } from './components/CookieBanner';
 
 function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
@@ -20,7 +21,6 @@ function App() {
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
       
-      // Handle scrolling to sections if hash is a section ID (e.g., #services)
       const hash = window.location.hash;
       if (hash && !hash.startsWith('#/')) {
         const element = document.querySelector(hash);
@@ -34,13 +34,11 @@ function App() {
           });
         }
       } else if (hash.startsWith('#/')) {
-        // Reset scroll position when switching to subpages
         window.scrollTo(0, 0);
       }
     };
 
     window.addEventListener('hashchange', handleHashChange);
-    // Trigger once on load
     handleHashChange();
 
     return () => window.removeEventListener('hashchange', handleHashChange);
@@ -48,11 +46,21 @@ function App() {
 
   // Simple Router
   if (currentHash === '#/privacy.html') {
-    return <Privacy />;
+    return (
+      <div className="bg-background text-white min-h-screen">
+        <Privacy />
+        <CookieBanner />
+      </div>
+    );
   }
 
   if (currentHash === '#/terms.html') {
-    return <Terms />;
+    return (
+      <div className="bg-background text-white min-h-screen">
+        <Terms />
+        <CookieBanner />
+      </div>
+    );
   }
 
   return (
@@ -69,6 +77,9 @@ function App() {
         <FAQ />
         <Contact />
       </main>
+      
+      {/* Posicionado ao final do DOM para garantir que flutue sobre absolutamente tudo */}
+      <CookieBanner />
     </div>
   );
 }
