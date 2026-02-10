@@ -192,12 +192,13 @@ export const Hero: React.FC = () => {
                     className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-[50%] bg-accent/20 rounded-full blur-[140px] -z-10" 
                 />
                 
+                {/* Fixed casing from fetchpriority to fetchPriority as per React standards */}
                 <img 
                     src="https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/image-hero.webp" 
                     alt="Vexury Platform Preview" 
                     className="w-[120%] md:w-full h-auto max-w-none md:max-w-full object-cover md:object-contain block leading-none align-bottom m-0 p-0 origin-bottom"
                     loading="eager"
-                    fetchpriority="high"
+                    fetchPriority="high"
                     width="1920"
                     height="1080"
                     decoding="async"
