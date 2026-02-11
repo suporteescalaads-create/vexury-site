@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { ArrowRight, Zap, Shield } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { generateEventId, trackLeadFront, sendToCAPI } from './FacebookService';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,17 +20,37 @@ export const Hero: React.FC = () => {
   const textOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const textY = useTransform(scrollY, [0, 400], [0, -20]);
 
+  const handleLeadAction = async (e: React.MouseEvent) => {
+    // Gerar ID único para desduplicação
+    const eventId = generateEventId();
+
+    // 1. Disparar Pixel (Navegador)
+    trackLeadFront(eventId);
+
+    // 2. Enviar para CAPI (Servidor)
+    // Nota: Em um formulário real, capturaríamos os dados de inputs. 
+    // Aqui simulamos com dados de localização se disponíveis ou placeholders.
+    await sendToCAPI({
+      eventId,
+      email: '', // Capturar de input se houver
+      city: 'Miami', // Exemplo premium
+      zip: '33149'  // Key Biscayne
+    });
+
+    // O link do WhatsApp abrirá normalmente pelo <a> envolvente 
+    // ou podemos forçar o redirecionamento aqui se necessário.
+  };
+
   return (
     <section 
       ref={containerRef} 
       className="hero-section relative pt-20 md:pt-32 pb-0 overflow-hidden bg-[#03000a]"
     >
       
-      {/* BACKGROUND DE ALTO IMPACTO - OTIMIZADO PARA MOBILE */}
+      {/* BACKGROUND DE ALTO IMPACTO */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_#1a0b2e_0%,#03000a_90%)]" />
           
-          {/* Orbes de Luz - Reduzidos em mobile para performance */}
           <motion.div
             animate={isMobile ? { opacity: [0.2, 0.3, 0.2] } : { 
                 x: [-50, 50, -50],
@@ -40,42 +61,6 @@ export const Hero: React.FC = () => {
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className="absolute top-0 left-0 w-[600px] h-[600px] bg-accent/15 rounded-full blur-[150px] mix-blend-screen"
           />
-
-          {!isMobile && (
-            <motion.div
-              animate={{ 
-                  x: [50, -80, 50],
-                  y: [80, -30, 80],
-                  scale: [1.1, 1, 1.1],
-                  opacity: [0.2, 0.3, 0.2] 
-              }}
-              transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 2 }}
-              className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[180px] mix-blend-screen"
-            />
-          )}
-
-          {/* Partículas - Reduzidas de 30 para 10 no mobile */}
-          <div className="absolute inset-0">
-            {[...Array(isMobile ? 10 : 25)].map((_, i) => (
-                <motion.div
-                    key={i}
-                    animate={{ 
-                        y: [0, -100],
-                        opacity: [0, 0.6, 0]
-                    }}
-                    transition={{ 
-                        duration: Math.random() * 4 + 4, 
-                        repeat: Infinity, 
-                        delay: Math.random() * 5 
-                    }}
-                    className="absolute w-1 h-1 bg-white/50 rounded-full blur-[1px]"
-                    style={{ 
-                        top: `${Math.random() * 100}%`, 
-                        left: `${Math.random() * 100}%` 
-                    }}
-                />
-            ))}
-          </div>
 
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] mix-blend-overlay"></div>
       </div>
@@ -108,6 +93,7 @@ export const Hero: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block"
+                        onClick={handleLeadAction}
                     >
                         <button className="px-10 md:px-12 py-4 md:py-5 bg-white text-black rounded-full font-bold transition-all duration-300 shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center gap-2 group relative overflow-hidden active:scale-95">
                             <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">Build My Website Now <ArrowRight size={18} /></span>
@@ -123,47 +109,12 @@ export const Hero: React.FC = () => {
           className="image-container relative z-20 w-full flex flex-col items-center m-0 p-0 -mt-2 md:-mt-14"
         >
             <div className="relative w-full overflow-hidden flex flex-col items-center">
-                <div className="absolute inset-0 pointer-events-none z-30 flex items-center justify-center">
-                    <div className="relative w-[120%] md:w-full h-full">
-                        <motion.div 
-                            animate={{ y: [0, -5, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute left-[5%] md:left-[15%] top-[14%] md:top-[25%] flex items-center gap-2 md:gap-3 bg-[#1a0b2e]/90 backdrop-blur-xl border border-white/10 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-2xl pointer-events-auto scale-[0.65] md:scale-[0.85] origin-left"
-                        >
-                            <div className="w-8 h-8 md:w-11 md:h-11 rounded-full bg-accent/20 flex items-center justify-center text-accent border border-accent/20">
-                                <Zap size={isMobile ? 14 : 22} fill="currentColor" />
-                            </div>
-                            <div className="text-left">
-                                <div className="text-[8px] md:text-[11px] text-gray-400 uppercase font-black tracking-widest">Speed</div>
-                                <div className="text-white font-bold text-xs md:text-lg">100/100</div>
-                            </div>
-                        </motion.div>
-
-                        <motion.div 
-                            animate={{ y: [0, 5, 0] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                            className="absolute right-[5%] md:right-[15%] top-[34%] md:top-[45%] flex items-center gap-2 md:gap-3 bg-[#1a0b2e]/90 backdrop-blur-xl border border-white/10 p-2 md:p-4 rounded-xl md:rounded-2xl shadow-2xl pointer-events-auto scale-[0.65] md:scale-[0.85] origin-right"
-                        >
-                            <div className="w-8 h-8 md:w-11 md:h-11 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 border border-blue-500/20">
-                                <Shield size={isMobile ? 14 : 22} fill="currentColor" />
-                            </div>
-                            <div className="text-left">
-                                <div className="text-[8px] md:text-[11px] text-gray-400 uppercase font-black tracking-widest">Security</div>
-                                <div className="text-white font-bold text-xs md:text-lg">Verified</div>
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-
                 <img 
                     src="https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/image-hero.webp" 
                     alt="Vexury Platform Preview" 
                     className="w-[120%] md:w-full h-auto object-cover md:object-contain block align-bottom m-0 p-0"
                     loading="eager"
                     fetchPriority="high"
-                    width="1200"
-                    height="675"
-                    decoding="async"
                 />
             </div>
         </motion.div>
