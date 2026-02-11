@@ -31,16 +31,19 @@ const steps = [
 ];
 
 // --- Visual Components for the Holographic Core ---
+// Cast motion components to any to bypass environment-specific type errors
+const MDiv = motion.div as any;
+const MH2 = motion.h2 as any;
 
 const RadarVisual = () => (
     <div className="relative w-full h-full flex items-center justify-center">
         {/* Scanning Line - Stronger Neon look */}
-        <motion.div 
+        <MDiv 
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             className="absolute w-full h-full rounded-full bg-[conic-gradient(from_0deg,transparent_0deg,rgba(168,85,247,0.5)_360deg)] opacity-70 blur-xl"
         />
-        <motion.div 
+        <MDiv 
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             className="absolute w-[85%] h-[85%] border-t-4 border-r-4 border-accent rounded-full shadow-[0_0_50px_#a855f7]"
@@ -48,7 +51,7 @@ const RadarVisual = () => (
         
         {/* Inner Rings */}
         <div className="absolute w-[60%] h-[60%] border border-white/20 rounded-full flex items-center justify-center">
-             <motion.div 
+             <MDiv 
                 animate={{ scale: [1, 1.4, 1], opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="w-6 h-6 bg-white rounded-full shadow-[0_0_30px_white]" 
@@ -58,7 +61,7 @@ const RadarVisual = () => (
 
         {/* Floating Data Points */}
         {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, i) => (
-            <motion.div
+            <MDiv
                 key={i}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 0] }}
@@ -73,12 +76,12 @@ const RadarVisual = () => (
 const BuildVisual = () => (
     <div className="relative w-full h-full flex items-center justify-center">
         {/* Rotating Tech Rings */}
-        <motion.div 
+        <MDiv 
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute w-[340px] h-[340px] rounded-full border-2 border-blue-500/20 border-dashed"
         />
-        <motion.div 
+        <MDiv 
             animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className="absolute w-[300px] h-[300px] rounded-full border-2 border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.2)]"
@@ -88,7 +91,7 @@ const BuildVisual = () => (
         {/* Central Interface Assembly */}
         <div className="relative w-72 h-52">
             {/* Background Panels floating in */}
-            <motion.div 
+            <MDiv 
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5 }}
@@ -96,7 +99,7 @@ const BuildVisual = () => (
             />
             
             {/* Floating UI Header */}
-            <motion.div 
+            <MDiv 
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
@@ -105,24 +108,24 @@ const BuildVisual = () => (
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500/80 shadow-[0_0_10px_red]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 shadow-[0_0_10px_yellow]" />
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500/80 shadow-[0_0_10px_green]" />
-            </motion.div>
+            </MDiv>
 
             {/* Content Blocks appearing */}
             <div className="absolute top-14 left-6 right-6 space-y-4">
-                <motion.div 
+                <MDiv 
                     initial={{ width: 0 }}
                     animate={{ width: "70%" }}
                     transition={{ delay: 0.5, duration: 0.8, repeat: Infinity, repeatDelay: 3 }}
                     className="h-5 bg-blue-400/30 rounded shadow-[0_0_15px_rgba(59,130,246,0.2)]"
                 />
                 <div className="flex gap-4">
-                     <motion.div 
+                     <MDiv 
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.8, duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
                         className="w-1/3 h-24 bg-blue-400/20 rounded border border-blue-400/30 shadow-inner"
                     />
-                     <motion.div 
+                     <MDiv 
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 1.0, duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
@@ -132,7 +135,7 @@ const BuildVisual = () => (
             </div>
 
             {/* Interactive Cursor */}
-            <motion.div 
+            <MDiv 
                 animate={{ 
                     x: [0, 140, 140, 70, 0],
                     y: [0, 0, 70, 70, 0]
@@ -143,23 +146,23 @@ const BuildVisual = () => (
                 <svg viewBox="0 0 24 24" fill="none" className="w-full h-full text-blue-300 fill-blue-400/40 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]">
                     <path d="M3 3L10.07 19.97L12.58 12.58L19.97 10.07L3 3Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-            </motion.div>
+            </MDiv>
 
              {/* Connection Line */}
-             <motion.div
+             <MDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute -right-6 top-24 w-12 h-[2px] bg-blue-400 shadow-[0_0_10px_#60a5fa]"
              />
-             <motion.div
+             <MDiv
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
                 className="absolute -right-16 top-[82px] px-3 py-1.5 bg-blue-500 rounded-lg text-[10px] text-white font-bold font-mono shadow-[0_0_20px_rgba(59,130,246,0.6)]"
              >
                 APPROVED
-             </motion.div>
+             </MDiv>
         </div>
     </div>
 );
@@ -169,7 +172,7 @@ const LaunchVisual = () => (
         {/* Core Propulsion Glow */}
         <div className="absolute w-48 h-48 bg-green-500/10 rounded-full blur-[80px] animate-pulse" />
         
-        <motion.div 
+        <MDiv 
             animate={{ y: [-15, 15, -15] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="relative z-10"
@@ -177,12 +180,12 @@ const LaunchVisual = () => (
             <div className="w-40 h-40 bg-green-950/40 rounded-full border-2 border-green-400/60 flex items-center justify-center backdrop-blur-2xl shadow-[0_0_70px_rgba(34,197,94,0.5)]">
                 <Rocket size={64} className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" />
             </div>
-        </motion.div>
+        </MDiv>
 
         {/* Upward Particles - Increased brightness */}
         <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
-                <motion.div
+                <MDiv
                     key={i}
                     initial={{ y: 500, opacity: 0 }}
                     animate={{ y: -500, opacity: [0, 1, 0] }}
@@ -203,7 +206,7 @@ const LaunchVisual = () => (
         </div>
 
         {/* Shockwaves */}
-        <motion.div 
+        <MDiv 
             animate={{ scale: [1, 2.5], opacity: [0.6, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="absolute w-40 h-40 border-2 border-green-400/40 rounded-full"
@@ -218,7 +221,6 @@ export const Work: React.FC = () => {
     const interval = setInterval(() => {
         setActiveStep((prev) => (prev + 1) % steps.length);
     }, 6000);
-    // Fix: line 221 - should use clearInterval(interval) instead of interval.setInterval(interval)
     return () => clearInterval(interval);
   }, []);
 
@@ -233,14 +235,14 @@ export const Work: React.FC = () => {
         
         {/* Header - scaled headings */}
         <div className="text-center mb-10 md:mb-16 max-w-4xl mx-auto">
-            <motion.h2 
+            <MH2 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 className="text-5xl md:text-7xl font-bold text-white mb-6 md:mb-8 tracking-tighter uppercase"
             >
                 The <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-white text-shine">Vexury</span> Method
-            </motion.h2>
+            </MH2>
             <p className="text-gray-400 text-xl md:text-2xl font-light leading-relaxed">
                 A simple and transparent process — so you always know how your website will be built.
             </p>
@@ -272,9 +274,9 @@ export const Work: React.FC = () => {
                                     {step.stepLabel}
                                 </span>
                                 {isActive && (
-                                    <motion.div layoutId="activeArrow" className="text-accent">
+                                    <MDiv layoutId="activeArrow" className="text-accent">
                                         <ChevronRight size={24} className="drop-shadow-[0_0_8px_#a855f7]" />
-                                    </motion.div>
+                                    </MDiv>
                                 )}
                             </div>
 
@@ -314,7 +316,7 @@ export const Work: React.FC = () => {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/[0.03] rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
                     
                     <AnimatePresence mode="wait">
-                        <motion.div
+                        <MDiv
                             key={activeStep}
                             initial={{ opacity: 0, scale: 0.7, filter: "blur(20px)", y: 20 }}
                             animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: 0 }}
@@ -325,7 +327,7 @@ export const Work: React.FC = () => {
                             {activeStep === 0 && <RadarVisual />}
                             {activeStep === 1 && <BuildVisual />}
                             {activeStep === 2 && <LaunchVisual />}
-                        </motion.div>
+                        </MDiv>
                     </AnimatePresence>
                 </div>
 
@@ -335,7 +337,7 @@ export const Work: React.FC = () => {
 
         {/* Footer Statement */}
         <div className="mt-10 md:mt-16 text-center">
-            <motion.div 
+            <MDiv 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -348,7 +350,7 @@ export const Work: React.FC = () => {
                     <p className="text-2xl text-white font-bold tracking-tight">Clear steps. No surprises.</p>
                     <p className="text-gray-500 text-lg">Just a professional website that represents your business.</p>
                 </div>
-            </motion.div>
+            </MDiv>
         </div>
 
       </div>

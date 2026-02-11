@@ -1,14 +1,15 @@
 
 export const generateEventId = () => {
-  return 'evt_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
+  return 'vexury_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9);
 };
 
-export const trackLeadFront = (eventId: string) => {
+export const trackLeadFront = (eventId: string, contentName: string) => {
   if (typeof window !== 'undefined' && (window as any).fbq) {
     (window as any).fbq('track', 'Lead', {
+      content_name: contentName,
       eventID: eventId
     });
-    console.log(`[Pixel] Evento Lead disparado: ${eventId}`);
+    console.debug(`[Meta Pixel] Lead Tracked: ${contentName} (ID: ${eventId})`);
   }
 };
 
@@ -17,18 +18,28 @@ export const sendToCAPI = async (data: {
   city?: string;
   zip?: string;
   eventId: string;
+  contentName: string;
 }) => {
   try {
+    // Note: Em produção, substitua pela URL real do seu servidor CAPI
     const response = await fetch('/api/leads', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        source_url: window.location.href,
+        timestamp: Math.floor(Date.now() / 1000)
+      }),
     });
-    return response.ok;
+    
+    if (!response.ok) throw new Error('CAPI request failed');
+    
+    console.debug(`[Meta CAPI] Event Sent: ${data.contentName}`);
+    return true;
   } catch (error) {
-    console.error('[CAPI] Erro ao enviar para o servidor:', error);
+    console.error('[Meta CAPI] Error:', error);
     return false;
   }
 };

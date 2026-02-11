@@ -2,11 +2,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { ArrowRight, Zap, Shield } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { generateEventId, trackLeadFront, sendToCAPI } from './FacebookService';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  // Cast motion components to any to bypass environment-specific type errors
+  const MDiv = motion.div as any;
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -20,27 +22,6 @@ export const Hero: React.FC = () => {
   const textOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   const textY = useTransform(scrollY, [0, 400], [0, -20]);
 
-  const handleLeadAction = async (e: React.MouseEvent) => {
-    // Gerar ID único para desduplicação
-    const eventId = generateEventId();
-
-    // 1. Disparar Pixel (Navegador)
-    trackLeadFront(eventId);
-
-    // 2. Enviar para CAPI (Servidor)
-    // Nota: Em um formulário real, capturaríamos os dados de inputs. 
-    // Aqui simulamos com dados de localização se disponíveis ou placeholders.
-    await sendToCAPI({
-      eventId,
-      email: '', // Capturar de input se houver
-      city: 'Miami', // Exemplo premium
-      zip: '33149'  // Key Biscayne
-    });
-
-    // O link do WhatsApp abrirá normalmente pelo <a> envolvente 
-    // ou podemos forçar o redirecionamento aqui se necessário.
-  };
-
   return (
     <section 
       ref={containerRef} 
@@ -51,7 +32,7 @@ export const Hero: React.FC = () => {
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_#1a0b2e_0%,#03000a_90%)]" />
           
-          <motion.div
+          <MDiv
             animate={isMobile ? { opacity: [0.2, 0.3, 0.2] } : { 
                 x: [-50, 50, -50],
                 y: [-30, 80, -30],
@@ -68,7 +49,7 @@ export const Hero: React.FC = () => {
       <div className="relative z-20 flex flex-col items-center">
         
         <div className="container mx-auto px-6 text-center mb-4 md:mb-6">
-            <motion.div style={{ opacity: textOpacity, y: textY }} className="max-w-4xl mx-auto">
+            <MDiv style={{ opacity: textOpacity, y: textY } as any} className="max-w-4xl mx-auto">
                 <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-accent-light text-sm font-medium mb-6 md:mb-10 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
                     <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
@@ -93,7 +74,6 @@ export const Hero: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-block"
-                        onClick={handleLeadAction}
                     >
                         <button className="px-10 md:px-12 py-4 md:py-5 bg-white text-black rounded-full font-bold transition-all duration-300 shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center gap-2 group relative overflow-hidden active:scale-95">
                             <span className="relative z-10 flex items-center gap-2 text-sm md:text-base">Build My Website Now <ArrowRight size={18} /></span>
@@ -101,11 +81,11 @@ export const Hero: React.FC = () => {
                         </button>
                     </a>
                 </div>
-            </motion.div>
+            </MDiv>
         </div>
 
-        <motion.div 
-          style={{ y: imageY }}
+        <MDiv 
+          style={{ y: imageY } as any}
           className="image-container relative z-20 w-full flex flex-col items-center m-0 p-0 -mt-2 md:-mt-14"
         >
             <div className="relative w-full overflow-hidden flex flex-col items-center">
@@ -117,7 +97,7 @@ export const Hero: React.FC = () => {
                     fetchPriority="high"
                 />
             </div>
-        </motion.div>
+        </MDiv>
       </div>
     </section>
   );

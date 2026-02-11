@@ -4,6 +4,10 @@ import { Check, Sparkles, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Pricing: React.FC = () => {
+  // Cast motion components to any to bypass environment-specific type errors
+  const MDiv = motion.div as any;
+  const MH2 = motion.h2 as any;
+
   return (
     <section id="pricing" className="pt-10 pb-12 md:pt-16 md:pb-20 bg-[#03000a] relative overflow-hidden">
        
@@ -21,7 +25,7 @@ export const Pricing: React.FC = () => {
         
         {/* Header */}
         <div className="text-center mb-10 md:mb-12 max-w-4xl mx-auto">
-            <motion.h2 
+            <MH2 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -29,7 +33,7 @@ export const Pricing: React.FC = () => {
                 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight"
             >
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-purple-400">Investment</span>
-            </motion.h2>
+            </MH2>
             <p className="text-gray-400 text-lg md:text-xl font-light">
                 Transparent pricing. Exceptional quality. No hidden surprises.
             </p>
@@ -39,7 +43,7 @@ export const Pricing: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-[1280px] mx-auto items-stretch">
             
             {/* PLAN 1: PROFESSIONAL */}
-            <motion.div 
+            <MDiv 
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.5 }}
                 className="flex flex-col h-full bg-white/[0.02] backdrop-blur-md p-8 rounded-[2rem] border border-white/5 hover:border-white/10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] group"
@@ -93,10 +97,10 @@ export const Pricing: React.FC = () => {
                     <p>Annual pricing · Reduced renewal after the first year.</p>
                     <p className="text-gray-400 font-medium">You don’t have to worry about anything.</p>
                 </div>
-            </motion.div>
+            </MDiv>
 
             {/* PLAN 2: PREMIUM (POPULAR) */}
-            <motion.div 
+            <MDiv 
                 initial={{ scale: 1 }}
                 whileInView={{ scale: 1.02 }} // Slightly larger on load
                 viewport={{ once: true }}
@@ -166,10 +170,10 @@ export const Pricing: React.FC = () => {
                     <p>Annual pricing · Reduced renewal after the first year.</p>
                     <p className="text-white font-medium">You don’t have to worry about anything.</p>
                 </div>
-            </motion.div>
+            </MDiv>
 
             {/* PLAN 3: CUSTOM / ENTERPRISE */}
-            <motion.div 
+            <MDiv 
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.5 }}
                 className="flex flex-col h-full bg-white/[0.02] backdrop-blur-md p-8 rounded-[2rem] border border-white/5 hover:border-white/10 transition-all duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)] group"
@@ -223,7 +227,7 @@ export const Pricing: React.FC = () => {
                     <p>Annual pricing · Reduced renewal after the first year.</p>
                     <p className="text-gray-400 font-medium">You don’t have to worry about anything.</p>
                 </div>
-            </motion.div>
+            </MDiv>
 
         </div>
 

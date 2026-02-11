@@ -3,6 +3,7 @@ import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { CookieBanner } from './components/CookieBanner';
+import { generateEventId, trackLeadFront, sendToCAPI } from './components/FacebookService';
 
 // Lazy loading components below the fold
 const Features = lazy(() => import('./components/Features').then(m => ({ default: m.Features })));
@@ -23,6 +24,48 @@ function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   useEffect(() => {
+    // --- LÓGICA DE TRACKING ESPECIALISTA ---
+    const LEAD_BUTTONS = [
+      'BUILD MY WEBSITE NOW',
+      'START YOUR WEBSITE',
+      'START MY WEBSITE',
+      'START YOUR PROJECT',
+      "LET'S TALK",
+      'TALK TO US',
+      'SEND EMAIL',
+      'WHATSAPP'
+    ];
+
+    const handleGlobalClick = async (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Fixed: Cast the returned Element to HTMLElement to access innerText property
+      const btn = target.closest('button, a') as HTMLElement | null;
+      
+      if (!btn) return;
+
+      const btnText = btn.innerText.trim().toUpperCase();
+      
+      // Verifica se o texto do botão está na nossa lista de conversão
+      if (LEAD_BUTTONS.includes(btnText)) {
+        const eventId = generateEventId();
+        const contentName = btnText.charAt(0) + btnText.slice(1).toLowerCase();
+
+        // 1. Pixel (Navegador) - Imediato
+        trackLeadFront(eventId, contentName);
+
+        // 2. CAPI (Servidor) - Segundo plano
+        // Não usamos await aqui para não bloquear a navegação do usuário se for um link
+        sendToCAPI({
+          eventId,
+          contentName,
+          city: 'Miami', // Default Context
+          zip: '33149'   // Default Context
+        });
+      }
+    };
+
+    document.addEventListener('click', handleGlobalClick);
+
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
       
@@ -46,7 +89,10 @@ function App() {
     window.addEventListener('hashchange', handleHashChange);
     handleHashChange();
 
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      document.removeEventListener('click', handleGlobalClick);
+    };
   }, []);
 
   if (currentHash === '#/privacy.html') {

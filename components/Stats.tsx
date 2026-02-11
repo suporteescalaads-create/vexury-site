@@ -30,17 +30,20 @@ const Counter = ({ value, from = 0, suffix = "", prefix = "" }: { value: number,
     return <span ref={ref}>{prefix}{display}{suffix}</span>;
 }
 
-const StatCard = ({ children, delay }: { children?: React.ReactNode, delay: number }) => (
-    <motion.div 
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay, duration: 0.5 }}
-        className="relative h-full bg-white/[0.02] backdrop-blur-sm border border-white/5 rounded-3xl p-8 overflow-hidden hover:bg-white/[0.04] transition-colors duration-500 flex flex-col items-center justify-center text-center"
-    >
-        {children}
-    </motion.div>
-);
+const StatCard = ({ children, delay }: { children?: React.ReactNode, delay: number }) => {
+    const MDiv = motion.div as any;
+    return (
+        <MDiv 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay, duration: 0.5 }}
+            className="relative h-full bg-white/[0.02] backdrop-blur-sm border border-white/5 rounded-3xl p-8 overflow-hidden hover:bg-white/[0.04] transition-colors duration-500 flex flex-col items-center justify-center text-center"
+        >
+            {children}
+        </MDiv>
+    );
+};
 
 export const Stats: React.FC = () => {
   return (

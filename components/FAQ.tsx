@@ -33,6 +33,10 @@ const questions = [
 export const FAQ: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
+  // Cast motion components to any to bypass environment-specific type errors
+  const MDiv = motion.div as any;
+  const MH2 = motion.h2 as any;
+
   return (
     <section id="faq" className="py-12 md:py-20 bg-background relative">
       
@@ -43,18 +47,18 @@ export const FAQ: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-6 max-w-3xl relative z-10">
-        <motion.h2 
+        <MH2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold text-center text-white mb-8 md:mb-10"
         >
             Frequently Asked <span className="text-gray-500">Questions</span>
-        </motion.h2>
+        </MH2>
 
         <div className="space-y-4">
             {questions.map((item, i) => (
-                <motion.div 
+                <MDiv 
                     key={i} 
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -69,17 +73,17 @@ export const FAQ: React.FC = () => {
                         <span className={`font-medium text-lg transition-colors ${activeIndex === i ? 'text-white' : 'text-gray-400 group-hover:text-white'}`}>
                             {item.q}
                         </span>
-                        <motion.div
+                        <MDiv
                             animate={{ rotate: activeIndex === i ? 180 : 0 }}
                             transition={{ duration: 0.3 }}
                         >
                              <ChevronDown className="text-gray-500" />
-                        </motion.div>
+                        </MDiv>
                     </button>
                     
                     <AnimatePresence>
                         {activeIndex === i && (
-                            <motion.div
+                            <MDiv
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
@@ -88,10 +92,10 @@ export const FAQ: React.FC = () => {
                                 <p className="text-gray-400 leading-relaxed px-6 pb-6 pt-0 font-light">
                                     {item.a}
                                 </p>
-                            </motion.div>
+                            </MDiv>
                         )}
                     </AnimatePresence>
-                </motion.div>
+                </MDiv>
             ))}
         </div>
       </div>

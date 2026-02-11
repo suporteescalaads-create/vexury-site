@@ -3,6 +3,12 @@ import React from 'react';
 import { Target, Award, Zap, ArrowUpRight, MousePointerClick, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
+// Cast motion components to any to bypass environment-specific type errors
+const MDiv = motion.div as any;
+const MH2 = motion.h2 as any;
+const MP = motion.p as any;
+const MButton = motion.button as any;
+
 const features = [
     {
         title: "Clear Communication That Converts",
@@ -12,7 +18,7 @@ const features = [
         visual: (
             <div className="bg-black/40 rounded-xl p-5 border border-white/10 backdrop-blur-md shadow-inner relative overflow-hidden min-h-[190px] flex items-center justify-between gap-4">
                 {/* Simulated Lead Notifications - Vertical Layout */}
-                <motion.div 
+                <MDiv 
                     initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
@@ -28,9 +34,9 @@ const features = [
                         </div>
                     </div>
                     <div className="text-[10px] text-gray-500 leading-tight font-medium">Generated via website</div>
-                </motion.div>
+                </MDiv>
 
-                <motion.div 
+                <MDiv 
                     initial={{ y: 10, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.4 }}
@@ -48,7 +54,7 @@ const features = [
                     <div className="text-[10px] text-gray-500 leading-tight font-medium">
                         Qualified lead · 2m
                     </div>
-                </motion.div>
+                </MDiv>
                 
                 {/* Background Accent */}
                 <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-green-500/10 blur-[40px] rounded-full pointer-events-none" />
@@ -66,14 +72,14 @@ const features = [
                 
                 {/* Authority Badge Visual - Significantly Larger */}
                 <div className="relative z-10 flex flex-col items-center justify-center py-5 text-center w-full px-2">
-                    <motion.div 
+                    <MDiv 
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
                         transition={{ type: "spring", stiffness: 200, damping: 10 }}
                         className="w-20 h-20 rounded-full border-2 border-accent/50 flex items-center justify-center shadow-[0_0_50px_rgba(168,85,247,0.4)] bg-[#03000a] mb-5"
                     >
                         <CheckCircle2 size={40} className="text-white drop-shadow-[0_0_10px_white]" />
-                    </motion.div>
+                    </MDiv>
                     
                     {/* Centered Badge Text - Adjusted Tracking and Padding */}
                     <div className="inline-flex items-center justify-center gap-3 px-4 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm">
@@ -100,7 +106,7 @@ const features = [
                             <span className="text-green-400">100/100</span>
                         </div>
                         <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                            <motion.div 
+                            <MDiv 
                                 initial={{ width: 0 }}
                                 whileInView={{ width: "100%" }}
                                 transition={{ duration: 1.5, ease: "easeOut" }}
@@ -120,13 +126,13 @@ const features = [
                 {/* Bottom Part: Bounce Rate */}
                 <div className="flex items-center justify-between w-full border-t border-white/5 pt-4">
                     <div className="text-[10px] text-gray-500 uppercase tracking-wider font-bold">Bounce Rate</div>
-                     <motion.div 
+                     <MDiv 
                         initial={{ scale: 0 }}
                         whileInView={{ scale: 1 }}
                         className="text-xs font-bold text-white bg-white/10 px-3 py-1 rounded-lg"
                      >
                         Ultra-Low
-                     </motion.div>
+                     </MDiv>
                 </div>
             </div>
         )
@@ -148,7 +154,7 @@ const cardVariants = {
 
 const FeatureCard: React.FC<{ feature: any, index: number }> = ({ feature, index }) => {
     return (
-        <motion.div
+        <MDiv
             custom={index}
             variants={cardVariants}
             initial="hidden"
@@ -177,7 +183,7 @@ const FeatureCard: React.FC<{ feature: any, index: number }> = ({ feature, index
                     {feature.visual}
                 </div>
             </div>
-        </motion.div>
+        </MDiv>
     );
 };
 
@@ -192,7 +198,7 @@ export const Features: React.FC = () => {
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1280px]">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
             <div className="max-w-2xl">
-                <motion.div 
+                <MDiv 
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -200,9 +206,9 @@ export const Features: React.FC = () => {
                 >
                     <span className="w-8 h-[1px] bg-accent"></span>
                     Services
-                </motion.div>
+                </MDiv>
                 
-                <motion.h2 
+                <MH2 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -210,9 +216,9 @@ export const Features: React.FC = () => {
                     className="text-4xl md:text-5xl font-bold text-white tracking-tight"
                 >
                     Real Impact for <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-accent-light to-white animate-pulse-slow">Real Businesses</span>
-                </motion.h2>
+                </MH2>
             </div>
-            <motion.p 
+            <MP 
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
@@ -220,7 +226,7 @@ export const Features: React.FC = () => {
                 className="text-gray-400 max-w-md text-lg leading-relaxed font-light"
             >
                 We don’t build websites just to look good. We build platforms that communicate clearly, load fast, and help your business be taken seriously online. From first impression to final delivery, every detail is designed to support your business goals.
-            </motion.p>
+            </MP>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -229,7 +235,7 @@ export const Features: React.FC = () => {
             ))}
 
             {/* Promo Card */}
-            <motion.div 
+            <MDiv 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -256,7 +262,7 @@ export const Features: React.FC = () => {
                     {/* Floating Particles */}
                     <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
                          {[...Array(5)].map((_, i) => (
-                             <motion.div 
+                             <MDiv 
                                 key={i}
                                 initial={{ y: 200, opacity: 0 }}
                                 animate={{ y: -200, opacity: [0, 1, 0] }}
@@ -278,7 +284,7 @@ export const Features: React.FC = () => {
                     {/* --- CONTENT --- */}
                     <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                         <div className="max-w-xl">
-                            <motion.div 
+                            <MDiv 
                                 whileHover={{ scale: 1.05 }}
                                 className="inline-flex items-center gap-2 mb-6 px-3 py-1 bg-white/5 rounded-full border border-accent/20 backdrop-blur-sm"
                             >
@@ -287,7 +293,7 @@ export const Features: React.FC = () => {
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-accent shadow-[0_0_10px_#a855f7]"></span>
                                 </span>
                                 <span className="text-[10px] font-bold text-accent uppercase tracking-widest">Limited Availability</span>
-                            </motion.div>
+                            </MDiv>
 
                             <h3 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
                                 Have a Website That <br/>
@@ -303,7 +309,7 @@ export const Features: React.FC = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <motion.button 
+                                <MButton 
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     className="bg-white text-black px-12 py-5 rounded-full text-sm font-bold hover:bg-gray-200 transition-all duration-300 flex items-center gap-3 shadow-[0_0_40px_rgba(255,255,255,0.3)] relative overflow-hidden group/btn"
@@ -311,7 +317,7 @@ export const Features: React.FC = () => {
                                     <span className="relative z-10">Start Your Website</span>
                                     <ArrowUpRight size={18} className="relative z-10" />
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-300/50 to-transparent skew-x-12 translate-x-[-100%] group-hover/btn:animate-shimmer" />
-                                </motion.button>
+                                </MButton>
                             </a>
                         </div>
                         
@@ -320,27 +326,27 @@ export const Features: React.FC = () => {
                              {/* Glow behind icons */}
                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-accent/20 blur-[60px] rounded-full pointer-events-none" />
 
-                           <motion.div 
+                           <MDiv 
                                 animate={{ y: [-10, 10, -10] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                                 className="w-28 h-28 bg-white/5 rounded-2xl border border-white/10 flex items-center justify-center backdrop-blur-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] z-10 relative"
                             >
                               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-2xl opacity-50" />
                               <Target size={40} className="text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
-                           </motion.div>
+                           </MDiv>
 
-                           <motion.div 
+                           <MDiv 
                                 animate={{ y: [10, -10, 10] }}
                                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                                 className="w-28 h-28 bg-[#0f0518] rounded-2xl border border-accent/40 flex items-center justify-center backdrop-blur-xl shadow-[0_0_30px_rgba(168,85,247,0.2)] z-10 relative mt-12"
                             >
                               <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent rounded-2xl opacity-50" />
                               <Award size={40} className="text-accent drop-shadow-[0_0_20px_#a855f7]" />
-                           </motion.div>
+                           </MDiv>
                         </div>
                     </div>
                 </div>
-            </motion.div>
+            </MDiv>
         </div>
       </div>
     </section>

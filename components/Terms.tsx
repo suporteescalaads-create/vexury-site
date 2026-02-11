@@ -10,6 +10,10 @@ export const Terms: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // Cast motion components to any to bypass environment-specific type errors
+  const MDiv = motion.div as any;
+  const MH1 = motion.h1 as any;
+
   return (
     <div className="bg-[#03000a] text-white min-h-screen font-sans selection:bg-accent selection:text-white">
       <Header />
@@ -29,28 +33,28 @@ export const Terms: React.FC = () => {
 
           {/* Page Header */}
           <div className="text-center mb-16">
-            <motion.div 
+            <MDiv 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6"
             >
               <FileText size={14} /> Agreement
-            </motion.div>
+            </MDiv>
             
-            <motion.h1 
+            <MH1 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
               className="text-5xl md:text-6xl font-bold tracking-tight mb-6"
             >
               Terms of <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-accent">Service</span>
-            </motion.h1>
+            </MH1>
             
             <p className="text-gray-400 text-lg">Last Updated: {new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
           </div>
 
           {/* Content */}
-          <motion.div 
+          <MDiv 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -111,7 +115,7 @@ export const Terms: React.FC = () => {
               </p>
             </div>
 
-          </motion.div>
+          </MDiv>
         </div>
       </main>
 

@@ -1,9 +1,13 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cookie, ShieldCheck, Check, X } from 'lucide-react';
 
 export const CookieBanner: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+
+  // Cast motion components to any to bypass environment-specific type errors
+  const MDiv = motion.div as any;
 
   useEffect(() => {
     // Check for previous consent
@@ -33,7 +37,7 @@ export const CookieBanner: React.FC = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
+        <MDiv
           initial={{ opacity: 0, y: 50, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.95 }}
@@ -58,7 +62,7 @@ export const CookieBanner: React.FC = () => {
                 <div>
                   <h4 className="text-white font-black text-[10px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em]">Cookie Policy</h4>
                   <div className="flex items-center gap-1.5 text-[8px] md:text-[9px] text-accent-light uppercase tracking-[0.15em] md:tracking-[0.2em] font-black opacity-60">
-                    <ShieldCheck size={10} md:size={12} strokeWidth={3} />
+                    <ShieldCheck size={10} className="md:w-3 md:h-3" strokeWidth={3} />
                     Vexury Secured
                   </div>
                 </div>
@@ -82,7 +86,7 @@ export const CookieBanner: React.FC = () => {
                     onClick={handleDeclineAll}
                     className="flex-1 py-3 md:py-4 px-2 md:px-3 rounded-xl md:rounded-2xl border border-white/5 bg-white/5 text-gray-400/60 text-[8px] md:text-[9px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] hover:text-red-400 hover:bg-red-500/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-1"
                   >
-                    Decline All <X size={10} md:size={12} strokeWidth={3} />
+                    Decline All <X size={10} className="md:w-3 md:h-3" strokeWidth={3} />
                   </button>
                 </div>
                 
@@ -91,7 +95,7 @@ export const CookieBanner: React.FC = () => {
                   className="w-full sm:flex-[1.4] py-3 md:py-4 px-4 rounded-xl md:rounded-2xl bg-white text-black text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] shadow-[0_8px_20px_rgba(255,255,255,0.1)] hover:bg-accent hover:text-white transition-all duration-500 flex items-center justify-center gap-1.5 md:gap-2 group/btn relative overflow-hidden active:scale-95"
                 >
                   <span className="relative z-10 flex items-center gap-1.5 md:gap-2">
-                    Accept All <Check size={14} md:size={16} strokeWidth={3} />
+                    Accept All <Check size={14} className="md:w-4 md:h-4" strokeWidth={3} />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 translate-x-[-150%] group-hover/btn:animate-shimmer" />
                 </button>
@@ -101,7 +105,7 @@ export const CookieBanner: React.FC = () => {
             {/* Bottom Accent Decor */}
             <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-40" />
           </div>
-        </motion.div>
+        </MDiv>
       )}
     </AnimatePresence>
   );
