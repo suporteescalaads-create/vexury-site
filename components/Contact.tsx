@@ -260,7 +260,6 @@ export const Contact: React.FC = () => {
 
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
             <p>© 2026 Vexury Agency. All rights reserved.</p>
-            <p className="mt-2 md:mt-0 font-mono tracking-tighter text-gray-700">CRAFTED FOR THE ELITE BUSINESS WORLD</p>
         </div>
       </div>
     </footer>
