@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -23,13 +22,15 @@ function App() {
 
   useEffect(() => {
     // --- FORMBRICKS INITIALIZATION ---
-    // O Snippet no index.html já cria o objeto global. Apenas inicializamos as configs.
-    if ((window as any).formbricks) {
-      (window as any).formbricks.init({
+    const formbricks = (window as any).formbricks;
+    if (formbricks) {
+      // Usando o ID de ambiente que você forneceu no texto para desenvolvimento
+      formbricks.init({
         environmentId: "cmljk5g9i5i3jvt01re4wp908",
         apiHost: "https://app.formbricks.com",
+        debug: true // Ativar debug para ver erros no console se não conectar
       });
-      console.debug("[Vexury] Formbricks Initialized via Proxy");
+      console.debug("[Vexury] Formbricks initialized for environment: cmljk5g9i5i3jvt01re4wp908");
     }
 
     // --- TRACKING LOGIC ---

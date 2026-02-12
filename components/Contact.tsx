@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -23,30 +22,37 @@ export const Contact: React.FC = () => {
       ...formData,
       fullName: `${formData.firstName} ${formData.lastName}`,
       submittedAt: new Date().toISOString(),
-      source: "Vexury Contact Form"
+      source: "Vexury Website Contact"
     };
 
     try {
-      // 1. Tentar via Tracking (Método principal e mais rico em dados)
-      if ((window as any).formbricks) {
-        (window as any).formbricks.track('contact_submit', payload);
-        console.debug("[Vexury] Sent to Formbricks via Track");
+      let tracked = false;
+      // 1. Enviar via Track do SDK (Principal para ativar a conexão do dashboard)
+      const formbricks = (window as any).formbricks;
+      if (formbricks) {
+        formbricks.track('contact_submit', payload);
+        console.debug("[Vexury] Lead tracked via Formbricks SDK");
+        tracked = true;
       }
 
-      // 2. Fallback redundante direto para a API (Garante que o lead chegue mesmo se o JS falhar)
+      // 2. Enviar via API Rest (Backup direto)
       const FORMBRICKS_URL = "https://app.formbricks.com/api/v1/client/cmljk5g9i5i3jvt01re4wp908/responses";
-      await fetch(FORMBRICKS_URL, {
+      const apiResponse = await fetch(FORMBRICKS_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: payload }),
       });
 
-      setFormStatus('success');
+      if (apiResponse.ok || tracked) {
+        setFormStatus('success');
+      } else {
+        throw new Error('All submission methods failed');
+      }
     } catch (error) {
       console.error("[Vexury Contact Error]", error);
-      // Se chegamos aqui, algo falhou na rede, mas tentamos o tracking acima.
-      // Damos sucesso pois o track costuma funcionar via queue.
-      setFormStatus('success'); 
+      setFormStatus('error');
+      // Resetar erro após 4 segundos para permitir nova tentativa
+      setTimeout(() => setFormStatus('idle'), 4000);
     }
   };
 
@@ -248,7 +254,7 @@ export const Contact: React.FC = () => {
                       </button>
                       
                       {formStatus === 'error' && (
-                        <p className="text-red-500 text-xs text-center font-medium">Something went wrong. Please try again.</p>
+                        <p className="text-red-500 text-xs text-center font-medium">Something went wrong. Please check your connection.</p>
                       )}
                     </form>
                   </MDiv>
