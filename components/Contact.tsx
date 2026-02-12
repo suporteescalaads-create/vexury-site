@@ -12,22 +12,85 @@ export const Contact: React.FC = () => {
     phone: '',
     company: ''
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const MDiv = motion.div as any;
 
+  const validateField = (name: string, value: string) => {
+    let error = '';
+
+    switch (name) {
+      case 'firstName':
+        if (!value.trim()) error = 'Please enter a valid first name.';
+        else if (value.length < 2 || value.length > 50) error = 'Please enter a valid first name.';
+        else if (!/^[A-Za-z\s\-']+$/.test(value)) error = 'Please enter a valid first name.';
+        break;
+      case 'lastName':
+        if (!value.trim()) error = 'Please enter a valid last name.';
+        else if (value.length < 2 || value.length > 50) error = 'Please enter a valid last name.';
+        else if (!/^[A-Za-z\s\-']+$/.test(value)) error = 'Please enter a valid last name.';
+        break;
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const blacklistedEmails = ['test@test.com', 'example@example.com', 'admin@admin.com'];
+        if (!value.trim()) error = 'Please enter a valid email address.';
+        else if (value.length > 254) error = 'Please enter a valid email address.';
+        else if (!emailRegex.test(value)) error = 'Please enter a valid email address.';
+        else if (value.includes(' ')) error = 'Please enter a valid email address.';
+        else if (blacklistedEmails.includes(value.toLowerCase())) error = 'Please enter a valid email address.';
+        break;
+      case 'phone':
+        const digits = value.replace(/\D/g, '');
+        const blacklistedPhones = ['0000000000', '1111111111', '1234567890'];
+        const isUSFormat = (digits.length === 10) || (digits.length === 11 && digits.startsWith('1'));
+        if (!value.trim()) error = 'Please enter a valid U.S. phone number (example: 305-555-1234).';
+        else if (!isUSFormat) error = 'Please enter a valid U.S. phone number (example: 305-555-1234).';
+        else if (blacklistedPhones.includes(digits.slice(-10))) error = 'Please enter a valid U.S. phone number (example: 305-555-1234).';
+        break;
+      case 'company':
+        if (value.length > 100) error = 'Company name is too long.';
+        break;
+    }
+
+    return error;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Auto-remove error message once corrected
+    const error = validateField(name, value);
+    setErrors(prev => {
+      const newErrors = { ...prev };
+      if (!error) delete newErrors[name];
+      else newErrors[name] = error;
+      return newErrors;
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormStatus('submitting');
+    
+    // Full form validation on submit
+    const newErrors: Record<string, string> = {};
+    Object.keys(formData).forEach(key => {
+      const error = validateField(key, (formData as any)[key]);
+      if (error) newErrors[key] = error;
+    });
 
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setFormStatus('submitting');
     const googleScriptUrl = "https://script.google.com/macros/s/AKfycby254fTQ8Pv3_PtcJmR9dkDWorxCKdxxSAdqqAdfLID9AhvrRJfO5H1_V83Tr5KSsXkmg/exec";
 
     try {
-      // 1. Enviar dados para o Google Sheets via Google Apps Script
-      // Usamos mode: 'no-cors' se o script não retornar headers CORS, 
-      // mas como o usuário solicitou Content-Type application/json, seguiremos o padrão.
-      const response = await fetch(googleScriptUrl, {
+      await fetch(googleScriptUrl, {
         method: "POST",
-        mode: "no-cors", // Recomendado para Google Apps Script se não houver backend intermediário
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json"
         },
@@ -41,23 +104,15 @@ export const Contact: React.FC = () => {
         })
       });
 
-      // Como o Google Script frequentemente redireciona ou não retorna JSON válido no no-cors,
-      // assumimos sucesso se a promise não falhar.
       setFormStatus('success');
-      
-      // Resetar form após sucesso
       setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '' });
+      setErrors({});
 
     } catch (error) {
       console.error('Submission error:', error);
       setFormStatus('error');
-      // Volta para o estado idle após 4 segundos se der erro para tentar novamente
       setTimeout(() => setFormStatus('idle'), 4000);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -77,14 +132,10 @@ export const Contact: React.FC = () => {
 
   return (
     <footer id="contact" className="bg-[#03000a] pt-24 pb-12 relative overflow-hidden">
-      {/* Divider Soft Neon */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
-          
-          {/* Lado Esquerdo: Informações de Contato */}
           <MDiv 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -140,7 +191,6 @@ export const Contact: React.FC = () => {
             </div>
           </MDiv>
 
-          {/* Lado Direito: Formulário Premium */}
           <MDiv 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -165,9 +215,9 @@ export const Contact: React.FC = () => {
                     >
                       <CheckCircle2 size={48} />
                     </motion.div>
-                    <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">Message Sent!</h3>
+                    <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">Thank you!</h3>
                     <p className="text-gray-400 max-w-sm text-lg font-light leading-relaxed">
-                      Thank you for reaching out. We've received your inquiry and our team will be in touch within <span className="text-white font-semibold">24 hours</span>.
+                      We’ll contact you soon.
                     </p>
                     <button 
                       onClick={() => setFormStatus('idle')}
@@ -189,29 +239,29 @@ export const Contact: React.FC = () => {
                       <p className="text-gray-500 text-sm font-light">Fill out the form below and we'll start your project analysis.</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6 flex-grow">
+                    <form onSubmit={handleSubmit} noValidate className="space-y-6 flex-grow">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">First Name</label>
                           <input 
-                            required
                             name="firstName"
                             placeholder="John"
                             value={formData.firstName}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className={`w-full bg-white/[0.05] border ${errors.firstName ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
                           />
+                          {errors.firstName && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.firstName}</p>}
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">Last Name</label>
                           <input 
-                            required
                             name="lastName"
                             placeholder="Doe"
                             value={formData.lastName}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className={`w-full bg-white/[0.05] border ${errors.lastName ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
                           />
+                          {errors.lastName && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.lastName}</p>}
                         </div>
                       </div>
 
@@ -219,25 +269,25 @@ export const Contact: React.FC = () => {
                         <div className="space-y-2">
                           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">E-Mail</label>
                           <input 
-                            required
                             type="email"
                             name="email"
                             placeholder="hello@example.com"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className={`w-full bg-white/[0.05] border ${errors.email ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
                           />
+                          {errors.email && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.email}</p>}
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">Phone</label>
                           <input 
-                            required
                             name="phone"
                             placeholder="+1 (305) 000-0000"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className={`w-full bg-white/[0.05] border ${errors.phone ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
                           />
+                          {errors.phone && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.phone}</p>}
                         </div>
                       </div>
 
@@ -248,12 +298,14 @@ export const Contact: React.FC = () => {
                           placeholder="Your Business Name"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                          className={`w-full bg-white/[0.05] border ${errors.company ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
                         />
+                        {errors.company && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.company}</p>}
                       </div>
 
                       <div className="pt-4">
                         <button 
+                          type="submit"
                           disabled={formStatus === 'submitting'}
                           className="w-full py-5 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-all duration-500 shadow-xl relative overflow-hidden group disabled:opacity-70"
                         >
@@ -289,7 +341,6 @@ export const Contact: React.FC = () => {
           </MDiv>
         </div>
 
-        {/* Rodapé de Navegação */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10 md:mb-16 border-t border-white/5 pt-16">
             <div className="col-span-2 md:col-span-1">
                  <a href="https://vexury.com/#/" className="inline-block mb-6" onClick={(e) => {
@@ -321,7 +372,7 @@ export const Contact: React.FC = () => {
                     <li><a href="mailto:hello@vexury.com" className="hover:text-white transition-colors font-medium">hello@vexury.com</a></li>
                 </ul>
                 <div className="flex gap-4">
-                    <a href="https://www.instagram.com/vexuryco/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-accent hover:border-accent transition-all duration-300">
+                    <a href="https://www.instagram.com/vexuryco/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-accent hover:border-accent transition-all duration-300" aria-label="Instagram">
                         <Instagram size={18} />
                     </a>
                 </div>
