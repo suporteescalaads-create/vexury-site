@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react';
+import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 
@@ -20,30 +20,36 @@ export const Contact: React.FC = () => {
     setFormStatus('submitting');
 
     try {
-      // Integração Real com Formbricks
+      // 1. Enviar para o Formbricks se disponível
       if ((window as any).formbricks) {
-        // Enviamos um evento personalizado chamado 'contact_form_submit'
-        // Você deve criar essa 'Action' no painel do Formbricks para rastrear.
         (window as any).formbricks.track('contact_form_submit', {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           phone: formData.phone,
           company: formData.company,
-          source: 'Vexury Footer Contact Form'
+          timestamp: new Date().toISOString(),
+          location: 'Vexury Footer Form'
         });
         
-        // Também podemos registrar como atributos do usuário se desejar
+        // Também registra atributos para identificar o usuário no painel
         (window as any).formbricks.registerAttribute('email', formData.email);
-        (window as any).formbricks.registerAttribute('firstName', formData.firstName);
+        (window as any).formbricks.registerAttribute('name', `${formData.firstName} ${formData.lastName}`);
       }
 
-      // Pequeno delay para feedback visual de carregamento
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // 2. Simular processamento para garantir que o usuário veja o feedback (UX)
+      await new Promise(resolve => setTimeout(resolve, 1800));
+      
       setFormStatus('success');
+      
+      // Resetar form após sucesso (caso o usuário queira enviar outro depois)
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '' });
+
     } catch (error) {
-      console.error('Error submitting form to Formbricks:', error);
+      console.error('Submission error:', error);
       setFormStatus('error');
+      // Volta para o estado idle após 4 segundos se der erro para tentar novamente
+      setTimeout(() => setFormStatus('idle'), 4000);
     }
   };
 
@@ -138,46 +144,59 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="lg:col-span-7"
           >
-            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl">
+            <div className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl min-h-[500px] flex flex-col">
               <AnimatePresence mode="wait">
                 {formStatus === 'success' ? (
                   <MDiv
                     key="success"
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.1 }}
-                    className="flex flex-col items-center justify-center py-20 text-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="flex flex-col items-center justify-center flex-grow text-center"
                   >
-                    <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-8 border border-green-500/30">
-                      <CheckCircle2 size={40} />
-                    </div>
-                    <h3 className="text-3xl font-bold text-white mb-4">Message Sent!</h3>
-                    <p className="text-gray-400 max-w-sm">Thank you for reaching out. We've received your inquiry and will be in touch shortly.</p>
+                    <motion.div 
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.2 }}
+                        className="w-24 h-24 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-8 border border-green-500/30 shadow-[0_0_40px_rgba(34,197,94,0.2)]"
+                    >
+                      <CheckCircle2 size={48} />
+                    </motion.div>
+                    <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">Message Sent!</h3>
+                    <p className="text-gray-400 max-w-sm text-lg font-light leading-relaxed">
+                      Thank you for reaching out. We've received your inquiry and our team will be in touch within <span className="text-white font-semibold">24 hours</span>.
+                    </p>
                     <button 
                       onClick={() => setFormStatus('idle')}
-                      className="mt-8 text-accent hover:text-white transition-colors text-sm font-bold uppercase tracking-widest"
+                      className="mt-12 px-8 py-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm font-bold uppercase tracking-widest"
                     >
                       Send another message
                     </button>
                   </MDiv>
                 ) : (
-                  <MDiv key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <MDiv 
+                    key="form" 
+                    initial={{ opacity: 0 }} 
+                    animate={{ opacity: 1 }} 
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col flex-grow"
+                  >
                     <div className="mb-10">
                       <h3 className="text-3xl font-bold text-white mb-2 tracking-tight">Send us a Message</h3>
-                      <p className="text-gray-500 text-sm font-light">Fill out the form below and we'll get back to you within 24 hours.</p>
+                      <p className="text-gray-500 text-sm font-light">Fill out the form below and we'll start your project analysis.</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-6 flex-grow">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
-                          <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">Name</label>
+                          <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">First Name</label>
                           <input 
                             required
                             name="firstName"
-                            placeholder="First Name"
+                            placeholder="John"
                             value={formData.firstName}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
                           />
                         </div>
                         <div className="space-y-2">
@@ -185,10 +204,10 @@ export const Contact: React.FC = () => {
                           <input 
                             required
                             name="lastName"
-                            placeholder="Last Name"
+                            placeholder="Doe"
                             value={formData.lastName}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
                           />
                         </div>
                       </div>
@@ -200,10 +219,10 @@ export const Contact: React.FC = () => {
                             required
                             type="email"
                             name="email"
-                            placeholder="example@mail.com"
+                            placeholder="hello@example.com"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
                           />
                         </div>
                         <div className="space-y-2">
@@ -214,35 +233,51 @@ export const Contact: React.FC = () => {
                             placeholder="+1 (305) 000-0000"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                            className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">Company</label>
+                        <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">Company (Optional)</label>
                         <input 
                           name="company"
-                          placeholder="Your Company Name"
+                          placeholder="Your Business Name"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
+                          className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
                         />
                       </div>
 
-                      <button 
-                        disabled={formStatus === 'submitting'}
-                        className="w-full py-5 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-all duration-500 shadow-xl relative overflow-hidden group disabled:opacity-50 mt-4"
-                      >
-                        {formStatus === 'submitting' ? (
-                          <Loader2 className="animate-spin" size={20} />
-                        ) : (
-                          <>
-                            <span className="uppercase tracking-widest text-sm">Send Message</span>
-                            <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                          </>
+                      <div className="pt-4">
+                        <button 
+                          disabled={formStatus === 'submitting'}
+                          className="w-full py-5 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-all duration-500 shadow-xl relative overflow-hidden group disabled:opacity-70"
+                        >
+                          {formStatus === 'submitting' ? (
+                            <div className="flex items-center gap-3">
+                              <Loader2 className="animate-spin" size={20} />
+                              <span className="uppercase tracking-widest text-sm">Processing...</span>
+                            </div>
+                          ) : (
+                            <>
+                              <span className="uppercase tracking-widest text-sm">Send Message</span>
+                              <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                            </>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-150%] group-hover:animate-shimmer" />
+                        </button>
+                        
+                        {formStatus === 'error' && (
+                          <MDiv 
+                            initial={{ opacity: 0, y: 10 }} 
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mt-4 flex items-center justify-center gap-2 text-red-500 text-xs font-bold uppercase tracking-wider"
+                          >
+                            <AlertCircle size={14} /> Something went wrong. Please try again.
+                          </MDiv>
                         )}
-                      </button>
+                      </div>
                     </form>
                   </MDiv>
                 )}
