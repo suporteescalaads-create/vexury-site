@@ -1,6 +1,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import { ArrowRight, Zap, Shield } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export const Hero: React.FC = () => {
@@ -28,21 +28,46 @@ export const Hero: React.FC = () => {
       className="hero-section relative pt-20 md:pt-32 pb-0 overflow-hidden bg-[#03000a]"
     >
       
-      {/* BACKGROUND DE ALTO IMPACTO */}
+      {/* BACKGROUND DE ALTO IMPACTO COM LUZES EM MOVIMENTO */}
       <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+          {/* Base Gradiente Profunda */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_#1a0b2e_0%,#03000a_90%)]" />
           
+          {/* Luz Principal (Accent/Roxa) Orbiante */}
           <MDiv
-            animate={isMobile ? { opacity: [0.2, 0.3, 0.2] } : { 
-                x: [-50, 50, -50],
-                y: [-30, 80, -30],
-                scale: [1, 1.1, 1],
-                opacity: [0.3, 0.4, 0.3] 
+            animate={{ 
+                x: [-100, 100, -100],
+                y: [-50, 150, -50],
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.4, 0.2] 
             }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute top-0 left-0 w-[600px] h-[600px] bg-accent/15 rounded-full blur-[150px] mix-blend-screen"
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-20 -left-20 w-[800px] h-[800px] bg-accent/20 rounded-full blur-[180px] mix-blend-screen"
           />
 
+          {/* Segunda Luz (Azul) em contra-movimento */}
+          <MDiv
+            animate={{ 
+                x: [100, -100, 100],
+                y: [150, -50, 150],
+                scale: [1.1, 1, 1.1],
+                opacity: [0.1, 0.3, 0.1] 
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -bottom-40 -right-40 w-[700px] h-[700px] bg-blue-500/15 rounded-full blur-[160px] mix-blend-screen"
+          />
+
+          {/* Feixe de Luz "Scanner" Horizontal */}
+          <MDiv
+            animate={{ 
+                x: ['-100%', '200%'],
+                opacity: [0, 0.5, 0]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear", delay: 2 }}
+            className="absolute top-1/3 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent/40 to-transparent blur-[10px]"
+          />
+
+          {/* Textura de Ruído (Noise) */}
           <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] mix-blend-overlay"></div>
       </div>
 
@@ -50,7 +75,7 @@ export const Hero: React.FC = () => {
         
         <div className="container mx-auto px-6 text-center mb-4 md:mb-6">
             <MDiv style={{ opacity: textOpacity, y: textY } as any} className="max-w-4xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-accent-light text-sm font-medium mb-6 md:mb-10 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+                <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-accent-light text-sm font-medium mb-6 md:mb-10 shadow-[0_0_20px_rgba(168,85,247,0.2)] backdrop-blur-md">
                     <span className="relative flex h-2 w-2">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -97,6 +122,8 @@ export const Hero: React.FC = () => {
                     fetchPriority="high"
                 />
             </div>
+            {/* Glow sutil sob o dispositivo */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[50%] bg-accent/5 blur-[100px] pointer-events-none -z-10" />
         </MDiv>
       </div>
     </section>
