@@ -4,22 +4,26 @@ import { Check, Sparkles, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export const Pricing: React.FC = () => {
+  // Cast motion components to any to bypass environment-specific type errors
   const MDiv = motion.div as any;
   const MH2 = motion.h2 as any;
 
   return (
     <section id="pricing" className="pt-10 pb-12 md:pt-16 md:pb-20 bg-[#03000a] relative overflow-hidden">
        
+       {/* Wide Intense Neon Divider */}
        <div className="absolute top-0 w-full h-px">
            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-80" />
            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400 to-transparent blur-[6px] opacity-40" />
            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent to-transparent blur-[12px] opacity-20" />
        </div>
 
+       {/* Ambient Background Lights */}
        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[800px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
        
        <div className="container mx-auto px-6 relative z-10">
         
+        {/* Header */}
         <div className="text-center mb-10 md:mb-12 max-w-4xl mx-auto">
             <MH2 
                 initial={{ opacity: 0, y: 30 }}
@@ -35,6 +39,7 @@ export const Pricing: React.FC = () => {
             </p>
         </div>
 
+        {/* Pricing Grid - Wider container at 1280px for better fit */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-[1280px] mx-auto items-stretch">
             
             {/* PLAN 1: PROFESSIONAL */}
@@ -76,7 +81,9 @@ export const Pricing: React.FC = () => {
                 </ul>
 
                 <a 
-                    href="sms:+13054676397&body=Hi!%20I'm%20interested%20in%20the%20Professional%20Website%20plan." 
+                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20the%20Professional%20Website%20plan." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                     className="block mb-8"
                 >
                     <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
@@ -84,6 +91,7 @@ export const Pricing: React.FC = () => {
                     </button>
                 </a>
 
+                {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
                     <p>All plans include hosting, optional free domain, direct support, and full setup.</p>
                     <p>Annual pricing · Reduced renewal after the first year.</p>
@@ -94,10 +102,11 @@ export const Pricing: React.FC = () => {
             {/* PLAN 2: PREMIUM (POPULAR) */}
             <MDiv 
                 initial={{ scale: 1 }}
-                whileInView={{ scale: 1.02 }}
+                whileInView={{ scale: 1.02 }} // Slightly larger on load
                 viewport={{ once: true }}
                 className="flex flex-col h-full bg-[#0f0518] backdrop-blur-xl p-8 rounded-[2rem] border border-accent/50 relative shadow-[0_0_60px_rgba(168,85,247,0.15)] z-10"
             >
+                {/* Popular Badge */}
                 <div className="absolute top-0 inset-x-0 flex justify-center -translate-y-1/2">
                     <div className="bg-accent text-white px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-[0_0_20px_#a855f7] flex items-center gap-2">
                         <Sparkles size={12} fill="currentColor" /> Popular Choice
@@ -144,7 +153,9 @@ export const Pricing: React.FC = () => {
                 </ul>
 
                 <a 
-                    href="sms:+13054676397&body=Hi!%20I'm%20interested%20in%20the%20Premium%20Website%20plan." 
+                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20the%20Premium%20Website%20plan." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                     className="block mb-8"
                 >
                     <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
@@ -153,6 +164,7 @@ export const Pricing: React.FC = () => {
                     </button>
                 </a>
 
+                {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-400 leading-relaxed space-y-2">
                     <p>All plans include hosting, optional free domain, direct support, and full setup.</p>
                     <p>Annual pricing · Reduced renewal after the first year.</p>
@@ -199,7 +211,9 @@ export const Pricing: React.FC = () => {
                 </ul>
 
                 <a 
-                    href="sms:+13054676397&body=Hi!%20I'm%20interested%20in%20a%20Custom/Enterprise%20solution." 
+                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20a%20Custom/Enterprise%20solution." 
+                    target="_blank" 
+                    rel="noopener noreferrer"
                     className="block mb-8"
                 >
                     <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
@@ -207,6 +221,7 @@ export const Pricing: React.FC = () => {
                     </button>
                 </a>
 
+                {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
                     <p>All plans include hosting, optional free domain, direct support, and full setup.</p>
                     <p>Annual pricing · Reduced renewal after the first year.</p>
