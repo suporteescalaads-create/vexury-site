@@ -1,11 +1,9 @@
-
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { CookieBanner } from './components/CookieBanner';
 import { generateEventId, trackLeadFront, sendToCAPI } from './components/FacebookService';
 
-// Lazy loading components below the fold
 const Features = lazy(() => import('./components/Features').then(m => ({ default: m.Features })));
 const Stats = lazy(() => import('./components/Stats').then(m => ({ default: m.Stats })));
 const Work = lazy(() => import('./components/Work').then(m => ({ default: m.Work })));
@@ -17,7 +15,6 @@ const Contact = lazy(() => import('./components/Contact').then(m => ({ default: 
 const Privacy = lazy(() => import('./components/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
 
-// Simple loading placeholder to avoid layout shift
 const SectionLoader = () => <div className="h-96 bg-background animate-pulse" />;
 
 function App() {
@@ -25,14 +22,24 @@ function App() {
 
   useEffect(() => {
     // --- FORMBRICKS INITIALIZATION ---
-    if ((window as any).formbricks) {
-      (window as any).formbricks.init({
-        environmentId: "cmljk5g9i5i3jvt01re4wp908",
-        apiHost: "https://app.formbricks.com",
-      });
-    }
+    // Inicializamos o SDK com o Environment ID das imagens fornecidas
+    // Cast window to any to access global formbricks property without TypeScript errors
+    const initFormbricks = () => {
+      if ((window as any).formbricks) {
+        (window as any).formbricks.init({
+          environmentId: "cmljk5g9i5i3jvt01re4wp908",
+          apiHost: "https://app.formbricks.com",
+        });
+        console.debug("[Formbricks] SDK Initialized");
+      } else {
+        // Retry logic em caso de atraso no carregamento do script defer
+        setTimeout(initFormbricks, 500);
+      }
+    };
 
-    // --- LÓGICA DE TRACKING ESPECIALISTA ---
+    initFormbricks();
+
+    // --- TRACKING LOGIC ---
     const LEAD_BUTTONS = [
       'BUILD MY WEBSITE NOW',
       'START YOUR WEBSITE',
@@ -71,7 +78,6 @@ function App() {
 
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
-      
       const hash = window.location.hash;
       if (hash && !hash.startsWith('#/')) {
         const element = document.querySelector(hash);
@@ -101,9 +107,7 @@ function App() {
   if (currentHash === '#/privacy.html') {
     return (
       <div className="bg-background text-white min-h-screen">
-        <Suspense fallback={<SectionLoader />}>
-          <Privacy />
-        </Suspense>
+        <Suspense fallback={<SectionLoader />}><Privacy /></Suspense>
         <CookieBanner />
       </div>
     );
@@ -112,9 +116,7 @@ function App() {
   if (currentHash === '#/terms.html') {
     return (
       <div className="bg-background text-white min-h-screen">
-        <Suspense fallback={<SectionLoader />}>
-          <Terms />
-        </Suspense>
+        <Suspense fallback={<SectionLoader />}><Terms /></Suspense>
         <CookieBanner />
       </div>
     );

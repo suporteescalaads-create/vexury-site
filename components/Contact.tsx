@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,15 +19,19 @@ export const Contact: React.FC = () => {
     setFormStatus('submitting');
 
     try {
-      // Usando o SDK do Formbricks para rastrear a submissão conforme solicitado
+      // Integração via SDK: formbricks.track
+      // Cast window to any to access global formbricks property without TypeScript errors
       if ((window as any).formbricks) {
         (window as any).formbricks.track('contact_submit', {
           ...formData,
-          full_name: `${formData.firstName} ${formData.lastName}`
+          fullName: `${formData.firstName} ${formData.lastName}`,
+          submittedAt: new Date().toISOString()
         });
-        setFormStatus('success');
+        
+        // Simular um tempo de processamento para UX
+        setTimeout(() => setFormStatus('success'), 1200);
       } else {
-        // Fallback para submissão manual caso o SDK falhe ao carregar
+        // Fallback robusto se o SDK não estiver disponível
         const FORMBRICKS_ENVIRONMENT_ID = "cmljk5g9i5i3jvt01re4wp908";
         const response = await fetch(`https://app.formbricks.com/api/v1/client/${FORMBRICKS_ENVIRONMENT_ID}/responses`, {
           method: 'POST',
@@ -48,7 +51,7 @@ export const Contact: React.FC = () => {
         }
       }
     } catch (error) {
-      console.error(error);
+      console.error("[Contact Error]", error);
       setFormStatus('error');
       setTimeout(() => setFormStatus('idle'), 3000);
     }
