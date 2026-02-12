@@ -20,15 +20,29 @@ export const Contact: React.FC = () => {
     setFormStatus('submitting');
 
     try {
-      // Simulação de envio ou integração com serviço de tracking
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Se houver script de tracking global (Meta Pixel etc), ele será disparado pelo clique no botão
-      // conforme configurado no App.tsx
-      
+      // Integração Real com Formbricks
+      if ((window as any).formbricks) {
+        // Enviamos um evento personalizado chamado 'contact_form_submit'
+        // Você deve criar essa 'Action' no painel do Formbricks para rastrear.
+        (window as any).formbricks.track('contact_form_submit', {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company,
+          source: 'Vexury Footer Contact Form'
+        });
+        
+        // Também podemos registrar como atributos do usuário se desejar
+        (window as any).formbricks.registerAttribute('email', formData.email);
+        (window as any).formbricks.registerAttribute('firstName', formData.firstName);
+      }
+
+      // Pequeno delay para feedback visual de carregamento
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setFormStatus('success');
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error submitting form to Formbricks:', error);
       setFormStatus('error');
     }
   };
