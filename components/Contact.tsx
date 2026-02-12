@@ -15,28 +15,37 @@ export const Contact: React.FC = () => {
     message: ''
   });
 
-  const FORMBRICKS_ENVIRONMENT_ID = "cmljk5g915i3ivt01jzy8xl7w";
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
 
     try {
-      const response = await fetch(`https://app.formbricks.com/api/v1/client/${FORMBRICKS_ENVIRONMENT_ID}/responses`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          data: {
-            ...formData,
-            full_name: `${formData.firstName} ${formData.lastName}`
-          }
-        }),
-      });
-
-      if (response.ok) {
+      // Usando o SDK do Formbricks para rastrear a submissão conforme solicitado
+      if ((window as any).formbricks) {
+        (window as any).formbricks.track('contact_submit', {
+          ...formData,
+          full_name: `${formData.firstName} ${formData.lastName}`
+        });
         setFormStatus('success');
       } else {
-        throw new Error('Failed to send');
+        // Fallback para submissão manual caso o SDK falhe ao carregar
+        const FORMBRICKS_ENVIRONMENT_ID = "cmljk5g9i5i3jvt01re4wp908";
+        const response = await fetch(`https://app.formbricks.com/api/v1/client/${FORMBRICKS_ENVIRONMENT_ID}/responses`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            data: {
+              ...formData,
+              full_name: `${formData.firstName} ${formData.lastName}`
+            }
+          }),
+        });
+
+        if (response.ok) {
+          setFormStatus('success');
+        } else {
+          throw new Error('Failed to send');
+        }
       }
     } catch (error) {
       console.error(error);
@@ -196,7 +205,7 @@ export const Contact: React.FC = () => {
                           <label className="text-[11px] uppercase tracking-widest font-bold text-gray-500 ml-1">Phone</label>
                           <input 
                             name="phone"
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+1 (305) 000-0000"
                             value={formData.phone}
                             onChange={handleChange}
                             className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all"
