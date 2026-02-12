@@ -24,7 +24,7 @@
     <script type="text/javascript">
     !function(){
         var appUrl = "https://app.formbricks.com"; 
-        var environmentId = "cmljk5g9i5i3jvt01re4wp908";
+        var environmentId = "cmljk5g9w5i3ovt01due0lvkx";
         var t=document.createElement("script");
         t.type="text/javascript",
         t.async=!0,
@@ -32,7 +32,9 @@
         var e=document.getElementsByTagName("script")[0];
         e.parentNode.insertBefore(t,e),
         setTimeout(function(){
-            window.formbricks.setup({environmentId: environmentId, appUrl: appUrl})
+            if(window.formbricks) {
+                window.formbricks.setup({environmentId: environmentId, appUrl: appUrl});
+            }
         }, 500)
     }();
     </script>

@@ -1,9 +1,11 @@
+
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { CookieBanner } from './components/CookieBanner';
 import { generateEventId, trackLeadFront, sendToCAPI } from './components/FacebookService';
 
+// Lazy loading components below the fold
 const Features = lazy(() => import('./components/Features').then(m => ({ default: m.Features })));
 const Stats = lazy(() => import('./components/Stats').then(m => ({ default: m.Stats })));
 const Work = lazy(() => import('./components/Work').then(m => ({ default: m.Work })));
@@ -15,29 +17,50 @@ const Contact = lazy(() => import('./components/Contact').then(m => ({ default: 
 const Privacy = lazy(() => import('./components/Privacy').then(m => ({ default: m.Privacy })));
 const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
 
+// Simple loading placeholder to avoid layout shift
 const SectionLoader = () => <div className="h-96 bg-background animate-pulse" />;
 
 function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   useEffect(() => {
-    // A inicialização agora é feita via index.html para garantir a conexão do dashboard.
-    console.debug("[Vexury] App mounted. Formbricks should be connected via index.html snippet.");
+    // --- LÓGICA DE TRACKING ESPECIALISTA ---
+    const LEAD_BUTTONS = [
+      'BUILD MY WEBSITE NOW',
+      'START YOUR WEBSITE',
+      'START MY WEBSITE',
+      'START YOUR PROJECT',
+      "LET'S TALK",
+      'TALK TO US',
+      'SEND EMAIL',
+      'WHATSAPP'
+    ];
 
-    // --- TRACKING LOGIC ---
     const handleGlobalClick = async (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      // Fixed: Cast the returned Element to HTMLElement to access innerText property
       const btn = target.closest('button, a') as HTMLElement | null;
+      
       if (!btn) return;
-      
+
       const btnText = btn.innerText.trim().toUpperCase();
-      const LEAD_BUTTONS = ['BUILD MY WEBSITE NOW', 'START YOUR WEBSITE', 'START MY WEBSITE', 'START YOUR PROJECT', "LET'S TALK", 'TALK TO US'];
       
+      // Verifica se o texto do botão está na nossa lista de conversão
       if (LEAD_BUTTONS.includes(btnText)) {
         const eventId = generateEventId();
         const contentName = btnText.charAt(0) + btnText.slice(1).toLowerCase();
+
+        // 1. Pixel (Navegador) - Imediato
         trackLeadFront(eventId, contentName);
-        sendToCAPI({ eventId, contentName, city: 'Miami', zip: '33149' });
+
+        // 2. CAPI (Servidor) - Segundo plano
+        // Não usamos await aqui para não bloquear a navegação do usuário se for um link
+        sendToCAPI({
+          eventId,
+          contentName,
+          city: 'Miami', // Default Context
+          zip: '33149'   // Default Context
+        });
       }
     };
 
@@ -45,6 +68,7 @@ function App() {
 
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
+      
       const hash = window.location.hash;
       if (hash && !hash.startsWith('#/')) {
         const element = document.querySelector(hash);
@@ -52,7 +76,10 @@ function App() {
           const headerOffset = 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
         }
       } else if (hash.startsWith('#/')) {
         window.scrollTo(0, 0);
@@ -71,7 +98,9 @@ function App() {
   if (currentHash === '#/privacy.html') {
     return (
       <div className="bg-background text-white min-h-screen">
-        <Suspense fallback={<SectionLoader />}><Privacy /></Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Privacy />
+        </Suspense>
         <CookieBanner />
       </div>
     );
@@ -80,7 +109,9 @@ function App() {
   if (currentHash === '#/terms.html') {
     return (
       <div className="bg-background text-white min-h-screen">
-        <Suspense fallback={<SectionLoader />}><Terms /></Suspense>
+        <Suspense fallback={<SectionLoader />}>
+          <Terms />
+        </Suspense>
         <CookieBanner />
       </div>
     );

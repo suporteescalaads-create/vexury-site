@@ -10,53 +10,36 @@ export const Contact: React.FC = () => {
     lastName: '',
     email: '',
     phone: '',
-    company: '',
-    message: ''
+    company: ''
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
 
-    const payload = {
-      ...formData,
-      fullName: `${formData.firstName} ${formData.lastName}`,
-      submittedAt: new Date().toISOString(),
-      source: "Vexury Website Contact"
-    };
-
     try {
-      let tracked = false;
-      // 1. Enviar via Track do SDK (Principal para ativar a conexão do dashboard)
-      const formbricks = (window as any).formbricks;
-      if (formbricks) {
-        formbricks.track('contact_submit', payload);
-        console.debug("[Vexury] Lead tracked via Formbricks SDK");
-        tracked = true;
-      }
-
-      // 2. Enviar via API Rest (Backup direto)
-      const FORMBRICKS_URL = "https://app.formbricks.com/api/v1/client/cmljk5g9i5i3jvt01re4wp908/responses";
-      const apiResponse = await fetch(FORMBRICKS_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ data: payload }),
-      });
-
-      if (apiResponse.ok || tracked) {
+      // Integração com Formbricks via track
+      if ((window as any).formbricks) {
+        (window as any).formbricks.track('contact_form_submission', {
+          ...formData,
+          source: 'Vexury Website Contact Form'
+        });
+        
+        // Simulação de delay para experiência de carregamento suave
+        await new Promise(resolve => setTimeout(resolve, 1500));
         setFormStatus('success');
       } else {
-        throw new Error('All submission methods failed');
+        // Fallback caso o script ainda não tenha carregado
+        console.warn('Formbricks not loaded yet. Retrying...');
+        setTimeout(() => setFormStatus('error'), 1000);
       }
     } catch (error) {
-      console.error("[Vexury Contact Error]", error);
+      console.error('Error submitting form:', error);
       setFormStatus('error');
-      // Resetar erro após 4 segundos para permitir nova tentativa
-      setTimeout(() => setFormStatus('idle'), 4000);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -64,9 +47,8 @@ export const Contact: React.FC = () => {
 
   return (
     <footer id="contact" className="bg-[#03000a] pt-20 pb-10 relative overflow-hidden">
-      {/* Background Decor */}
+      {/* Divider Soft Neon */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
-      <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
@@ -128,7 +110,7 @@ export const Contact: React.FC = () => {
             </div>
           </MDiv>
 
-          {/* Lado Direito: Card do Formulário */}
+          {/* Lado Direito: Formulário Premium */}
           <MDiv 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -226,19 +208,6 @@ export const Contact: React.FC = () => {
                         />
                       </div>
 
-                      <div className="space-y-2">
-                        <label className="text-[11px] uppercase tracking-widest font-bold text-gray-500 ml-1">Message</label>
-                        <textarea 
-                          required
-                          name="message"
-                          rows={4}
-                          placeholder="Tell us about your project..."
-                          value={formData.message}
-                          onChange={handleChange}
-                          className="w-full bg-white/[0.05] border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-gray-600 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all resize-none"
-                        />
-                      </div>
-
                       <button 
                         disabled={formStatus === 'submitting'}
                         className="w-full py-5 bg-white text-black rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-accent hover:text-white transition-all duration-500 shadow-xl relative overflow-hidden group disabled:opacity-50"
@@ -252,10 +221,6 @@ export const Contact: React.FC = () => {
                           </>
                         )}
                       </button>
-                      
-                      {formStatus === 'error' && (
-                        <p className="text-red-500 text-xs text-center font-medium">Something went wrong. Please check your connection.</p>
-                      )}
                     </form>
                   </MDiv>
                 )}
@@ -264,7 +229,7 @@ export const Contact: React.FC = () => {
           </MDiv>
         </div>
 
-        {/* Rodapé Interno */}
+        {/* Rodapé de Navegação */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mb-10 md:mb-16 border-t border-white/5 pt-16">
             <div className="col-span-2 md:col-span-1">
                  <div className="inline-block mb-6">
