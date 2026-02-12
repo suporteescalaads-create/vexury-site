@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Logo } from './Logo';
+import { Logo } from './Logo.tsx';
 
 export const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -59,7 +59,6 @@ export const Contact: React.FC = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Auto-remove error message once corrected
     const error = validateField(name, value);
     setErrors(prev => {
       const newErrors = { ...prev };
@@ -72,7 +71,6 @@ export const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Full form validation on submit
     const newErrors: Record<string, string> = {};
     Object.keys(formData).forEach(key => {
       const error = validateField(key, (formData as any)[key]);

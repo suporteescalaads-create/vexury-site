@@ -8,6 +8,24 @@ export const Pricing: React.FC = () => {
   const MDiv = motion.div as any;
   const MH2 = motion.h2 as any;
 
+  const handleContactScroll = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById('contact');
+    if (element) {
+      const headerOffset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      
+      // Update hash without triggering a full page jump or security error
+      window.location.hash = 'contact';
+    }
+  };
+
   return (
     <section id="pricing" className="pt-10 pb-12 md:pt-16 md:pb-20 bg-[#03000a] relative overflow-hidden">
        
@@ -81,9 +99,8 @@ export const Pricing: React.FC = () => {
                 </ul>
 
                 <a 
-                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20the%20Professional%20Website%20plan." 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="https://vexury.com/#contact" 
+                    onClick={handleContactScroll}
                     className="block mb-8"
                 >
                     <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
@@ -153,9 +170,8 @@ export const Pricing: React.FC = () => {
                 </ul>
 
                 <a 
-                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20the%20Premium%20Website%20plan." 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="https://vexury.com/#contact" 
+                    onClick={handleContactScroll}
                     className="block mb-8"
                 >
                     <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
@@ -211,9 +227,8 @@ export const Pricing: React.FC = () => {
                 </ul>
 
                 <a 
-                    href="https://wa.me/13054676317?text=Hi%20Julio!%20I'm%20interested%20in%20a%20Custom/Enterprise%20solution." 
-                    target="_blank" 
-                    rel="noopener noreferrer"
+                    href="https://vexury.com/#contact" 
+                    onClick={handleContactScroll}
                     className="block mb-8"
                 >
                     <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">

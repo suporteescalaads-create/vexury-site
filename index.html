@@ -133,9 +133,12 @@
       }
       /* Pre-render critical classes to avoid FOUC */
       .hero-title {
-        background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
+        background-image: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
+        background-clip: text;
         -webkit-background-clip: text;
+        color: transparent;
         -webkit-text-fill-color: transparent;
+        display: inline;
       }
       /* Reduce layout shift */
       #root { min-height: 100vh; }
@@ -159,6 +162,6 @@
       src="https://www.facebook.com/tr?id=809755415414227&ev=PageView&noscript=1"
     /></noscript>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="index.tsx"></script>
   </body>
 </html>

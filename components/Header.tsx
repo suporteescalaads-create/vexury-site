@@ -1,13 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
-import { NavItem } from '../types';
-import { Logo } from './Logo';
+import { NavItem } from '../types.ts';
+import { Logo } from './Logo.tsx';
 
 const navItems: NavItem[] = [
-  { label: 'Services', href: 'https://vexury.com/#services' },
-  { label: 'Team', href: 'https://vexury.com/#team' },
-  { label: 'Pricing', href: 'https://vexury.com/#pricing' },
+  { label: 'Services', href: '#services' },
+  { label: 'Team', href: '#team' },
+  { label: 'Pricing', href: '#pricing' },
   { label: 'Contact', href: 'https://vexury.com/#contact' },
 ];
 
@@ -18,7 +18,6 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const checkPath = () => {
-        // In this hash-routing setup, home is when hash is empty or a section ID, not #/subpage.html
         const hash = window.location.hash;
         setIsHomePage(!hash.startsWith('#/'));
     };
@@ -38,28 +37,13 @@ export const Header: React.FC = () => {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isInternalHash = href.includes('#') && !href.includes('#/');
+    const isInternalHash = (href.startsWith('#') && !href.startsWith('#/')) || href.includes('#contact');
     
     if (isInternalHash) {
       if (isHomePage) {
-        e.preventDefault();
-        const targetId = href.split('#')[1];
-        const element = document.getElementById(targetId);
-        
-        if (element) {
-          const headerOffset = 100;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
-          
-          setIsMenuOpen(false);
-        }
+        // Deixamos o App.tsx lidar com o scroll via hashchange
+        setIsMenuOpen(false);
       } else {
-        // If not on home page, let the link take us back to home with the hash
         setIsMenuOpen(false);
       }
     }
@@ -73,22 +57,20 @@ export const Header: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Premium Logo - Points to home */}
           <a 
-            href="https://vexury.com/#" 
+            href="#" 
             className="flex items-center"
             onClick={(e) => {
                if(isHomePage) {
                    e.preventDefault();
                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                   window.location.hash = '#';
+                   window.location.hash = '';
                }
             }}
           >
             <Logo className="w-10 h-10" textClassName="text-lg" />
           </a>
 
-          {/* Desktop Nav - Minimalist */}
           <nav className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <a
@@ -102,7 +84,6 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-white hover:text-accent transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}

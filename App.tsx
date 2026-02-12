@@ -1,21 +1,20 @@
-
 import React, { useEffect, useState, Suspense, lazy } from 'react';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { CookieBanner } from './components/CookieBanner';
-import { generateEventId, trackLeadFront, sendToCAPI } from './components/FacebookService';
+import { Header } from './components/Header.tsx';
+import { Hero } from './components/Hero.tsx';
+import { CookieBanner } from './components/CookieBanner.tsx';
+import { generateEventId, trackLeadFront, sendToCAPI } from './components/FacebookService.ts';
 
-// Lazy loading components below the fold
-const Features = lazy(() => import('./components/Features').then(m => ({ default: m.Features })));
-const Stats = lazy(() => import('./components/Stats').then(m => ({ default: m.Stats })));
-const Work = lazy(() => import('./components/Work').then(m => ({ default: m.Work })));
-const Team = lazy(() => import('./components/Team').then(m => ({ default: m.Team })));
-const Pricing = lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })));
-const Testimonials = lazy(() => import('./components/Testimonials').then(m => ({ default: m.Testimonials })));
-const FAQ = lazy(() => import('./components/FAQ').then(m => ({ default: m.FAQ })));
-const Contact = lazy(() => import('./components/Contact').then(m => ({ default: m.Contact })));
-const Privacy = lazy(() => import('./components/Privacy').then(m => ({ default: m.Privacy })));
-const Terms = lazy(() => import('./components/Terms').then(m => ({ default: m.Terms })));
+// Lazy loading components below the fold with extensions
+const Features = lazy(() => import('./components/Features.tsx').then(m => ({ default: m.Features })));
+const Stats = lazy(() => import('./components/Stats.tsx').then(m => ({ default: m.Stats })));
+const Work = lazy(() => import('./components/Work.tsx').then(m => ({ default: m.Work })));
+const Team = lazy(() => import('./components/Team.tsx').then(m => ({ default: m.Team })));
+const Pricing = lazy(() => import('./components/Pricing.tsx').then(m => ({ default: m.Pricing })));
+const Testimonials = lazy(() => import('./components/Testimonials.tsx').then(m => ({ default: m.Testimonials })));
+const FAQ = lazy(() => import('./components/FAQ.tsx').then(m => ({ default: m.FAQ })));
+const Contact = lazy(() => import('./components/Contact.tsx').then(m => ({ default: m.Contact })));
+const Privacy = lazy(() => import('./components/Privacy.tsx').then(m => ({ default: m.Privacy })));
+const Terms = lazy(() => import('./components/Terms.tsx').then(m => ({ default: m.Terms })));
 
 // Simple loading placeholder to avoid layout shift
 const SectionLoader = () => <div className="h-96 bg-background animate-pulse" />;
@@ -38,28 +37,23 @@ function App() {
 
     const handleGlobalClick = async (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Fixed: Cast the returned Element to HTMLElement to access innerText property
       const btn = target.closest('button, a') as HTMLElement | null;
       
       if (!btn) return;
 
       const btnText = btn.innerText.trim().toUpperCase();
       
-      // Verifica se o texto do botão está na nossa lista de conversão
       if (LEAD_BUTTONS.includes(btnText)) {
         const eventId = generateEventId();
         const contentName = btnText.charAt(0) + btnText.slice(1).toLowerCase();
 
-        // 1. Pixel (Navegador) - Imediato
         trackLeadFront(eventId, contentName);
 
-        // 2. CAPI (Servidor) - Segundo plano
-        // Não usamos await aqui para não bloquear a navegação do usuário se for um link
         sendToCAPI({
           eventId,
           contentName,
-          city: 'Miami', // Default Context
-          zip: '33149'   // Default Context
+          city: 'Miami',
+          zip: '33149'
         });
       }
     };
