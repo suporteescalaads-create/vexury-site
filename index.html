@@ -20,33 +20,75 @@
     </script>
     <!-- End Facebook Pixel Code -->
 
-    <!-- START Formbricks Surveys -->
-    <script type="text/javascript">
-    !function(){
-        var appUrl = "https://app.formbricks.com"; 
-        var environmentId = "cmljk5g9w5i3ovt01due0lvkx";
-        var t=document.createElement("script");
-        t.type="text/javascript",
-        t.async=!0,
-        t.src=appUrl+"/js/formbricks.umd.cjs";
-        var e=document.getElementsByTagName("script")[0];
-        e.parentNode.insertBefore(t,e),
-        setTimeout(function(){
-            if(window.formbricks) {
-                window.formbricks.setup({environmentId: environmentId, appUrl: appUrl});
-            }
-        }, 500)
-    }();
-    </script>
-    <!-- END Formbricks Surveys -->
-
+    <!-- Priorização de Recursos Críticos -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="https://raw.githubusercontent.com/suporteescalaads-create/elementos/refs/heads/main/image-hero.webp" fetchpriority="high">
     
+    <!-- SEO Master Tags - Miami & Key Biscayne Premium Focus -->
     <title>Vexury | High-Performance Web Design Agency Miami & Key Biscayne</title>
-    <meta name="description" content="Elevate your elite business with Vexury. High-performance web design and digital strategy based in Key Biscayne, Miami.">
+    <meta name="title" content="Vexury | High-Performance Web Design Agency Miami & Key Biscayne">
+    <meta name="description" content="Elevate your elite business with Vexury. High-performance web design and digital strategy based in Key Biscayne, Miami. We build sophisticated websites that dominate the market and maximize conversions for premium brands.">
+    <meta name="keywords" content="web design Miami, Key Biscayne digital agency, high performance websites, luxury web design Florida, Vexury agency, custom web development Miami, conversion focused design">
+    <meta name="author" content="Vexury Agency">
     
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vexury.com/">
+    <meta property="og:title" content="Vexury | Premium Web Design & Strategy in Miami">
+    <meta property="og:description" content="Transform your online presence into a high-conversion machine. Sophisticated design meets extreme performance for the world's most demanding businesses.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/f9919f2dbcb39b4b4d39ec34ea9363373584515b/logo_vexury.svg">
+    <meta property="og:site_name" content="Vexury">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vexury.com/">
+    <meta property="twitter:title" content="Vexury | Elite Digital Design & Performance">
+    <meta property="twitter:description" content="High-speed, high-conversion websites for elite businesses in Miami and Key Biscayne.">
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/f9919f2dbcb39b4b4d39ec34ea9363373584515b/logo_vexury.svg">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Vexury",
+      "image": "https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/f9919f2dbcb39b4b4d39ec34ea9363373584515b/logo_vexury.svg",
+      "@id": "https://vexury.com/",
+      "url": "https://vexury.com/",
+      "telephone": "+1-305-467-6317",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Street Address TBD",
+        "addressLocality": "Key Biscayne",
+        "addressRegion": "FL",
+        "postalCode": "33149",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 25.6937,
+        "longitude": -80.1628
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/vexuryco"
+      ]
+    }
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/suporteescalaads-create/vexury-site/6f67f3e6f98450861e8a1d191faab378f805a283/faviconvexuryfinal.svg" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -68,6 +110,7 @@
               display: ['Inter', 'sans-serif'],
             },
             animation: {
+              'blob': 'pulse 10s infinite',
               'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shimmer': 'shimmer 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
             },
@@ -81,9 +124,20 @@
         },
       }
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
-      body { background-color: #03000a; color: #ffffff; overflow-x: hidden; }
-      .hero-title { background: linear-gradient(to right, #fff, #d8b4fe, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+      body {
+        background-color: #03000a;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+      /* Pre-render critical classes to avoid FOUC */
+      .hero-title {
+        background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* Reduce layout shift */
       #root { min-height: 100vh; }
     </style>
     <script type="importmap">
@@ -101,7 +155,9 @@
     </script>
   </head>
   <body>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=809755415414227&ev=PageView&noscript=1" /></noscript>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=809755415414227&ev=PageView&noscript=1"
+    /></noscript>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
