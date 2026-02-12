@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Target, Award, Zap, ArrowUpRight, MousePointerClick, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -305,9 +304,8 @@ export const Features: React.FC = () => {
                                 Don't let a poor digital presence undervalue your brand. Upgrade to a Vexury standard today.
                             </p>
                             <a 
-                                href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="https://vexury.com/#pricing"
+                                className="inline-block"
                             >
                                 <MButton 
                                     whileHover={{ scale: 1.02 }}

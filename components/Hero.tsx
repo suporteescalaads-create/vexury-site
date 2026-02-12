@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -95,9 +94,7 @@ export const Hero: React.FC = () => {
 
                 <div>
                     <a 
-                        href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="https://vexury.com/#pricing"
                         className="inline-block"
                     >
                         <button className="px-10 md:px-12 py-4 md:py-5 bg-white text-black rounded-full font-bold transition-all duration-300 shadow-[0_0_25px_rgba(255,255,255,0.2)] flex items-center gap-2 group relative overflow-hidden active:scale-95">
