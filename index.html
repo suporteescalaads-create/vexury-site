@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
   <head>
@@ -19,8 +20,10 @@
       fbq('track', 'PageView');
     </script>
 
-    <!-- Formbricks SDK -->
-    <script src="https://unpkg.com/@formbricks/js@latest/dist/index.umd.js" defer></script>
+    <!-- Formbricks SDK Loading Snippet (Official Recommendation from PDF) -->
+    <script type="text/javascript">
+      !function(){var t=window.formbricks=window.formbricks||{cloud:!0};t.q=t.q||[],t.init=function(e){t.config=e},t.track=function(e,n){t.q.push([e,n])},t.registerRouteChange=function(){t.q.push(["registerRouteChange"])},t.identifyUser=function(e,n){t.q.push(["identifyUser",e,n])},t.logout=function(){t.q.push(["logout"])},t.setAttribute=function(e,n){t.q.push(["setAttribute",e,n])},t.setAttributes=function(e){t.q.push(["setAttributes",e])};var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://app.formbricks.com/api/v1/client/storage/js-sdk/bundle.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)}();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,11 +68,7 @@
     </script>
     <style>
       body { background-color: #03000a; color: #ffffff; overflow-x: hidden; }
-      .hero-title {
-        background: linear-gradient(to right, #fff, #d8b4fe, #a855f7);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
+      .hero-title { background: linear-gradient(to right, #fff, #d8b4fe, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
       #root { min-height: 100vh; }
     </style>
     <script type="importmap">

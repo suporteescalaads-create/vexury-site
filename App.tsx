@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -22,55 +23,29 @@ function App() {
 
   useEffect(() => {
     // --- FORMBRICKS INITIALIZATION ---
-    // Inicializamos o SDK com o Environment ID das imagens fornecidas
-    // Cast window to any to access global formbricks property without TypeScript errors
-    const initFormbricks = () => {
-      if ((window as any).formbricks) {
-        (window as any).formbricks.init({
-          environmentId: "cmljk5g9i5i3jvt01re4wp908",
-          apiHost: "https://app.formbricks.com",
-        });
-        console.debug("[Formbricks] SDK Initialized");
-      } else {
-        // Retry logic em caso de atraso no carregamento do script defer
-        setTimeout(initFormbricks, 500);
-      }
-    };
-
-    initFormbricks();
+    // O Snippet no index.html já cria o objeto global. Apenas inicializamos as configs.
+    if ((window as any).formbricks) {
+      (window as any).formbricks.init({
+        environmentId: "cmljk5g9i5i3jvt01re4wp908",
+        apiHost: "https://app.formbricks.com",
+      });
+      console.debug("[Vexury] Formbricks Initialized via Proxy");
+    }
 
     // --- TRACKING LOGIC ---
-    const LEAD_BUTTONS = [
-      'BUILD MY WEBSITE NOW',
-      'START YOUR WEBSITE',
-      'START MY WEBSITE',
-      'START YOUR PROJECT',
-      "LET'S TALK",
-      'TALK TO US',
-      'SEND EMAIL',
-      'WHATSAPP'
-    ];
-
     const handleGlobalClick = async (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const btn = target.closest('button, a') as HTMLElement | null;
-      
       if (!btn) return;
-
+      
       const btnText = btn.innerText.trim().toUpperCase();
+      const LEAD_BUTTONS = ['BUILD MY WEBSITE NOW', 'START YOUR WEBSITE', 'START MY WEBSITE', 'START YOUR PROJECT', "LET'S TALK", 'TALK TO US'];
       
       if (LEAD_BUTTONS.includes(btnText)) {
         const eventId = generateEventId();
         const contentName = btnText.charAt(0) + btnText.slice(1).toLowerCase();
-
         trackLeadFront(eventId, contentName);
-
-        sendToCAPI({
-          eventId,
-          contentName,
-          city: 'Miami', 
-          zip: '33149'   
-        });
+        sendToCAPI({ eventId, contentName, city: 'Miami', zip: '33149' });
       }
     };
 
@@ -85,10 +60,7 @@ function App() {
           const headerOffset = 100;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: "smooth"
-          });
+          window.scrollTo({ top: offsetPosition, behavior: "smooth" });
         }
       } else if (hash.startsWith('#/')) {
         window.scrollTo(0, 0);
