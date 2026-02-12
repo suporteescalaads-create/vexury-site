@@ -19,30 +19,33 @@ export const Contact: React.FC = () => {
     e.preventDefault();
     setFormStatus('submitting');
 
+    const googleScriptUrl = "https://script.google.com/macros/s/AKfycby254fTQ8Pv3_PtcJmR9dkDWorxCKdxxSAdqqAdfLID9AhvrRJfO5H1_V83Tr5KSsXkmg/exec";
+
     try {
-      // 1. Enviar para o Formbricks se disponível
-      if ((window as any).formbricks) {
-        (window as any).formbricks.track('contact_form_submit', {
+      // 1. Enviar dados para o Google Sheets via Google Apps Script
+      // Usamos mode: 'no-cors' se o script não retornar headers CORS, 
+      // mas como o usuário solicitou Content-Type application/json, seguiremos o padrão.
+      const response = await fetch(googleScriptUrl, {
+        method: "POST",
+        mode: "no-cors", // Recomendado para Google Apps Script se não houver backend intermediário
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           phone: formData.phone,
           company: formData.company,
-          timestamp: new Date().toISOString(),
-          location: 'Vexury Footer Form'
-        });
-        
-        // Também registra atributos para identificar o usuário no painel
-        (window as any).formbricks.registerAttribute('email', formData.email);
-        (window as any).formbricks.registerAttribute('name', `${formData.firstName} ${formData.lastName}`);
-      }
+          source: "Website"
+        })
+      });
 
-      // 2. Simular processamento para garantir que o usuário veja o feedback (UX)
-      await new Promise(resolve => setTimeout(resolve, 1800));
-      
+      // Como o Google Script frequentemente redireciona ou não retorna JSON válido no no-cors,
+      // assumimos sucesso se a promise não falhar.
       setFormStatus('success');
       
-      // Resetar form após sucesso (caso o usuário queira enviar outro depois)
+      // Resetar form após sucesso
       setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '' });
 
     } catch (error) {
