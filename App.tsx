@@ -21,17 +21,8 @@ function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   useEffect(() => {
-    // --- FORMBRICKS INITIALIZATION ---
-    const formbricks = (window as any).formbricks;
-    if (formbricks) {
-      // Usando o ID de ambiente que você forneceu no texto para desenvolvimento
-      formbricks.init({
-        environmentId: "cmljk5g9i5i3jvt01re4wp908",
-        apiHost: "https://app.formbricks.com",
-        debug: true // Ativar debug para ver erros no console se não conectar
-      });
-      console.debug("[Vexury] Formbricks initialized for environment: cmljk5g9i5i3jvt01re4wp908");
-    }
+    // A inicialização agora é feita via index.html para garantir a conexão do dashboard.
+    console.debug("[Vexury] App mounted. Formbricks should be connected via index.html snippet.");
 
     // --- TRACKING LOGIC ---
     const handleGlobalClick = async (e: MouseEvent) => {
