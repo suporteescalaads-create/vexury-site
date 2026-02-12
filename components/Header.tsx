@@ -18,7 +18,6 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const checkPath = () => {
-        // In this hash-routing setup, home is when hash is empty or a section ID, not #/subpage.html
         const hash = window.location.hash;
         setIsHomePage(!hash.startsWith('#/'));
     };
@@ -59,7 +58,6 @@ export const Header: React.FC = () => {
           setIsMenuOpen(false);
         }
       } else {
-        // If not on home page, let the link take us back to home with the hash
         setIsMenuOpen(false);
       }
     }
@@ -73,7 +71,6 @@ export const Header: React.FC = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
-          {/* Premium Logo - Points to home */}
           <a 
             href="https://vexury.com/#" 
             className="flex items-center"
@@ -88,7 +85,6 @@ export const Header: React.FC = () => {
             <Logo className="w-10 h-10" textClassName="text-lg" />
           </a>
 
-          {/* Desktop Nav - Minimalist */}
           <nav className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <a
@@ -102,7 +98,6 @@ export const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2 text-white hover:text-accent transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -127,9 +122,7 @@ export const Header: React.FC = () => {
               </a>
             ))}
             <a 
-                href="https://wa.me/13054676317?text=Hello%20Julio!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
-                target="_blank"
-                rel="noopener noreferrer"
+                href="sms:+13054676397&body=Hello!%20I'm%20interested%20in%20building%20a%20website%20with%20Vexury."
             >
                 <button className="bg-white text-black w-full py-5 font-bold mt-4 rounded-full tracking-wider uppercase text-sm">
                     Start Project
