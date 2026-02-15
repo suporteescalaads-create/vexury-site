@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle, Instagram, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo.tsx';
 
@@ -172,34 +172,78 @@ export const Contact: React.FC = () => {
             viewport={{ once: true }}
             className="lg:col-span-7"
           >
-            <div id="contact-form-top" className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl min-h-[500px] flex flex-col">
+            <div id="contact-form-top" className="bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-2xl min-h-[550px] flex flex-col justify-center">
               <AnimatePresence mode="wait">
                 {formStatus === 'success' ? (
                   <MDiv
                     key="success"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="flex flex-col items-center justify-center flex-grow text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col items-center text-center relative z-10"
                   >
-                    <motion.div 
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 200, damping: 12, delay: 0.2 }}
-                        className="w-24 h-24 rounded-full bg-green-500/20 flex items-center justify-center text-green-500 mb-8 border border-green-500/30 shadow-[0_0_40px_rgba(34,197,94,0.2)]"
+                    {/* Animated Decorative Background Elements */}
+                    <MDiv 
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                      className="absolute inset-0 bg-accent rounded-full blur-[100px] -z-10"
+                    />
+
+                    {/* Premium Success Icon Visual */}
+                    <div className="relative mb-12">
+                      <MDiv 
+                        initial={{ scale: 0, rotate: -45 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
+                        className="w-32 h-32 rounded-full bg-gradient-to-br from-green-400/20 to-green-600/5 flex items-center justify-center text-green-500 border border-green-500/30 relative z-10 shadow-[0_0_50px_rgba(34,197,94,0.3)] backdrop-blur-xl"
+                      >
+                        <CheckCircle2 size={64} strokeWidth={1.5} className="drop-shadow-[0_0_15px_rgba(34,197,94,0.8)]" />
+                      </MDiv>
+                      
+                      {/* Floating Particles Around Icon */}
+                      {[...Array(6)].map((_, i) => (
+                        <MDiv
+                          key={i}
+                          animate={{ 
+                            y: [0, -40, 0], 
+                            x: [0, Math.sin(i) * 30, 0],
+                            opacity: [0, 1, 0],
+                            scale: [0, 1, 0]
+                          }}
+                          transition={{ duration: 3, delay: i * 0.4, repeat: Infinity }}
+                          className="absolute w-1.5 h-1.5 bg-green-400 rounded-full blur-[1px]"
+                          style={{ 
+                            top: '50%', 
+                            left: '50%',
+                          }}
+                        />
+                      ))}
+                    </div>
+
+                    <MDiv
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
                     >
-                      <CheckCircle2 size={48} />
-                    </motion.div>
-                    <h3 className="text-4xl font-bold text-white mb-4 tracking-tight">Thank you!</h3>
-                    <p className="text-gray-400 max-w-sm text-lg font-light leading-relaxed">
-                      We’ll contact you soon.
-                    </p>
-                    <button 
-                      onClick={() => setFormStatus('idle')}
-                      className="mt-12 px-8 py-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 transition-all text-sm font-bold uppercase tracking-widest"
-                    >
-                      Send another message
-                    </button>
+                      <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                        Thank <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-200">you!</span>
+                      </h3>
+                      
+                      <div className="space-y-4 max-w-sm mx-auto">
+                        <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed">
+                          Our team is already reviewing your request.
+                        </p>
+                        <p className="text-gray-500 text-sm font-medium tracking-wide uppercase">
+                          Expect a response within 24 hours.
+                        </p>
+                      </div>
+
+                      <div className="mt-12 flex items-center justify-center gap-3 text-accent/60">
+                        <Sparkles size={16} />
+                        <span className="text-[10px] uppercase tracking-[0.3em] font-black">Vexury Concierge Activated</span>
+                        <Sparkles size={16} />
+                      </div>
+                    </MDiv>
                   </MDiv>
                 ) : (
                   <MDiv 
