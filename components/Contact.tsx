@@ -234,14 +234,8 @@ export const Contact: React.FC = () => {
                           Our team is already reviewing your request.
                         </p>
                         <p className="text-gray-500 text-sm font-medium tracking-wide uppercase">
-                          Expect a response within 24 hours.
+                          You’ll hear from us within 24 hours.
                         </p>
-                      </div>
-
-                      <div className="mt-12 flex items-center justify-center gap-3 text-accent/60">
-                        <Sparkles size={16} />
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-black">Vexury Concierge Activated</span>
-                        <Sparkles size={16} />
                       </div>
                     </MDiv>
                   </MDiv>
