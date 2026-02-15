@@ -57,16 +57,13 @@ export const Pricing: React.FC = () => {
                     <p className="text-sm text-gray-400 font-light h-14">A high-quality website (1–3 pages) designed to clearly present your business and build trust.</p>
                 </div>
 
-                <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5">
+                <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5 h-[120px] flex flex-col justify-center">
                     <div className="flex items-baseline gap-1 mb-1">
                         <span className="text-4xl font-bold text-white">$1,200</span>
                         <span className="text-sm text-gray-500 whitespace-nowrap">one-time</span>
                     </div>
                     <div className="text-[10px] text-accent font-medium uppercase tracking-wide">
                         $89/month — starting month 3
-                    </div>
-                    <div className="text-[10px] text-green-500 font-medium mt-1 leading-tight">
-                        Includes 2 months of hosting, maintenance, security & support
                     </div>
                 </div>
 
@@ -86,18 +83,20 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <div className="block mb-8">
-                    <a href="https://vexury.com/#contact" className="w-full">
-                        <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
-                            Start My Website
-                        </button>
-                    </a>
-                </div>
+                <div className="mt-auto">
+                    <div className="block mb-8">
+                        <a href="https://vexury.com/#contact" className="w-full">
+                            <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
+                                Start My Website
+                            </button>
+                        </a>
+                    </div>
 
-                {/* Card Footer Info */}
-                <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
-                    <p>Professional, reliable and built for small businesses.</p>
-                    <p className="text-gray-400 font-medium">Cancel anytime.</p>
+                    {/* Card Footer Info */}
+                    <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
+                        <p>Professional, reliable and built for small businesses.</p>
+                        <p className="text-gray-400 font-medium">Cancel anytime.</p>
+                    </div>
                 </div>
             </MDiv>
 
@@ -124,7 +123,7 @@ export const Pricing: React.FC = () => {
                     <p className="text-sm text-gray-300 font-light h-14">A multi-page website (up to 10 pages) built to elevate your brand and support business growth.</p>
                 </div>
 
-                <div className="mb-8 p-6 bg-accent/5 rounded-2xl border border-accent/20 relative overflow-hidden">
+                <div className="mb-8 p-6 bg-accent/5 rounded-2xl border border-accent/20 relative overflow-hidden h-[120px] flex flex-col justify-center">
                     <div className="absolute inset-0 bg-accent/5 animate-pulse-slow"></div>
                     <div className="relative z-10">
                         <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
@@ -134,9 +133,6 @@ export const Pricing: React.FC = () => {
                         <div className="text-[10px] text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
                             $99/month — starting month 3
-                        </div>
-                        <div className="text-[10px] text-green-400 font-medium mt-1 leading-tight ml-3.5">
-                            Includes 2 months of hosting, maintenance, security & support
                         </div>
                     </div>
                 </div>
@@ -157,19 +153,21 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <div className="block mb-8">
-                    <a href="https://vexury.com/#contact" className="w-full">
-                        <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
-                            <span className="relative z-10 flex items-center justify-center gap-2">Start Your Project <ArrowRight size={18} /></span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
-                        </button>
-                    </a>
-                </div>
+                <div className="mt-auto">
+                    <div className="block mb-8">
+                        <a href="https://vexury.com/#contact" className="w-full">
+                            <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
+                                <span className="relative z-10 flex items-center justify-center gap-2">Start Your Project <ArrowRight size={18} /></span>
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
+                            </button>
+                        </a>
+                    </div>
 
-                {/* Card Footer Info */}
-                <div className="pt-6 border-t border-white/10 text-[11px] text-gray-400 leading-relaxed space-y-2">
-                    <p>Built to scale and dominate your market.</p>
-                    <p className="text-white font-medium">Cancel anytime.</p>
+                    {/* Card Footer Info */}
+                    <div className="pt-6 border-t border-white/10 text-[11px] text-gray-400 leading-relaxed space-y-2">
+                        <p>Built to scale and dominate your market.</p>
+                        <p className="text-white font-medium">Cancel anytime.</p>
+                    </div>
                 </div>
             </MDiv>
 
@@ -188,7 +186,7 @@ export const Pricing: React.FC = () => {
                     <p className="text-sm text-gray-400 font-light h-14">Fully tailored solutions for advanced functionality, integrations or large-scale digital presence.</p>
                 </div>
 
-                <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5">
+                <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5 h-[120px] flex flex-col justify-center">
                     <div className="flex items-center gap-1 mb-1">
                         <span className="text-3xl font-bold text-white leading-tight">Custom Pricing</span>
                     </div>
@@ -212,17 +210,20 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <div className="block mb-8">
-                    <a href="https://vexury.com/#contact" className="w-full">
-                        <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
-                            Let’s Talk
-                        </button>
-                    </a>
-                </div>
+                <div className="mt-auto">
+                    <div className="block mb-8">
+                        <a href="https://vexury.com/#contact" className="w-full">
+                            <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
+                                Let’s Talk
+                            </button>
+                        </a>
+                    </div>
 
-                {/* Card Footer Info */}
-                <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
-                    <p>Built around your business goals.</p>
+                    {/* Card Footer Info */}
+                    <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
+                        <p>Built around your business goals.</p>
+                        <p className="text-gray-400 font-medium opacity-0">Placeholder</p>
+                    </div>
                 </div>
             </MDiv>
 
