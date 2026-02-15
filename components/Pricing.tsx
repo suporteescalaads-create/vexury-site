@@ -8,24 +8,6 @@ export const Pricing: React.FC = () => {
   const MDiv = motion.div as any;
   const MH2 = motion.h2 as any;
 
-  const handleContactScroll = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const element = document.getElementById('contact');
-    if (element) {
-      const headerOffset = 100;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      
-      // Update hash without triggering a full page jump or security error
-      window.location.hash = 'contact';
-    }
-  };
-
   return (
     <section id="pricing" className="pt-10 pb-12 md:pt-16 md:pb-20 bg-[#03000a] relative overflow-hidden">
        
@@ -70,8 +52,9 @@ export const Pricing: React.FC = () => {
                     <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-black transition-colors duration-500">
                         <Zap size={24} />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Professional Website</h3>
-                    <p className="text-sm text-gray-400 font-light h-10">A professional one-page website designed to present your business clearly and build trust.</p>
+                    <h3 className="text-2xl font-bold text-white mb-1">Professional Website</h3>
+                    <p className="text-[10px] text-accent uppercase tracking-widest font-bold mb-4">(For businesses that need a strong and professional online presence)</p>
+                    <p className="text-sm text-gray-400 font-light h-14">A high-quality website (1–3 pages) designed to clearly present your business and build trust.</p>
                 </div>
 
                 <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5">
@@ -80,39 +63,38 @@ export const Pricing: React.FC = () => {
                         <span className="text-sm text-gray-500 whitespace-nowrap">one-time</span>
                     </div>
                     <div className="text-[10px] text-accent font-medium uppercase tracking-wide">
-                        $600 / year — starting year 2
+                        $89 / month — starting month 3
                     </div>
                 </div>
 
                 <ul className="space-y-4 mb-10 flex-grow">
                     {[
-                        "One-page website",
-                        "Professional structure and layout",
-                        "Clear messaging and content flow",
-                        "Mobile-friendly and fast loading"
+                        "Up to 3 pages",
+                        "Strategic structure and clean layout",
+                        "Clear messaging and strong call-to-action",
+                        "Mobile-first and fast loading",
+                        "Secure hosting & maintenance included",
+                        "Ongoing technical support"
                     ].map((feat, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
-                            <div className="mt-0.5 min-w-[18px]"><Check size={16} className="text-gray-500" /></div>
+                            <div className="mt-0.5 min-w-[18px]"><Check size={16} className="text-accent" /></div>
                             {feat}
                         </li>
                     ))}
                 </ul>
 
-                <a 
-                    href="https://vexury.com/#contact" 
-                    onClick={handleContactScroll}
-                    className="block mb-8"
-                >
-                    <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
-                        Start My Website
-                    </button>
-                </a>
+                <div className="block mb-8">
+                    <a href="https://vexury.com/#contact" className="w-full">
+                        <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
+                            Start My Website
+                        </button>
+                    </a>
+                </div>
 
                 {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
-                    <p>All plans include hosting, optional free domain, direct support, and full setup.</p>
-                    <p>Annual pricing · Reduced renewal after the first year.</p>
-                    <p className="text-gray-400 font-medium">You don’t have to worry about anything.</p>
+                    <p>Professional, reliable and built for small businesses.</p>
+                    <p className="text-gray-400 font-medium">Cancel anytime.</p>
                 </div>
             </MDiv>
 
@@ -134,8 +116,9 @@ export const Pricing: React.FC = () => {
                     <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6 text-white shadow-[0_0_20px_rgba(168,85,247,0.4)]">
                         <Sparkles size={24} />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Premium Website</h3>
-                    <p className="text-sm text-gray-300 font-light h-10">Refined visuals, smooth animations, and visual depth for a strong first impression.</p>
+                    <h3 className="text-2xl font-bold text-white mb-1">Premium Website</h3>
+                    <p className="text-[10px] text-accent-light uppercase tracking-widest font-bold mb-4">(For businesses ready to grow and stand out)</p>
+                    <p className="text-sm text-gray-300 font-light h-14">A multi-page website (up to 10 pages) built to elevate your brand and support business growth.</p>
                 </div>
 
                 <div className="mb-8 p-6 bg-accent/5 rounded-2xl border border-accent/20 relative overflow-hidden">
@@ -147,20 +130,19 @@ export const Pricing: React.FC = () => {
                         </div>
                         <div className="text-[10px] text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                            $1,000 / year — starting year 2
+                            $99 / month — starting month 3
                         </div>
                     </div>
                 </div>
 
                 <ul className="space-y-4 mb-10 flex-grow">
                     {[
-                        "Multi-section website (1-10 pages)",
-                        "Custom structure and layout",
-                        "Refined animations and smooth transitions",
-                        "Visual depth and modern interactions",
-                        "Content organization and approval",
-                        "Mobile-first and optimized performance",
-                        "Launch-ready delivery"
+                        "Up to 10 custom pages",
+                        "Tailored structure based on your goals",
+                        "Refined animations and modern interactions",
+                        "Enhanced branding and visual depth",
+                        "Performance optimization & premium hosting",
+                        "Ongoing updates and priority support"
                     ].map((feat, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm text-white">
                             <div className="mt-0.5 min-w-[18px]"><Check size={16} className="text-accent drop-shadow-[0_0_5px_#a855f7]" /></div>
@@ -169,22 +151,19 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <a 
-                    href="https://vexury.com/#contact" 
-                    onClick={handleContactScroll}
-                    className="block mb-8"
-                >
-                    <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
-                        <span className="relative z-10 flex items-center justify-center gap-2">Start Your Project <ArrowRight size={18} /></span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
-                    </button>
-                </a>
+                <div className="block mb-8">
+                    <a href="https://vexury.com/#contact" className="w-full">
+                        <button className="w-full py-5 rounded-xl bg-accent text-white font-bold hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.4)] group relative overflow-hidden">
+                            <span className="relative z-10 flex items-center justify-center gap-2">Start Your Project <ArrowRight size={18} /></span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 translate-x-[-100%] group-hover:animate-shimmer" />
+                        </button>
+                    </a>
+                </div>
 
                 {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-400 leading-relaxed space-y-2">
-                    <p>All plans include hosting, optional free domain, direct support, and full setup.</p>
-                    <p>Annual pricing · Reduced renewal after the first year.</p>
-                    <p className="text-white font-medium">You don’t have to worry about anything.</p>
+                    <p>Built to scale and dominate your market.</p>
+                    <p className="text-white font-medium">Cancel anytime.</p>
                 </div>
             </MDiv>
 
@@ -198,8 +177,9 @@ export const Pricing: React.FC = () => {
                     <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-black transition-colors duration-500">
                         <ShieldCheck size={24} />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Custom / Enterprise</h3>
-                    <p className="text-sm text-gray-400 font-light h-10">Fully tailored structure, advanced functionality, or unique requirements.</p>
+                    <h3 className="text-2xl font-bold text-white mb-1">Custom / Enterprise</h3>
+                    <p className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-4">(For strategic or complex projects)</p>
+                    <p className="text-sm text-gray-400 font-light h-14">Fully tailored solutions for advanced functionality, integrations or large-scale digital presence.</p>
                 </div>
 
                 <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5">
@@ -213,11 +193,11 @@ export const Pricing: React.FC = () => {
 
                 <ul className="space-y-4 mb-10 flex-grow">
                     {[
-                        "Fully customized website",
-                        "Tailored structure and layout",
-                        "Advanced functionality",
-                        "Dedicated project guidance",
-                        "Scalable solutions"
+                        "Fully customized architecture",
+                        "Advanced features and integrations",
+                        "Dedicated project strategy",
+                        "Scalable infrastructure",
+                        "Long-term technical partnership"
                     ].map((feat, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm text-gray-300">
                             <div className="mt-0.5 min-w-[18px]"><Check size={16} className="text-gray-500" /></div>
@@ -226,21 +206,17 @@ export const Pricing: React.FC = () => {
                     ))}
                 </ul>
 
-                <a 
-                    href="https://vexury.com/#contact" 
-                    onClick={handleContactScroll}
-                    className="block mb-8"
-                >
-                    <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
-                        Let’s Talk
-                    </button>
-                </a>
+                <div className="block mb-8">
+                    <a href="https://vexury.com/#contact" className="w-full">
+                        <button className="w-full py-4 rounded-xl border border-white/20 text-white font-bold hover:bg-white hover:text-black transition-all duration-300">
+                            Let’s Talk
+                        </button>
+                    </a>
+                </div>
 
                 {/* Card Footer Info */}
                 <div className="pt-6 border-t border-white/10 text-[11px] text-gray-500 leading-relaxed space-y-2">
-                    <p>All plans include hosting, optional free domain, direct support, and full setup.</p>
-                    <p>Annual pricing · Reduced renewal after the first year.</p>
-                    <p className="text-gray-400 font-medium">You don’t have to worry about anything.</p>
+                    <p>Built around your business goals.</p>
                 </div>
             </MDiv>
 
