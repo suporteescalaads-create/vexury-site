@@ -63,7 +63,10 @@ export const Pricing: React.FC = () => {
                         <span className="text-sm text-gray-500 whitespace-nowrap">one-time</span>
                     </div>
                     <div className="text-[10px] text-accent font-medium uppercase tracking-wide">
-                        $89 / month — starting month 3
+                        $89/month — starting month 3
+                    </div>
+                    <div className="text-[10px] text-green-500 font-medium mt-1 leading-tight">
+                        Includes 2 months of hosting, maintenance, security & support
                     </div>
                 </div>
 
@@ -130,7 +133,10 @@ export const Pricing: React.FC = () => {
                         </div>
                         <div className="text-[10px] text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                            $99 / month — starting month 3
+                            $99/month — starting month 3
+                        </div>
+                        <div className="text-[10px] text-green-400 font-medium mt-1 leading-tight ml-3.5">
+                            Includes 2 months of hosting, maintenance, security & support
                         </div>
                     </div>
                 </div>
@@ -145,7 +151,7 @@ export const Pricing: React.FC = () => {
                         "Ongoing updates and priority support"
                     ].map((feat, i) => (
                         <li key={i} className="flex items-start gap-3 text-sm text-white">
-                            <div className="mt-0.5 min-w-[18px]"><Check size={16} className="text-accent drop-shadow-[0_0_5px_#a855f7]" /></div>
+                            <div className="mt-0.5 min-w-[18px]"><Check size={16} className="text-accent" /></div>
                             {feat}
                         </li>
                     ))}
