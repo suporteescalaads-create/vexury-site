@@ -1,7 +1,25 @@
-import React, { useState } from 'react';
-import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+
+import React, { useState, useRef, useEffect } from 'react';
+import { Instagram, Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle, ChevronDown, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo.tsx';
+
+const countries = [
+  { name: 'United States', code: '+1', flag: '🇺🇸', iso: 'US' },
+  { name: 'Brazil', code: '+55', flag: '🇧🇷', iso: 'BR' },
+  { name: 'United Kingdom', code: '+44', flag: '🇬🇧', iso: 'GB' },
+  { name: 'Portugal', code: '+351', flag: '🇵🇹', iso: 'PT' },
+  { name: 'Spain', code: '+34', flag: '🇪🇸', iso: 'ES' },
+  { name: 'France', code: '+33', flag: '🇫🇷', iso: 'FR' },
+  { name: 'Germany', code: '+49', flag: '🇩🇪', iso: 'DE' },
+  { name: 'Italy', code: '+39', flag: '🇮🇹', iso: 'IT' },
+  { name: 'Mexico', code: '+52', flag: '🇲🇽', iso: 'MX' },
+  { name: 'Canada', code: '+1', flag: '🇨🇦', iso: 'CA' },
+  { name: 'Argentina', code: '+54', flag: '🇦🇷', iso: 'AR' },
+  { name: 'Chile', code: '+56', flag: '🇨L', iso: 'CL' },
+  { name: 'Colombia', code: '+57', flag: '🇨🇴', iso: 'CO' },
+  { name: 'Uruguay', code: '+598', flag: '🇺🇾', iso: 'UY' },
+];
 
 export const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -12,9 +30,23 @@ export const Contact: React.FC = () => {
     phone: '',
     company: ''
   });
+  const [selectedCountry, setSelectedCountry] = useState(countries[0]);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
-
+  
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const MDiv = motion.div as any;
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsCountryDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const validateField = (name: string, value: string) => {
     let error = '';
@@ -41,11 +73,8 @@ export const Contact: React.FC = () => {
         break;
       case 'phone':
         const digits = value.replace(/\D/g, '');
-        const blacklistedPhones = ['0000000000', '1111111111', '1234567890'];
-        const isUSFormat = (digits.length === 10) || (digits.length === 11 && digits.startsWith('1'));
-        if (!value.trim()) error = 'Please enter a valid U.S. phone number (example: 305-555-1234).';
-        else if (!isUSFormat) error = 'Please enter a valid U.S. phone number (example: 305-555-1234).';
-        else if (blacklistedPhones.includes(digits.slice(-10))) error = 'Please enter a valid U.S. phone number (example: 305-555-1234).';
+        if (!value.trim()) error = 'Please enter your phone number.';
+        else if (digits.length < 7 || digits.length > 15) error = 'Please enter a valid phone number.';
         break;
       case 'company':
         if (value.length > 100) error = 'Company name is too long.';
@@ -96,7 +125,7 @@ export const Contact: React.FC = () => {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          phone: formData.phone,
+          phone: `${selectedCountry.code} ${formData.phone}`,
           company: formData.company,
           source: "Website"
         })
@@ -114,19 +143,20 @@ export const Contact: React.FC = () => {
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isHomePage = !window.location.hash.startsWith('#/');
-    if (isHomePage && href.includes('#') && !href.includes('#/')) {
-      e.preventDefault();
-      const targetId = href.split('#')[1];
-      const element = document.getElementById(targetId);
-      if (element) {
-        const headerOffset = 100; 
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+    const hashIndex = href.indexOf('#');
+    if (hashIndex !== -1) {
+      const hash = href.substring(hashIndex);
+      if (!hash.startsWith('#/')) {
+        e.preventDefault();
+        window.location.hash = hash;
       }
     }
   };
+
+  const filteredCountries = countries.filter(c => 
+    c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    c.code.includes(searchQuery)
+  );
 
   return (
     <footer id="contact" className="bg-[#03000a] pt-24 pb-12 relative overflow-hidden">
@@ -179,13 +209,6 @@ export const Contact: React.FC = () => {
                   <p className="text-gray-400 font-medium">Key Biscayne, Miami, FL 33149</p>
                 </div>
               </div>
-            </div>
-
-            <div className="pt-6">
-                <a href="https://www.instagram.com/vexuryco/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 text-gray-500 hover:text-white transition-all duration-300">
-                    <Instagram size={20} />
-                    <span className="text-sm font-medium tracking-widest uppercase">@vexuryco</span>
-                </a>
             </div>
           </MDiv>
 
@@ -276,15 +299,72 @@ export const Contact: React.FC = () => {
                           />
                           {errors.email && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.email}</p>}
                         </div>
-                        <div className="space-y-2">
+                        <div className="space-y-2 relative">
                           <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-gray-500 ml-1">Phone</label>
-                          <input 
-                            name="phone"
-                            placeholder="+1 (305) 000-0000"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            className={`w-full bg-white/[0.05] border ${errors.phone ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
-                          />
+                          <div className="flex gap-2">
+                            <div className="relative" ref={dropdownRef}>
+                              <button
+                                type="button"
+                                onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
+                                className="flex items-center gap-2 h-full bg-white/[0.05] border border-white/10 rounded-2xl px-4 py-4 text-white hover:bg-white/[0.1] transition-all whitespace-nowrap"
+                              >
+                                <span className="text-xl">{selectedCountry.flag}</span>
+                                <span className="text-sm font-bold">{selectedCountry.code}</span>
+                                <ChevronDown size={14} className={`transition-transform duration-300 ${isCountryDropdownOpen ? 'rotate-180' : ''}`} />
+                              </button>
+                              
+                              <AnimatePresence>
+                                {isCountryDropdownOpen && (
+                                  <MDiv
+                                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                    className="absolute left-0 bottom-full mb-2 w-64 max-h-72 overflow-y-auto bg-[#0a0510] border border-white/10 rounded-2xl p-2 z-[60] shadow-2xl backdrop-blur-xl"
+                                  >
+                                    <div className="sticky top-0 bg-[#0a0510] pb-2 px-1">
+                                      <div className="relative">
+                                        <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
+                                        <input
+                                          autoFocus
+                                          placeholder="Search country..."
+                                          className="w-full bg-white/5 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs text-white focus:outline-none focus:border-accent/50"
+                                          value={searchQuery}
+                                          onChange={(e) => setSearchQuery(e.target.value)}
+                                          onClick={(e) => e.stopPropagation()}
+                                        />
+                                      </div>
+                                    </div>
+                                    <div className="space-y-1">
+                                      {filteredCountries.map((c) => (
+                                        <button
+                                          key={c.iso}
+                                          type="button"
+                                          onClick={() => {
+                                            setSelectedCountry(c);
+                                            setIsCountryDropdownOpen(false);
+                                            setSearchQuery('');
+                                          }}
+                                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/5 transition-colors text-left"
+                                        >
+                                          <span className="text-xl">{c.flag}</span>
+                                          <span className="text-xs text-white font-medium flex-grow">{c.name}</span>
+                                          <span className="text-[10px] text-accent font-bold">{c.code}</span>
+                                        </button>
+                                      ))}
+                                    </div>
+                                  </MDiv>
+                                )}
+                              </AnimatePresence>
+                            </div>
+
+                            <input 
+                              name="phone"
+                              placeholder="(305) 000-0000"
+                              value={formData.phone}
+                              onChange={handleChange}
+                              className={`flex-grow bg-white/[0.05] border ${errors.phone ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
+                            />
+                          </div>
                           {errors.phone && <p className="text-red-500 text-[10px] font-bold mt-1 ml-1">{errors.phone}</p>}
                         </div>
                       </div>
