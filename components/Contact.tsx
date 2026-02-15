@@ -258,7 +258,7 @@ export const Contact: React.FC = () => {
                           <input 
                             name="phone"
                             type="tel"
-                            placeholder="+1 (000) 000-0000"
+                            placeholder="(000) 000-0000"
                             value={formData.phone}
                             onChange={handleChange}
                             className={`w-full bg-white/[0.05] border ${errors.phone ? 'border-red-500/50' : 'border-white/10'} rounded-2xl px-6 py-4 text-white placeholder:text-gray-700 focus:outline-none focus:border-accent/50 focus:bg-white/[0.08] transition-all`}
