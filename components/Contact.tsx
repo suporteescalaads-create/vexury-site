@@ -136,21 +136,21 @@ export const Contact: React.FC = () => {
             <div className="space-y-8">
               <div className="flex items-start gap-6 group">
                 <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold mb-1">Phone Number</h4>
-                  <a href="tel:+13054676317" className="text-gray-400 hover:text-white transition-colors font-medium">+1 (305) 467-6317</a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500">
                   <Mail size={20} />
                 </div>
                 <div>
                   <h4 className="text-white font-semibold mb-1">Email Address</h4>
                   <a href="mailto:hello@vexury.com" className="text-gray-400 hover:text-white transition-colors font-medium">hello@vexury.com</a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6 group">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                  <Phone size={20} />
+                </div>
+                <div>
+                  <h4 className="text-white font-semibold mb-1">Phone Number</h4>
+                  <a href="tel:+13054676317" className="text-gray-400 hover:text-white transition-colors font-medium">+1 (305) 467-6317</a>
                 </div>
               </div>
 
@@ -344,8 +344,8 @@ export const Contact: React.FC = () => {
              <div className="text-sm">
                 <h4 className="font-semibold text-white mb-6 text-sm uppercase tracking-wider">Connect</h4>
                 <ul className="space-y-4 text-gray-500 mb-6">
-                    <li><a href="tel:+13054676317" className="hover:text-white transition-colors font-medium">+1 (305) 467-6317</a></li>
                     <li><a href="mailto:hello@vexury.com" className="hover:text-white transition-colors font-medium">hello@vexury.com</a></li>
+                    <li><a href="tel:+13054676317" className="hover:text-white transition-colors font-medium">+1 (305) 467-6317</a></li>
                 </ul>
                 <div className="flex gap-4">
                     <a href="https://www.instagram.com/vexuryco/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-accent hover:border-accent transition-all duration-300" aria-label="Instagram">
