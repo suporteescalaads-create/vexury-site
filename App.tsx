@@ -1,8 +1,8 @@
+
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { Header } from './components/Header.tsx';
 import { Hero } from './components/Hero.tsx';
 import { CookieBanner } from './components/CookieBanner.tsx';
-import { generateEventId, trackLeadFront, sendToCAPI } from './components/FacebookService.ts';
 
 // Lazy loading components below the fold with extensions
 const Features = lazy(() => import('./components/Features.tsx').then(m => ({ default: m.Features })));
@@ -23,43 +23,6 @@ function App() {
   const [currentHash, setCurrentHash] = useState(window.location.hash);
 
   useEffect(() => {
-    // --- LÓGICA DE TRACKING ESPECIALISTA ---
-    const LEAD_BUTTONS = [
-      'BUILD MY WEBSITE NOW',
-      'START YOUR WEBSITE',
-      'START MY WEBSITE',
-      'START YOUR PROJECT',
-      "LET'S TALK",
-      'TALK TO US',
-      'SEND EMAIL',
-      'WHATSAPP'
-    ];
-
-    const handleGlobalClick = async (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const btn = target.closest('button, a') as HTMLElement | null;
-      
-      if (!btn) return;
-
-      const btnText = btn.innerText.trim().toUpperCase();
-      
-      if (LEAD_BUTTONS.includes(btnText)) {
-        const eventId = generateEventId();
-        const contentName = btnText.charAt(0) + btnText.slice(1).toLowerCase();
-
-        trackLeadFront(eventId, contentName);
-
-        sendToCAPI({
-          eventId,
-          contentName,
-          city: 'Miami',
-          zip: '33149'
-        });
-      }
-    };
-
-    document.addEventListener('click', handleGlobalClick);
-
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
       
@@ -85,7 +48,6 @@ function App() {
 
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
-      document.removeEventListener('click', handleGlobalClick);
     };
   }, []);
 

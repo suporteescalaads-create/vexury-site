@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Phone, Mail, MapPin, Send, CheckCircle2, Loader2, AlertCircle, Instagram, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo.tsx';
+import { generateEventId, trackLeadFront, sendToCAPI } from './FacebookService.ts';
 
 export const Contact: React.FC = () => {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -88,6 +89,17 @@ export const Contact: React.FC = () => {
           company: formData.company,
           source: "Website"
         })
+      });
+
+      // DISPARO DO EVENTO DE LEAD (PIXEL + CAPI) APENAS NO SUCESSO
+      const eventId = generateEventId();
+      trackLeadFront(eventId, 'Contact Form Submission');
+      sendToCAPI({
+        email: formData.email,
+        eventId,
+        contentName: 'Contact Form Submission',
+        city: 'Miami',
+        zip: '33149'
       });
 
       setFormStatus('success');
