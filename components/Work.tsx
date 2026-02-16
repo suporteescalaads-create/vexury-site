@@ -31,7 +31,6 @@ const steps = [
 ];
 
 // --- Visual Components for the Holographic Core ---
-// Cast motion components to any to bypass environment-specific type errors
 const MDiv = motion.div as any;
 const MH2 = motion.h2 as any;
 
@@ -79,18 +78,18 @@ const BuildVisual = () => (
         <MDiv 
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute w-[340px] h-[340px] rounded-full border-2 border-blue-500/20 border-dashed"
+            className="absolute w-[280px] h-[280px] md:w-[340px] md:h-[340px] rounded-full border-2 border-blue-500/20 border-dashed"
         />
         <MDiv 
             animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className="absolute w-[300px] h-[300px] rounded-full border-2 border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.2)]"
+            className="absolute w-[250px] h-[250px] md:w-[300px] md:h-[300px] rounded-full border-2 border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.2)]"
             style={{ borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
         />
 
-        {/* Central Interface Assembly */}
-        <div className="relative w-72 h-52">
-            {/* Background Panels floating in */}
+        {/* Central Interface Assembly - Wrapped in a scaling container for mobile */}
+        <div className="relative scale-75 md:scale-100 w-72 h-52">
+            {/* Background Panels */}
             <MDiv 
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -110,7 +109,7 @@ const BuildVisual = () => (
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500/80 shadow-[0_0_10px_green]" />
             </MDiv>
 
-            {/* Content Blocks appearing */}
+            {/* Content Blocks */}
             <div className="absolute top-14 left-6 right-6 space-y-4">
                 <MDiv 
                     initial={{ width: 0 }}
@@ -148,18 +147,18 @@ const BuildVisual = () => (
                 </svg>
             </MDiv>
 
-             {/* Connection Line */}
+             {/* Connection Line - Fixed position to avoid overlap or clipping */}
              <MDiv
                 initial={{ opacity: 0 }}
                 animate={{ opacity: [0, 1, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="absolute -right-6 top-24 w-12 h-[2px] bg-blue-400 shadow-[0_0_10px_#60a5fa]"
+                className="absolute -right-4 top-24 w-10 h-[2px] bg-blue-400 shadow-[0_0_10px_#60a5fa]"
              />
              <MDiv
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="absolute -right-16 top-[82px] px-3 py-1.5 bg-blue-500 rounded-lg text-[10px] text-white font-bold font-mono shadow-[0_0_20px_rgba(59,130,246,0.6)]"
+                className="absolute -right-12 top-[82px] px-3 py-1.5 bg-blue-500 rounded-lg text-[10px] text-white font-bold font-mono shadow-[0_0_20px_rgba(59,130,246,0.6)]"
              >
                 APPROVED
              </MDiv>
@@ -177,12 +176,12 @@ const LaunchVisual = () => (
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="relative z-10"
         >
-            <div className="w-40 h-40 bg-green-950/40 rounded-full border-2 border-green-400/60 flex items-center justify-center backdrop-blur-2xl shadow-[0_0_70px_rgba(34,197,94,0.5)]">
-                <Rocket size={64} className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" />
+            <div className="w-32 h-32 md:w-40 md:h-40 bg-green-950/40 rounded-full border-2 border-green-400/60 flex items-center justify-center backdrop-blur-2xl shadow-[0_0_70px_rgba(34,197,94,0.5)]">
+                <Rocket size={48} className="md:size-64 text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]" />
             </div>
         </MDiv>
 
-        {/* Upward Particles - Increased brightness */}
+        {/* Upward Particles */}
         <div className="absolute inset-0 overflow-hidden">
             {[...Array(20)].map((_, i) => (
                 <MDiv
@@ -226,14 +225,11 @@ export const Work: React.FC = () => {
 
   return (
     <section id="process" className="py-12 md:py-24 bg-[#03000a] relative overflow-hidden">
-      {/* Cinematic Background - Exact match to page background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,_rgba(168,85,247,0.1),transparent_80%)]" />
       <div className="absolute top-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-      {/* Reduced container max-width to 1280px */}
       <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 max-w-[1280px]">
         
-        {/* Header - scaled headings */}
         <div className="text-center mb-10 md:mb-16 max-w-4xl mx-auto">
             <MH2 
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -262,7 +258,6 @@ export const Work: React.FC = () => {
                                 isActive ? 'bg-white/[0.04] shadow-[0_0_50px_rgba(0,0,0,0.5)]' : 'hover:bg-white/[0.02]'
                             }`}
                         >
-                            {/* Active Line Indicator - Strong Neon */}
                             <div className={`absolute left-0 top-4 bottom-4 w-1.5 transition-all duration-700 rounded-full ${
                                 isActive ? 'bg-accent shadow-[0_0_30px_#a855f7,0_0_10px_#a855f7]' : 'bg-white/10'
                             }`} />
@@ -298,21 +293,16 @@ export const Work: React.FC = () => {
                 })}
             </div>
 
-            {/* RIGHT: Holographic Core - INTEGRATED WITH BACKGROUND */}
+            {/* RIGHT: Holographic Core */}
             <div className="relative h-[400px] md:h-[600px] w-full flex items-center justify-center">
                 
-                {/* Stage Frame - Now Transparent to blend with page background #03000a */}
                 <div className="absolute inset-0 border border-white/5 rounded-[4rem] bg-transparent" />
                 
-                {/* Internal Atmospheric Glow - Uses page color at the base */}
                 <div className="absolute inset-8 rounded-[3rem] bg-gradient-to-b from-accent/5 via-[#03000a] to-[#03000a]" />
                 
-                {/* Grainy Texture Overlay - More subtle */}
                 <div className="absolute inset-4 border border-white/[0.03] rounded-[3.5rem] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1] pointer-events-none" />
                 
-                {/* The Stage */}
                 <div className="relative w-full h-full flex items-center justify-center p-8 md:p-16 overflow-hidden">
-                    {/* Centered glow to lift the content from the dark background */}
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-accent/[0.03] rounded-full blur-[120px] pointer-events-none animate-pulse-slow" />
                     
                     <AnimatePresence mode="wait">
@@ -322,7 +312,7 @@ export const Work: React.FC = () => {
                             animate={{ opacity: 1, scale: 1, filter: "blur(0px)", y: 0 }}
                             exit={{ opacity: 0, scale: 1.2, filter: "blur(20px)", y: -20 }}
                             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            className="w-full h-full"
+                            className="w-full h-full flex items-center justify-center"
                         >
                             {activeStep === 0 && <RadarVisual />}
                             {activeStep === 1 && <BuildVisual />}
