@@ -27,6 +27,12 @@ function App() {
       setCurrentHash(window.location.hash);
       
       const hash = window.location.hash;
+      
+      // Track PageView on hash change
+      if (typeof (window as any).fbq === 'function') {
+        (window as any).fbq('track', 'PageView');
+      }
+
       if (hash && !hash.startsWith('#/')) {
         const element = document.querySelector(hash);
         if (element) {
