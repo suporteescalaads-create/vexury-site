@@ -117,7 +117,7 @@ export const Hero: React.FC = () => {
                     alt="Vexury Platform Preview" 
                     className="w-[120%] md:w-full h-auto object-cover md:object-contain block align-bottom m-0 p-0"
                     loading="eager"
-                    fetchPriority="high"
+                    fetchpriority="high"
                 />
             </div>
             {/* Glow sutil sob o dispositivo */}
