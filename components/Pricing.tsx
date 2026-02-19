@@ -59,7 +59,7 @@ export const Pricing: React.FC = () => {
 
                 <div className="mb-8 p-6 bg-white/[0.03] rounded-2xl border border-white/5 h-[120px] flex flex-col justify-center">
                     <div className="flex items-baseline gap-1 mb-1">
-                        <span className="text-4xl font-bold text-white">$1,200</span>
+                        <span className="text-4xl font-bold text-white">$599</span>
                         <span className="text-sm text-gray-500 whitespace-nowrap">one-time</span>
                     </div>
                     <div className="text-[10px] text-accent font-medium uppercase tracking-wide">
@@ -127,7 +127,7 @@ export const Pricing: React.FC = () => {
                     <div className="absolute inset-0 bg-accent/5 animate-pulse-slow"></div>
                     <div className="relative z-10">
                         <div className="flex items-baseline gap-1.5 mb-1 flex-wrap">
-                            <span className="text-4xl xs:text-5xl font-bold text-white tracking-tight">$3,800</span>
+                            <span className="text-4xl xs:text-5xl font-bold text-white tracking-tight">$1,600</span>
                             <span className="text-xs xs:text-sm text-gray-500 whitespace-nowrap">one-time</span>
                         </div>
                         <div className="text-[10px] text-accent-light font-bold uppercase tracking-wide flex items-center gap-2">
